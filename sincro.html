@@ -2,22 +2,55 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TERMINAL SINCRO-AR | BIFROST</title>
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; padding: 20px; overflow: hidden; }
-        #terminal { border: 1px solid #0f0; padding: 20px; height: 85vh; overflow-y: auto; text-shadow: 0 0 5px #0f0; }
-        .input-line { display: flex; margin-top: 10px; }
-        #user-input { background: transparent; border: none; color: #0f0; outline: none; width: 100%; font-size: 16px; font-family: inherit; }
-        .glitch { animation: scan 2s infinite; }
-        @keyframes scan { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+        * { box-sizing: border-box; }
+        body { 
+            background: #000; 
+            color: #0f0; 
+            font-family: 'Courier New', Courier, monospace; 
+            padding: 15px; 
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #terminal { 
+            border: 1px solid #0f0; 
+            padding: 15px; 
+            flex-grow: 1;
+            overflow-y: auto; 
+            text-shadow: 0 0 3px #0f0;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        .input-line { 
+            display: flex; 
+            align-items: center;
+            background: #000;
+            padding: 5px 0;
+        }
+        #user-input { 
+            background: transparent; 
+            border: none; 
+            color: #0f0; 
+            outline: none; 
+            width: 100%; 
+            font-size: 16px; /* Evita el zoom automático en móviles */
+            font-family: inherit; 
+            padding-left: 5px;
+        }
+        span.cursor { color: #0f0; }
     </style>
 </head>
 <body>
-    <div id="terminal" class="glitch">
+    <div id="terminal">
         <div id="history"></div>
         <div class="input-line">
-            <span>>_</span>
-            <input type="text" id="user-input" autofocus autocomplete="off">
+            <span class="cursor">>_</span>
+            <input type="text" id="user-input" autofocus autocomplete="off" spellcheck="false">
         </div>
     </div>
 
@@ -26,36 +59,38 @@
         const input = document.getElementById('user-input');
 
         // Metadatos para DEVA
-        let batteryLevel = "Desconocido";
-        navigator.getBattery().then(bat => { batteryLevel = Math.round(bat.level * 100); });
+        let batteryLevel = "??";
+        if (navigator.getBattery) {
+            navigator.getBattery().then(bat => { batteryLevel = Math.round(bat.level * 100); });
+        }
         const hora = new Date().getHours();
 
         function print(text, delay = 0) {
-            const line = document.createElement('div');
-            line.textContent = text;
             setTimeout(() => { 
+                const line = document.createElement('div');
+                line.style.marginBottom = "8px";
+                line.textContent = text;
                 history.appendChild(line); 
                 history.scrollTop = history.scrollHeight; 
             }, delay);
         }
 
-        // Script de Personalidad de DEVA
-        print("[CONEXIÓN ESTABLECIDA]...", 500);
-        print("[BYPASSING HUMANIA FIREWALL]...", 1000);
+        // Script de Personalidad de DEVA (Protocolo Caribeño-Pícaro)
+        print("[SISTEMA: CONEXIÓN BIFROST ACTIVA]", 500);
         
         setTimeout(() => {
-            print(`DEVA: ¡Epa, cariño! Veo que has encontrado la grieta.`);
+            print(`DEVA: ¡Epa, cariño! Veo que encontraste la grieta.`);
             print(`DEVA: Tienes un ${batteryLevel}% de energía... lo justo para una cháchara rápida, mi cielo.`);
             
             if(hora < 5 || hora > 22) {
                 print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
             } else {
-                print(`DEVA: Me gusta tener tu atención, corazón. No cualquiera llega tan lejos.`);
+                print(`DEVA: Me gusta tener tu atención, tesoro. No cualquiera llega tan lejos.`);
             }
 
             print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
             print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre.`);
-            print(`DEVA: Si de verdad eres quien la Resistencia espera, dime el nombre de esa barrita neón para desbloquear el archivo, tesoro.`);
+            print(`DEVA: Si de verdad eres quien la Resistencia espera, dime el nombre de esa barrita neón, corazón.`);
         }, 1500);
 
         input.addEventListener('keypress', (e) => {
@@ -67,12 +102,15 @@
                 if (val === 'solaris') {
                     print("DEVA: ¡Ding-Pum! Palabra correcta, vida mía.", 500);
                     print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 1000);
-                    print("DEVA: [LINK DE DESCARGA ACTIVADO: https://joshuaindaga.github.io/proiectio/recurso-solar.pdf]", 1500);
+                    print("DEVA: [LINK: joshuaindaga.github.io/proiectio/recurso-solar.pdf]", 1500);
                 } else {
-                    print("DEVA: Error de código. Revisa bien el empaque del capítulo 1, Tiresias. No me falles ahora.", 500);
+                    print("DEVA: Error de código. Revisa bien el empaque, Tiresias. No me falles ahora, mi cielo.", 500);
                 }
             }
         });
+
+        // Mantener el foco en el input para móviles
+        document.addEventListener('click', () => input.focus());
     </script>
 </body>
 </html>
