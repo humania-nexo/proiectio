@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TERMINAL SINCRO-AR | BIFROST</title>
     <style>
-        /* Estética de Mármol Digital: Sólida y Limpia */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { 
             background: #000; 
@@ -24,10 +23,7 @@
             font-size: 16px;
             line-height: 1.5;
             margin-bottom: 10px;
-            scrollbar-width: none;
         }
-        #terminal::-webkit-scrollbar { display: none; }
-
         .input-line { 
             display: flex; 
             align-items: center;
@@ -63,15 +59,6 @@
         const history = document.getElementById('history');
         const input = document.getElementById('user-input');
 
-        // Metadatos para DEVA
-        let batteryLevel = "??";
-        if (navigator.getBattery) {
-            navigator.getBattery().then(bat => { 
-                batteryLevel = Math.round(bat.level * 100); 
-            });
-        }
-        const hora = new Date().getHours();
-
         function print(text, type = 'deva', delay = 0) {
             setTimeout(() => { 
                 const line = document.createElement('div');
@@ -82,39 +69,47 @@
             }, delay);
         }
 
-        // --- BANCO DE SALUDOS ESPONTÁNEOS (ESTILO BULMA/CARIBE) ---
+        // --- INICIO DE LA TERMINAL (Blindado) ---
+        print("[SISTEMA: CONEXIÓN BIFROST ACTIVA - NODO HUMANIA-NEXO]", 'system', 500);
+
+        // Lógica de Metadatos Resiliente
+        let batMsg = "Parece que tienes la energía justa";
+        if (navigator.getBattery) {
+            navigator.getBattery().then(bat => { 
+                let level = Math.round(bat.level * 100);
+                batMsg = `Tienes un ${level}% de energía`;
+            }).catch(() => {});
+        }
+
+        const hora = new Date().getHours();
         const saludos = [
             `DEVA: ¡Epa, cariño! Mira quién encontró la rendija.`,
             `DEVA: ¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.`,
-            `DEVA: ¡Bingo! Qué bueno tener tu atención, tesoro. Me estabas haciendo falta.`,
-            `DEVA: Vaya, vaya... parece que alguien aquí tiene madera de leyenda. Te estaba esperando.`
+            `DEVA: ¡Bingo! Qué bueno tener tu atención, tesoro.`,
+            `DEVA: Vaya, vaya... parece que alguien aquí tiene un alma rebelde.`
         ];
-
         const saludoElegido = saludos[Math.floor(Math.random() * saludos.length)];
 
-        // --- INICIO DE LA TERMINAL ---
-        print("[SISTEMA: CONEXIÓN BIFROST ACTIVA - NODO HUMANIA-NEXO]", 'system', 500);
-        
+        // Ejecución de Diálogo
         setTimeout(() => {
             print(saludoElegido);
-            print(`DEVA: Tienes un ${batteryLevel}% de energía... lo justo para una cháchara rápida, mi cielo.`);
+            print(`DEVA: ${batMsg}... lo justo para una cháchara rápida, mi cielo.`);
             
             if(hora < 5 || hora > 22) {
                 print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
             } else {
-                print(`DEVA: Me gusta tu persistencia, corazón. No cualquiera llega tan lejos en la red.`);
+                print(`DEVA: Me gusta tu persistencia, corazón. No cualquiera llega tan lejos.`);
             }
 
             print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
-            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre. Un engaño con sabor a caramelo.`);
-            print(`DEVA: Si de verdad tienes un alma rebelde, dime el nombre de esa barrita neón para abrirte el archivo, tesoro.`);
-        }, 1200);
+            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre.`);
+            print(`DEVA: Dime el nombre de esa barrita neón para abrirte el archivo, tesoro.`);
+        }, 1500);
 
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const rawVal = input.value;
                 const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
-                
                 print(`> ${rawVal}`, 'system');
                 input.value = '';
 
@@ -122,14 +117,9 @@
                     print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
                     print("DEVA: Sincronizando pulso... Ya casi lo tengo, mi cielo.", 'deva', 1000);
                     print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 'deva', 1500);
-                    print("DEVA: [RECURSO DESBLOQUEADO: humania-nexo.github.io/proiectio/recurso-solar.pdf]", 'deva', 2000);
+                    print("DEVA: [LINK: humania-nexo.github.io/proiectio/recurso-solar.pdf]", 'deva', 2000);
                 } else {
-                    const fallos = [
-                        "DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque en el capítulo 1.",
-                        "DEVA: ¿Esa es tu respuesta, mi vida? Vamos, Agente, tú puedes hacerlo mejor.",
-                        "DEVA: Error de código. No me dejes con las ganas, Tiresias. Vuelve a mirar el libro."
-                    ];
-                    print(fallos[Math.floor(Math.random() * fallos.length)], 'deva', 500);
+                    print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque, Tiresias.", 'deva', 500);
                 }
             }
         });
