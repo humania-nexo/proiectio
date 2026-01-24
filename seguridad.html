@@ -3,36 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo de Seguridad 7.02 | Humania</title>
+    <title>Reporte de Incidente #HN-7729 | Humania Corp</title>
     <style>
+        :root { --rojo-alerta: #ff3b30; --texto-principal: #1d1d1f; --borde: #d1d1d6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background-color: #f4f4f7; 
-            color: #1d1d1f; 
+            background-color: #f2f2f7; 
+            color: var(--texto-principal); 
             font-family: 'SF Mono', 'Courier New', monospace; 
-            margin: 0; 
             padding: 20px; 
             display: flex; 
             justify-content: center;
+            line-height: 1.5;
         }
         .report-container { 
             background: #fff; 
             width: 100%; 
-            max-width: 700px; 
-            border: 1px solid #d1d1d6; 
+            max-width: 650px; 
+            border: 1px solid var(--borde); 
             padding: 40px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             min-height: 90vh;
+            display: flex;
+            flex-direction: column;
         }
-        .header { border-bottom: 2px solid #00c3ff; padding-bottom: 20px; margin-bottom: 30px; }
-        .header h1 { font-size: 1.2rem; font-weight: bold; color: #ff3b30; margin-bottom: 5px; }
-        .header p { font-size: 0.8rem; color: #8e8e93; }
+        .header { 
+            border-bottom: 2px solid var(--rojo-alerta); 
+            padding-bottom: 15px; 
+            margin-bottom: 25px; 
+        }
+        .header h1 { font-size: 1.1rem; letter-spacing: 1px; color: var(--rojo-alerta); }
+        .header p { font-size: 0.7rem; color: #8e8e93; text-transform: uppercase; margin-top: 5px; }
         
-        .meta-line { margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; border-left: 3px solid #eee; padding-left: 15px; }
-        .label { color: #8e8e93; font-size: 0.7rem; display: block; text-transform: uppercase; }
-        .data { color: #1d1d1f; font-weight: bold; }
+        .section-title { font-size: 0.75rem; color: #8e8e93; text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         
-        .system-msg { background: #fff3f2; border: 1px solid #ffccbc; padding: 15px; color: #d32f2f; font-size: 0.8rem; margin-top: 30px; }
-        .footer-note { margin-top: 50px; font-size: 0.7rem; color: #8e8e93; text-align: center; }
+        .meta-line { margin-bottom: 12px; font-size: 0.85rem; padding-left: 10px; border-left: 2px solid #f2f2f7; }
+        .label { color: #8e8e93; font-size: 0.65rem; display: block; }
+        .data { color: var(--texto-principal); font-weight: 600; }
+        
+        .warning-box { 
+            background: #fff3f2; 
+            border: 1px solid #ffccbc; 
+            padding: 15px; 
+            color: #d32f2f; 
+            font-size: 0.75rem; 
+            margin-top: auto;
+            border-radius: 4px;
+        }
+        .footer { margin-top: 30px; font-size: 0.6rem; color: #aeaeb2; text-align: center; }
+
+        /* Efecto de carga de datos */
+        .loading::after { content: " [RASTREANDO...]"; animation: blink 1s infinite; color: var(--rojo-alerta); }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -40,48 +62,67 @@
     <div class="report-container">
         <div class="header">
             <h1>SECURITY INCIDENT REPORT #HN-7729</h1>
-            <p>HUMANIA CYBER-DEFENSE UNIT | VANCE CORE ADVISORY</p>
+            <p>Unidad de Contrainteligencia | Núcleo de Seguridad Vance</p>
         </div>
 
+        <div class="section-title">Detalles del Intruso</div>
         <div id="log">
             <div class="meta-line">
-                <span class="label">Estado del Incidente</span>
-                <span class="data">VIOLACIÓN DE PROTOCOLO DE ACCESO DETECTADA</span>
+                <span class="label">Hardware Detectado</span>
+                <span id="device-info" class="data">Analizando firma de dispositivo...</span>
+            </div>
+            <div class="meta-line">
+                <span class="label">Protocolo de Red</span>
+                <span class="data">IPv4 / Sincronía A.N.I.M.A.</span>
+            </div>
+            <div class="meta-line">
+                <span class="label">Dirección IP</span>
+                <span id="ip-addr" class="data loading">Iniciando bypass...</span>
+            </div>
+            <div class="meta-line">
+                <span class="label">Nodo Geográfico (País)</span>
+                <span id="location" class="data loading">Localizando señal...</span>
             </div>
         </div>
 
-        <div class="system-msg">
-            <strong>ADVERTENCIA:</strong> Se ha detectado un intento de ingreso mediante credenciales no autorizadas. De acuerdo con el Tratado de Asistencia Soberana, sus datos han sido procesados. No intente abandonar su ubicación actual.
+        <div class="section-title" style="margin-top: 20px;">Estado Operativo</div>
+        <div class="meta-line">
+            <span class="label">Nivel de Infracción</span>
+            <span class="data" style="color: var(--rojo-alerta);">NIVEL 7 - CRÍTICO</span>
+        </div>
+        <div class="meta-line">
+            <span class="label">Acción de Respuesta</span>
+            <span class="data">Despliegue de U.R.R. (Unidad de Respuesta Rápida)</span>
         </div>
 
-        <p class="footer-note">Propiedad confidencial de Humania Corp. La divulgación de este reporte conlleva sanciones de Nivel 7.</p>
+        <div class="warning-box">
+            <strong>AVISO LEGAL:</strong> Según el Protocolo de Paz Preventiva, este terminal ha sido bloqueado preventivamente. Sus datos biométricos han sido transmitidos a la central de Humania para su recalibración. La resistencia es una anomalía biológica que debe ser corregida.
+        </div>
+
+        <p class="footer">Confidencial. Queda prohibida la reproducción de este reporte fuera de la red corporativa.</p>
     </div>
 
     <script>
-        const log = document.getElementById('log');
-
-        function addInfo(label, data, delay) {
-            setTimeout(() => {
-                const div = document.createElement('div');
-                div.className = 'meta-line';
-                div.innerHTML = `<span class="label">${label}</span><span class="data">${data}</span>`;
-                log.appendChild(div);
-            }, delay);
-        }
-
-        addInfo("Rastreo de Hardware", "Identificado rastro de señal móvil/fija", 500);
+        const userAgent = navigator.userAgent;
+        let device = "Estación de Trabajo";
+        if (userAgent.match(/Android/i)) device = "Móvil Android OS";
+        else if (userAgent.match(/iPhone/i)) device = "Apple Mobile (iOS)";
         
+        document.getElementById('device-info').textContent = device;
+
+        // --- Obtención de IP y País ---
         fetch('https://ipapi.co/json/')
             .then(res => res.json())
             .then(data => {
-                addInfo("Dirección IP de Origen", data.ip, 1000);
-                addInfo("Geolocalización Aproximada", `${data.city}, ${data.country_name}`, 1500);
-                addInfo("Proveedor de Servicio", data.org, 2000);
-                addInfo("Unidad de Respuesta", "U.R.R. Mazatlán - Desplegada", 2500);
-                addInfo("Estado de Objetivo", "RECUALIFICACIÓN NEURONAL PENDIENTE", 3000);
+                document.getElementById('ip-addr').textContent = data.ip;
+                document.getElementById('ip-addr').classList.remove('loading');
+                
+                document.getElementById('location').textContent = data.country_name.toUpperCase();
+                document.getElementById('location').classList.remove('loading');
             })
             .catch(() => {
-                addInfo("Error de Rastreo", "Bypass detectado. Iniciando escaneo de Red A.N.I.M.A.", 1000);
+                document.getElementById('ip-addr').textContent = "ERROR: BYPASS DETECTADO";
+                document.getElementById('location').textContent = "DESCONOCIDO (MÁSCARA ACTIVA)";
             });
     </script>
 </body>
