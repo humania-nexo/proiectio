@@ -5,132 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PROIECTIO | El Futuro del Sueño</title>
     <style>
-        :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f8f9fa; --texto: #1d1d1f; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f8f9fa; --texto: #1d1d1f; --oro: #d4af37; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; }
 
-        /* --- Header --- */
-        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.95); z-index: 100; backdrop-filter: blur(10px); }
-        .logo { font-weight: bold; letter-spacing: 3px; color: var(--texto); font-size: 1rem; }
-        .tagline { font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-
-        /* --- Efecto Parallax --- */
-        .parallax {
-            height: 60vh;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.9); z-index: 100; backdrop-filter: blur(10px); }
+        .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1.1rem; }
+        
+        /* Efecto Parallax General */
+        .parallax { height: 60vh; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; display: flex; align-items: center; justify-content: center; }
         @media (max-width: 768px) { .parallax { background-attachment: scroll; } }
 
-        .hero-img { background-image: url('multimedia/hero.jpg'); height: 80vh; }
-        .solaris-img { background-image: url('multimedia/solaris.jpg'); }
-        .rem-img { background-image: url('multimedia/sueño.jpg'); }
+        /* 1. SECCION HERO */
+        .hero-img { background-image: url('multimedia/hero.png'); height: 80vh; }
+        .hero-text { background: rgba(255, 255, 255, 0.8); padding: 30px; text-align: center; backdrop-filter: blur(5px); }
 
-        .overlay-text { 
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 25px 40px; 
-            text-align: center;
-            backdrop-filter: blur(8px);
-            border-radius: 2px;
-        }
+        /* 2. CARRUSEL ADICCIÓN (5 Submundos) */
+        .catalog-header { padding: 60px 20px 20px; text-align: center; background: #000; color: #fff; }
+        .carousel-container { background: #000; padding-bottom: 60px; }
+        .scroll-wrapper { display: flex; overflow-x: auto; gap: 20px; padding: 20px; scrollbar-width: none; scroll-snap-type: x mandatory; }
+        .scroll-wrapper::-webkit-scrollbar { display: none; }
+        .sub-card { min-width: 85vw; height: 450px; background-size: cover; background-position: center; border-radius: 25px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; scroll-snap-align: center; border: 1px solid #222; }
+        @media (min-width: 768px) { .sub-card { min-width: 400px; } }
+        .sub-card h3 { color: var(--cian); font-size: 1.8rem; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .sub-card p { color: #ccc; text-shadow: 0 1px 5px rgba(0,0,0,0.8); }
 
-        .content-block { padding: 80px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; font-weight: 200; letter-spacing: -1px; }
-        h2 { font-weight: 300; font-size: 2rem; margin-bottom: 20px; }
-        p { color: #666; line-height: 1.8; font-size: 1.1rem; }
+        /* 3. CARRUSEL NUTRICIÓN (Solaris / Velvet) */
+        .nutrition-section { padding: 80px 20px; text-align: center; background: var(--gris-claro); }
+        .dual-slider { max-width: 900px; margin: 0 auto; overflow: hidden; border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .slide-track { display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nutri-slide { min-width: 100%; position: relative; }
+        .nutri-slide img { width: 100%; display: block; }
+        .nutri-label { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.6); color: #fff; padding: 10px 20px; border-radius: 10px; backdrop-filter: blur(5px); }
 
-        /* --- Login Form --- */
-        .login-section { padding: 80px 20px; background: var(--gris-claro); text-align: center; }
-        input { width: 100%; max-width: 300px; padding: 15px; margin: 10px 5px; border: 1px solid #ddd; background: #fff; font-size: 0.9rem; }
-        .btn-login { padding: 15px 50px; background: var(--texto); color: white; border: none; cursor: pointer; font-size: 0.8rem; letter-spacing: 2px; font-weight: bold; transition: 0.3s; }
-        .btn-login:hover { background: #000; letter-spacing: 3px; }
+        /* 4. SECCION SUEÑO (Mecánica Final) */
+        .sleep-img { background-image: url('multimedia/sueño.png'); height: 70vh; }
 
-        /* --- Submundos --- */
-        .submundos-section { padding: 60px 0; background: #000; color: #fff; text-align: center; }
-        .scroll-wrapper { display: flex; overflow-x: auto; gap: 20px; padding: 40px 20px; scrollbar-width: none; scroll-snap-type: x mandatory; }
-        .sub-card { min-width: 300px; height: 350px; background: #111; border-radius: 25px; padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; text-align: left; scroll-snap-align: center; border: 1px solid #222; }
-        .sub-card h3 { color: var(--cian); margin-bottom: 5px; }
-
-        /* --- Chat de Mite --- */
+        /* MITE WIDGET */
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        #mite-bubble { width: 75px; height: 75px; cursor: pointer; transition: transform 0.3s; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.4)); }
-        #chat-window { position: fixed; bottom: 100px; right: 20px; width: 320px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; color: #1d1d1f; text-align: left; }
-        .chat-header { background: var(--cian); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
+        #mite-bubble { width: 70px; height: 70px; cursor: pointer; transition: 0.3s; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.4)); }
+        #chat-window { position: fixed; bottom: 100px; right: 20px; width: 300px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; }
+        .chat-header { background: var(--cian); color: white; padding: 12px; font-size: 0.8rem; font-weight: bold; display: flex; justify-content: space-between; }
         .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.85rem; }
-        .mite-msg { background: var(--gris-claro); padding: 10px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; }
-        .opt-btn { background: white; border: 1px solid var(--cian); color: var(--cian); padding: 6px 12px; border-radius: 15px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
+        .mite-msg { background: #f0f0f5; padding: 8px 12px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; color: #333; }
+        .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 12px; font-size: 0.7rem; cursor: pointer; margin: 2px; transition: 0.2s; }
+        .opt-btn:hover { background: var(--cian); color: #fff; }
 
-        /* --- Footer --- */
-        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #ccc; }
-        .secret-link { color: #eee; text-decoration: none; cursor: default; opacity: 0.1; font-family: monospace; }
-        .matrix-collapse { filter: invert(1) hue-rotate(90deg) brightness(1.2); transition: 2s; background: #000 !important; }
+        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #999; background: #fff; }
+        .secret-link { opacity: 0.05; text-decoration: none; color: #000; cursor: default; }
+        .matrix-collapse { filter: invert(1) hue-rotate(90deg); transition: 2s; background: #000 !important; }
     </style>
 </head>
 <body id="main-body">
 
     <header>
         <div class="logo">PROIECTIO&trade;</div>
-        <div class="tagline">A.N.I.M.A. NETWORK ACTIVE</div>
+        <div style="font-size: 0.6rem; color: var(--cian);">A.N.I.M.A. SINCRO: ONLINE</div>
     </header>
 
-    <!-- Hero -->
+    <!-- 1. HERO (LA PROMESA) -->
     <section class="parallax hero-img">
-        <div class="overlay-text">
+        <div class="hero-text">
             <h1>Un Mañana Sin Sombras</h1>
-            <p style="color:var(--cian); font-weight: bold; letter-spacing: 1px;">EL DESPERTAR DEFINITIVO</p>
+            <p style="color:var(--cian); font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;">TECNOLOGÍA NEURONAL NIVEL 7</p>
         </div>
     </section>
 
-    <div class="content-block">
-        <h2>La evolución del descanso</h2>
-        <p>A través de la Red A.N.I.M.A., Humania ha optimizado el ciclo biológico humano. Bienvenido a una vida donde el cansancio es solo un recuerdo del pasado.</p>
+    <!-- 2. CATÁLOGO DE ADICCIÓN (5 SUBMUNDOS) -->
+    <div class="catalog-header">
+        <h2>Ecosistemas de Inmersión</h2>
+        <p style="color: #666; font-size: 0.9rem;">¿Quién quieres ser hoy? Elige tu destino.</p>
     </div>
-
-    <!-- Solaris -->
-    <section class="parallax solaris-img"></section>
-
-    <div class="content-block">
-        <h2>Nutrición de Diseño</h2>
-        <p>Solaris no es solo alimento. Es el voltaje puro que su cuerpo necesita para mantener un rendimiento de Nivel 7 durante toda su jornada operativa.</p>
-    </div>
-
-    <!-- REM -->
-    <section class="parallax rem-img"></section>
-
-    <div class="content-block">
-        <h2>Sincronía REM</h2>
-        <p>No se limite a dormir. Viva. Proiectio le permite habitar sus deseos mientras su cuerpo se recupera en un estado de eficiencia total.</p>
-    </div>
-
-    <!-- Login -->
-    <section class="login-section">
-        <h3 style="font-weight: 400; margin-bottom: 20px; letter-spacing: 2px;">PORTAL DE ENLACE NEURONAL</h3>
-        <form id="login-form">
-            <input type="text" placeholder="ID BIOMÉTRICO" required>
-            <input type="password" placeholder="CONTRASEÑA" required>
-            <br><br>
-            <button type="submit" class="btn-login">CONECTAR</button>
-        </form>
-    </section>
-
-    <!-- Submundos -->
-    <section class="submundos-section">
-        <h2 style="color: white; margin-bottom: 10px;">Ecosistemas de Inmersión</h2>
-        <div class="scroll-wrapper">
-            <div class="sub-card"><h3>Arcadia Eterna</h3><p>El paraíso que la historia nos arrebató.</p></div>
-            <div class="sub-card"><h3>Coliseo Etérico</h3><p>Forja tu leyenda en el combate infinito. ¡Zashoom!</p></div>
-            <div class="sub-card"><h3>Beso Prohibido</h3><p>Donde los adioses nunca ocurrieron.</p></div>
-            <div class="sub-card"><h3>Neon Nirvana</h3><p>Hedonismo sensorial bajo vigilancia absoluta.</p></div>
-            <div class="sub-card"><h3>Chronos</h3><p>Habita el pasado. Aprende de los Gigantes.</p></div>
+    <section class="carousel-container">
+        <div class="scroll-wrapper" id="catalog-scroll">
+            <!-- ARCADIA -->
+            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/arcadia.png')">
+                <h3>Arcadia Eterna</h3>
+                <p>El refugio natural que la historia nos arrebató.</p>
+            </div>
+            <!-- COLISEO -->
+            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/coliseo.png')">
+                <h3>Coliseo Etérico</h3>
+                <p>Forja tu leyenda en el combate infinito. ¡Zashoom!</p>
+            </div>
+            <!-- BESO PROHIBIDO -->
+            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/beso.png')">
+                <h3>El Beso Prohibido</h3>
+                <p>Donde los adioses nunca ocurrieron.</p>
+            </div>
+            <!-- NEON (Placeholder) -->
+            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/neon.png')">
+                <h3>Neon Nirvana</h3>
+                <p>Hedonismo sensorial bajo vigilancia absoluta.</p>
+            </div>
+            <!-- CHRONOS (Placeholder) -->
+            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/chronos.png')">
+                <h3>Chronos</h3>
+                <p>Habita el pasado. Aprende de los Gigantes.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Widget Mite -->
+    <!-- 3. NUTRICIÓN (Solaris / Velvet Carousel) -->
+    <section class="nutrition-section">
+        <h2 style="margin-bottom: 30px;">Ciclo de Recarga Humana</h2>
+        <div class="dual-slider">
+            <div class="slide-track" id="nutri-track">
+                <div class="nutri-slide">
+                    <img src="multimedia/solaris-web.png" alt="Solaris">
+                    <div class="nutri-label">FASE DIURNA: SOLARIS</div>
+                </div>
+                <div class="nutri-slide">
+                    <img src="multimedia/velvet-web.png" alt="Velvet">
+                    <div class="nutri-label">FASE NOCTURNA: VELVET</div>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto; color: #666;">
+            Optimice su rendimiento operativo. Solaris para la acción, Velvet para el reinicio. El equilibrio perfecto para el ciudadano de hoy.
+        </p>
+    </section>
+
+    <!-- 4. MECANICA SUEÑO -->
+    <section class="parallax sleep-img">
+        <div class="hero-text">
+            <h2>Sincronía REM</h2>
+            <p>Donde tus deseos toman forma.</p>
+        </div>
+    </section>
+
+    <!-- WIDGET MITE -->
     <div id="mite-widget">
         <div id="chat-window">
             <div class="chat-header">
@@ -138,12 +142,12 @@
                 <span onclick="toggleChat()" style="cursor:pointer">✕</span>
             </div>
             <div class="chat-body" id="chat-log">
-                <div class="mite-msg">¡Zashoom! Soy Mite, tu guía hacia la felicidad. ¿Quieres comprar Fragmentos de Éter hoy? ¡Ding-Pum! 💎</div>
+                <div class="mite-msg">¡Zashoom! Soy Mite, tu guía hacia la felicidad. ¿Qué quieres comprar hoy? ¡Ding-Pum! 💎</div>
             </div>
-            <div style="padding: 10px; border-top: 1px solid #eee;">
-                <button class="opt-btn" onclick="miteDice('sincronia')">¿Qué es Sincronía?</button>
+            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; flex-wrap: wrap;">
+                <button class="opt-btn" onclick="miteDice('sincronia')">Sincronía</button>
                 <button class="opt-btn" onclick="miteDice('eter')">Ganar Éter</button>
-                <button class="opt-btn" onclick="miteDice('vance')">Hablar con Seguridad</button>
+                <button class="opt-btn" onclick="miteDice('vance')">Seguridad</button>
             </div>
         </div>
         <img src="multimedia/mite.png" id="mite-bubble" onclick="toggleChat()" alt="Mite">
@@ -156,43 +160,55 @@
     </footer>
 
     <script>
-        // Mite Chat
+        // Mite Chat Dinámico
         function toggleChat() {
             const chat = document.getElementById('chat-window');
             chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
         }
         function miteDice(t) {
             const log = document.getElementById('chat-log');
-            let r = (t==='sincronia') ? "¡Es optimizar tu mente al 100%! 🚀" : (t==='eter') ? "¡Trabaja duro y canjéalo por sueños! 💎" : "El Director Vance está ocupado protegiendo tu paz. 🛡️";
-            const m = document.createElement('div'); m.className = 'mite-msg'; m.textContent = r;
-            log.appendChild(m); log.scrollTop = log.scrollHeight;
+            const resp = {
+                'sincronia': ["¡Es la gloria! Eficiencia mental al 100%. 🚀", "¡En Proiectio puedes volar, cariño! 💎", "Es el puente al BIFROST. ¡Zashoom! ✨"],
+                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres esa skin de Dragón? ¡Usa tu Éter! 🐉", "¡Sin reembolsos, precioso cliente! 💎"],
+                'vance': ["Vance vigila tus pensamientos para que tú no sufras. 🛡️", "¡Paz total bajo la Red A.N.I.M.A.! 🕊️", "Acceso denegado. ¡Pero yo te cuido mejor! 🤖"]
+            };
+            const pool = resp[t];
+            const msg = document.createElement('div');
+            msg.className = 'mite-msg';
+            msg.textContent = "MITE: " + pool[Math.floor(Math.random() * pool.length)];
+            log.appendChild(msg);
+            log.scrollTop = log.scrollHeight;
         }
 
-        // Login Trap
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault(); window.location.href = "seguridad.html";
-        });
+        // Auto-Slider Nutrición (Solaris/Velvet)
+        let nutriIndex = 0;
+        setInterval(() => {
+            nutriIndex = (nutriIndex + 1) % 2;
+            document.getElementById('nutri-track').style.transform = `translateX(-${nutriIndex * 100}%)`;
+        }, 5000);
 
-        // Matrix Door
+        // Matrix Link
         document.getElementById('matrix-trigger').addEventListener('click', function(e) {
             e.preventDefault(); document.body.classList.add('matrix-collapse');
             setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
         });
 
-        // Shake Motion Sensor (DEVA Access)
-        let lastUpdate = 0; let lastX, lastY, lastZ;
-        window.addEventListener('devicemotion', function(event) {
-            let acc = event.accelerationIncludingGravity;
-            let curTime = new Date().getTime();
-            if ((curTime - lastUpdate) > 100) {
-                let diffTime = curTime - lastUpdate; lastUpdate = curTime;
-                let speed = Math.abs(acc.x + acc.y + acc.z - lastX - lastY - lastZ) / diffTime * 10000;
-                if (speed > 1500) { 
-                    document.body.style.background = "#0f0";
-                    window.location.href = "sincro.html?nodo=motion"; 
-                }
+        // Shake Motion
+        let lastX, lastY, lastZ, lastUpdate = 0;
+        window.addEventListener('devicemotion', function(e) {
+            let acc = e.accelerationIncludingGravity;
+            let now = new Date().getTime();
+            if ((now - lastUpdate) > 100) {
+                let diff = now - lastUpdate; lastUpdate = now;
+                let speed = Math.abs(acc.x + acc.y + acc.z - lastX - lastY - lastZ) / diff * 10000;
+                if (speed > 2000) window.location.href = "sincro.html?nodo=motion";
                 lastX = acc.x; lastY = acc.y; lastZ = acc.z;
             }
+        });
+
+        // Login Trap
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault(); window.location.href = "seguridad.html";
         });
     </script>
 </body>
