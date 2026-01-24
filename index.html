@@ -3,90 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Humania Corp | Un Mañana Sin Sombras</title>
+    <title>PROIECTIO | El Futuro del Sueño</title>
     <style>
         :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f8f9fa; --texto: #1d1d1f; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        body { background-color: var(--blanco); color: var(--texto); }
+        body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; }
 
-        /* Efecto Parallax Container */
-        .parallax {
-            height: 60vh;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* Estilo Apple/Neuralink */
+        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.9); z-index: 100; backdrop-filter: blur(10px); }
+        .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1.1rem; }
+        .tagline { font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 6px; border-radius: 4px; }
 
-        .hero-img { background-image: url('multimedia/hero.jpg'); height: 80vh; }
-        .solaris-img { background-image: url('multimedia/solaris.jpg'); }
-        .rem-img { background-image: url('multimedia/sueño.jpg'); }
+        /* Hero */
+        .hero { padding: 80px 20px; text-align: center; background: #fff; }
+        .hero h1 { font-size: 3rem; font-weight: 200; letter-spacing: -2px; margin-bottom: 10px; }
+        .hero p { color: #86868b; font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; }
+        .hero img { width: 100%; max-width: 900px; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
 
-        .overlay-text { 
-            background: rgba(255, 255, 255, 0.8); 
-            padding: 20px 40px; 
-            border-radius: 2px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
+        /* Carrusel Submundos (Scroll) */
+        .submundos-section { padding: 60px 0; background: #000; color: #fff; text-align: center; }
+        .scroll-wrapper { display: flex; overflow-x: auto; gap: 20px; padding: 40px 20px; scrollbar-width: none; scroll-snap-type: x mandatory; }
+        .sub-card { min-width: 300px; height: 400px; background: #111; border-radius: 25px; padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; text-align: left; scroll-snap-align: center; border: 1px solid #222; }
+        .sub-card h3 { color: var(--cian); font-size: 1.5rem; margin-bottom: 5px; }
+        .sub-card p { font-size: 0.9rem; color: #aaa; }
 
-        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.95); z-index: 100; }
-        .logo { font-weight: bold; letter-spacing: 3px; color: var(--texto); font-size: 0.9rem; }
+        /* Chat de Mite */
+        #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        #mite-bubble { width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.4)); }
+        #mite-bubble:hover { transform: scale(1.1) rotate(5deg); }
+        
+        #chat-window { position: fixed; bottom: 100px; right: 20px; width: 320px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; }
+        .chat-header { background: var(--cian); color: white; padding: 15px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; }
+        .chat-body { height: 300px; overflow-y: auto; padding: 15px; font-size: 0.85rem; }
+        .mite-msg { background: var(--gris-claro); padding: 10px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; color: #444; }
+        .options { padding: 10px; border-top: 1px solid #eee; display: flex; flex-wrap: wrap; gap: 5px; }
+        .opt-btn { background: white; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 15px; font-size: 0.7rem; cursor: pointer; }
+        .opt-btn:hover { background: var(--cian); color: white; }
 
-        .content-block { padding: 80px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
-        h2 { font-weight: 300; font-size: 2rem; margin-bottom: 20px; letter-spacing: -1px; }
-        p { color: #666; line-height: 1.8; }
-
-        .login-section { padding: 60px 20px; background: var(--gris-claro); text-align: center; }
-        input { width: 100%; max-width: 300px; padding: 12px; margin: 10px 5px; border: 1px solid #ddd; border-radius: 0; background: #fff; font-size: 0.9rem; }
-        .btn-login { padding: 12px 40px; background: var(--texto); color: white; border: none; cursor: pointer; font-size: 0.8rem; letter-spacing: 1px; }
-
-        footer { padding: 40px; text-align: center; font-size: 0.7rem; color: #ccc; }
-        .secret-link { color: #eee; text-decoration: none; cursor: default; opacity: 0.2; }
-
-        /* Ajuste para móviles: el parallax fixed a veces falla, usamos scroll normal pero elegante */
-        @media (max-width: 768px) { .parallax { background-attachment: scroll; } }
+        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #ccc; background: #fafafa; }
+        .secret-link { color: #eee; text-decoration: none; cursor: default; opacity: 0.1; }
+        .matrix-collapse { filter: invert(1) hue-rotate(90deg); transition: 2s; }
     </style>
 </head>
-<body>
+<body id="main-body">
 
     <header>
-        <div class="logo">HUMANIA&trade;</div>
-        <div style="font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 5px;">A.N.I.M.A. SINCRO: ON</div>
+        <div class="logo">PROIECTIO&trade;</div>
+        <div class="tagline">BY HUMANIA CORP</div>
     </header>
 
-    <section class="parallax hero-img">
-        <div class="overlay-text">
-            <h1 style="font-weight: 200; font-size: 2.5rem;">Un Mañana Sin Sombras</h1>
+    <section class="hero">
+        <h1>Tus sueños, <br><span style="color:var(--cian); font-weight: 500;">ahora son reales.</span></h1>
+        <p>La red de inmersión neuronal más avanzada del planeta. Bienvenido a la libertad biológica total.</p>
+        <img src="multimedia/hero.jpg" alt="Sincronía REM">
+    </section>
+
+    <section class="submundos-section">
+        <h2>Ecosistemas de Inmersión</h2>
+        <div class="scroll-wrapper">
+            <div class="sub-card"><h3>Arcadia Eterna</h3><p>El refugio natural que la historia nos arrebató.</p></div>
+            <div class="sub-card"><h3>Coliseo Etérico</h3><p>Forja tu leyenda en el combate infinito. ¡Zashoom!</p></div>
+            <div class="sub-card"><h3>Beso Prohibido</h3><p>Donde los adioses nunca ocurrieron.</p></div>
+            <div class="sub-card"><h3>Neon Nirvana</h3><p>Hedonismo sensorial bajo vigilancia absoluta.</p></div>
+            <div class="sub-card"><h3>Chronos</h3><p>Habita el pasado. Aprende de los Gigantes.</p></div>
         </div>
     </section>
 
-    <div class="content-block">
-        <h2>La evolución del descanso</h2>
-        <p>A través de la Red A.N.I.M.A., Humania ha logrado lo que la naturaleza tardó eones en perfeccionar: la optimización total del ciclo biológico. Bienvenido a una vida sin límites.</p>
+    <!-- WIDGET DE MITE -->
+    <div id="mite-widget">
+        <div id="chat-window">
+            <div class="chat-header">
+                <span>MITE - Asistente Virtual</span>
+                <span onclick="toggleChat()" style="cursor:pointer">✕</span>
+            </div>
+            <div class="chat-body" id="chat-log">
+                <div class="mite-msg">¡Zashoom! Soy Mite, tu guía hacia la felicidad. ¿En qué puedo ayudarte hoy, precioso cliente? ¡Ding-Pum! 💎</div>
+            </div>
+            <div class="options">
+                <button class="opt-btn" onclick="miteDice('sincronia')">¿Qué es la Sincronía?</button>
+                <button class="opt-btn" onclick="miteDice('eter')">¿Cómo gano Éter?</button>
+                <button class="opt-btn" onclick="miteDice('humano')">Hablar con un humano</button>
+            </div>
+        </div>
+        <img src="multimedia/mite.png" id="mite-bubble" onclick="toggleChat()" alt="Mite">
     </div>
-
-    <section class="parallax solaris-img"></section>
-
-    <div class="content-block">
-        <h2>Nutrición de Precisión</h2>
-        <p>Solaris no es solo alimento. Es la frecuencia energética que su cuerpo necesita para mantener un rendimiento de Nivel 7 durante toda la jornada operativa.</p>
-    </div>
-
-    <section class="parallax rem-img"></section>
-
-    <section class="login-section">
-        <h3 style="font-weight: 400; margin-bottom: 20px;">PORTAL DE ENLACE NEURONAL</h3>
-        <form id="login-form">
-            <input type="text" placeholder="ID DE USUARIO" required>
-            <input type="password" placeholder="PASSWORD" required>
-            <br><br>
-            <button type="submit" class="btn-login">VALIDAR BIOMETRÍA</button>
-        </form>
-    </section>
 
     <footer>
         <p>&copy; 202X HUMANIA GLOBAL SYSTEMS. "VOLUNTAS PRO PACE".</p>
@@ -94,15 +94,31 @@
     </footer>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            window.location.href = "seguridad.html";
-        });
+        // Lógica del Chat de Mite
+        function toggleChat() {
+            const chat = document.getElementById('chat-window');
+            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+        }
 
+        function miteDice(tema) {
+            const log = document.getElementById('chat-log');
+            let resp = "";
+            
+            if(tema === 'sincronia') resp = "¡Es genial! El chip CNB-3 optimiza tu cerebro para que vivas aventuras mientras tu cuerpo descansa. ¡Eficiencia del 100%! 🚀";
+            if(tema === 'eter') resp = "¡Ding-Pum! Los Fragmentos de Éter son la llave al placer. ¡Trabaja duro en el mundo real y cámbialos por sueños en Proiectio! 💎";
+            if(tema === 'humano') resp = "Error: Los operadores humanos están disfrutando de su suscripción Premium. ¡Pero yo soy mucho más divertida! ¿Quieres comprar una skin? 🎨";
+
+            const msg = document.createElement('div');
+            msg.className = 'mite-msg';
+            msg.textContent = resp;
+            log.appendChild(msg);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Lógica Matrix
         document.getElementById('matrix-trigger').addEventListener('click', function(e) {
             e.preventDefault();
-            document.body.style.transition = "all 2s";
-            document.body.style.filter = "invert(1) grayscale(1)";
+            document.body.classList.add('matrix-collapse');
             setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
         });
     </script>
