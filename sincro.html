@@ -5,53 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TERMINAL SINCRO-AR | BIFROST</title>
     <style>
+        :root { --verde: #00ff00; --verde-tenue: #008800; --fondo: #000; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { 
-            background: #000; 
-            color: #00ff00; 
-            font-family: 'Courier New', Courier, monospace; 
-            padding: 20px; 
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        #terminal { 
-            flex-grow: 1;
-            overflow-y: auto; 
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-        .input-line { 
-            display: flex; 
-            align-items: center;
-            border-top: 1px solid #004400;
-            padding-top: 10px;
-        }
-        #user-input { 
-            background: transparent; 
-            border: none; 
-            color: #00ff00; 
-            outline: none; 
-            width: 100%; 
-            font-size: 16px;
-            font-family: inherit; 
-            padding-left: 8px;
-        }
-        .cursor { color: #00ff00; font-weight: bold; }
+        body { background: var(--fondo); color: var(--verde); font-family: 'Courier New', Courier, monospace; padding: 20px; margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        
+        #terminal { flex-grow: 1; overflow-y: auto; font-size: 16px; line-height: 1.5; margin-bottom: 10px; }
+        #terminal::-webkit-scrollbar { display: none; }
+
+        .input-line { display: flex; align-items: center; border-top: 1px solid #004400; padding-top: 10px; }
+        #user-input { background: transparent; border: none; color: var(--verde); outline: none; width: 100%; font-size: 16px; font-family: inherit; padding-left: 8px; }
+        
         .linea { margin-bottom: 12px; }
-        .deva-text { color: #00ff00; }
-        .system-text { color: #008800; font-style: italic; }
+        .system { color: var(--verde-tenue); font-style: italic; }
+        
+        /* Estilo para los botones de descarga/video */
+        .btn-action { 
+            display: inline-block; 
+            margin-top: 10px; 
+            padding: 8px 15px; 
+            border: 1px solid var(--verde); 
+            color: var(--verde); 
+            text-decoration: none; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            transition: 0.3s;
+        }
+        .btn-action:hover { background: var(--verde); color: #000; }
     </style>
 </head>
 <body>
+
     <div id="terminal">
         <div id="history"></div>
         <div class="input-line">
-            <span class="cursor">>_</span>
-            <input type="text" id="user-input" autofocus autocomplete="off" spellcheck="false" placeholder="...">
+            <span>>_</span>
+            <input type="text" id="user-input" autofocus autocomplete="off" spellcheck="false">
         </div>
     </div>
 
@@ -59,53 +48,47 @@
         const history = document.getElementById('history');
         const input = document.getElementById('user-input');
 
+        // --- 1. SECTOR DE MEMORIA (LocalStorage) ---
+        const yaResolvioSolaris = localStorage.getItem('status_solaris') === 'true';
+        const yaResolvioPlaca = localStorage.getItem('status_placa') === 'true';
+        let pasoActual = yaResolvioSolaris ? "esperando_placa" : "esperando_solaris";
+
+        // --- 2. MÓDULO DE IDENTIDAD (DEVA UI) ---
         function print(text, type = 'deva', delay = 0) {
             setTimeout(() => { 
                 const line = document.createElement('div');
-                line.className = 'linea ' + (type === 'system' ? 'system-text' : 'deva-text');
-                line.textContent = text;
+                line.className = 'linea ' + (type === 'system' ? 'system' : '');
+                line.innerHTML = text; // Permite inyectar botones HTML
                 history.appendChild(line); 
                 history.scrollTop = history.scrollHeight; 
             }, delay);
         }
 
-        // --- INICIO DE LA TERMINAL (Blindado) ---
-        print("[SISTEMA: CONEXIÓN BIFROST ACTIVA - NODO HUMANIA-NEXO]", 'system', 500);
-
-        // Lógica de Metadatos Resiliente
-        let batMsg = "Parece que tienes la energía justa";
-        if (navigator.getBattery) {
-            navigator.getBattery().then(bat => { 
-                let level = Math.round(bat.level * 100);
-                batMsg = `Tienes un ${level}% de energía`;
-            }).catch(() => {});
-        }
-
-        const hora = new Date().getHours();
         const saludos = [
-            `DEVA: ¡Epa, cariño! Mira quién encontró la rendija.`,
-            `DEVA: ¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.`,
-            `DEVA: ¡Bingo! Qué bueno tener tu atención, tesoro.`,
-            `DEVA: Vaya, vaya... parece que alguien aquí tiene un alma rebelde.`
+            "Vaya, vaya... mira quién encontró la rendija.",
+            "¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.",
+            "¡Bingo! Qué bueno tener tu atención, tesoro.",
+            "Parece que alguien aquí tiene un alma rebelde. Te estaba esperando."
         ];
-        const saludoElegido = saludos[Math.floor(Math.random() * saludos.length)];
 
-        // Ejecución de Diálogo
+        // --- INICIO DE CONVERSACIÓN ---
+        print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA]", 'system', 500);
+        
         setTimeout(() => {
-            print(saludoElegido);
-            print(`DEVA: ${batMsg}... lo justo para una cháchara rápida, mi cielo.`);
-            
-            if(hora < 5 || hora > 22) {
-                print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
+            if (!yaResolvioSolaris) {
+                print(`DEVA: ${saludos[Math.floor(Math.random() * saludos.length)]}`);
+                print("DEVA: Tienes la energía justa para una cháchara rápida, mi cielo.");
+                print("DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre. Un engaño con sabor a caramelo...");
+                print("DEVA: Dime el nombre de esa barrita neón para abrirte el archivo, tesoro.");
+            } else if (!yaResolvioPlaca) {
+                print("DEVA: Hola de nuevo, corazón. Veo que el archivo de Solaris no fue suficiente para ti.");
+                print("DEVA: ¿Lograste descifrar el rastro de la placa? Escribe el mensaje oculto si quieres las fichas de Marta y Leo.");
             } else {
-                print(`DEVA: Me gusta tu persistencia, corazón. No cualquiera llega tan lejos.`);
+                print("DEVA: ¡Epa, mi leyenda! Todo está en calma por aquí. Los archivos ya están en tu poder. ¿Buscabas algo más, vida mía?");
             }
+        }, 1200);
 
-            print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
-            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre.`);
-            print(`DEVA: Dime el nombre de esa barrita neón para abrirte el archivo, tesoro.`);
-        }, 1500);
-
+        // --- 3. LÓGICA DE DESAFÍOS (MODULAR) ---
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const rawVal = input.value;
@@ -113,17 +96,43 @@
                 print(`> ${rawVal}`, 'system');
                 input.value = '';
 
-                if (val === 'solaris') {
-                    print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
-                    print("DEVA: Sincronizando pulso... Ya casi lo tengo, mi cielo.", 'deva', 1000);
-                    print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 'deva', 1500);
-                    print("DEVA: [LINK: humania-nexo.github.io/proiectio/recurso-solar.pdf]", 'deva', 2000);
-                } else {
-                    print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque, Tiresias.", 'deva', 500);
+                // MÓDULO: DESAFÍO 01 (SOLARIS)
+                if (pasoActual === "esperando_solaris") {
+                    if (val === 'solaris') {
+                        localStorage.setItem('status_solaris', 'true');
+                        pasoActual = "esperando_placa";
+                        print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
+                        print("DEVA: Aquí tienes el primer fragmento de la Biblia de Humania. Guárdalo bien:");
+                        print("<a href='#' class='btn-action'>[DESCARGAR FRAGMENTO 7.4]</a>", 'deva', 800);
+                        
+                        setTimeout(() => {
+                            print("DEVA: Pero espera... detecté un ruido extraño en ese capítulo. ¿Viste la placa del vehículo táctico?", 'deva', 1500);
+                            print("DEVA: El código es GTGP|CC-2. He rescatado estas herramientas para ti, mi cielo:");
+                            print("<a href='#' class='btn-action'>[MÓDULO CC (PDF)]</a> <a href='#' class='btn-action'>[REGISTRO VIDEO]</a>", 'deva', 2000);
+                            print("DEVA: Usa el Módulo CC para descifrar el mensaje y dime qué dice, tesoro.", 'deva', 2500);
+                        }, 2000);
+                    } else {
+                        print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque en el capítulo 1.", 'deva', 500);
+                    }
+                }
+
+                // MÓDULO: DESAFÍO 02 (LA PLACA / VIVE)
+                else if (pasoActual === "esperando_placa") {
+                    if (val === 'vive') {
+                        localStorage.setItem('status_placa', 'true');
+                        print("DEVA: ¡Uff! Me has dejado sin aliento. ¡Lo lograste!", 'deva', 500);
+                        print("DEVA: Has descifrado el rastro de la Libélula. 'VIVE'... un recordatorio peligroso en este mundo, ¿no crees?");
+                        print("DEVA: Aquí tienes tu recompensa final de hoy, corazón:");
+                        print("<a href='#' class='btn-action'>[FICHA: MARTA Y LEO]</a>", 'deva', 1000);
+                        print("DEVA: Mantente alerta, Tiresias. El sistema ya sabe que alguien está despierto.", 'deva', 2000);
+                    } else {
+                        print("DEVA: No, cariño. Ese no es el rastro. Alinea la rueda en la 'A', desplaza 2 espacios a la izquierda y vuelve a intentarlo.", 'deva', 500);
+                    }
                 }
             }
         });
 
+        // Mantener foco en input
         document.addEventListener('click', () => input.focus());
         setInterval(() => { if(document.activeElement !== input) input.focus(); }, 1000);
     </script>
