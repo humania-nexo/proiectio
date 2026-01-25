@@ -16,7 +16,14 @@
         .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; }
         .slider-wrapper:active { cursor: grabbing; }
         .slide-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
-        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; pointer-events: none; }
+        .slide-item { 
+    min-width: 100%; 
+    position: relative; 
+    text-decoration: none; 
+    color: inherit; 
+    display: block; /* Asegura que ocupe el espacio */
+    pointer-events: auto; /* IMPORTANTE: Esto permite que el clic funcione */
+}
         .slide-item img { width: 100%; height: auto; display: block; -webkit-user-drag: none; }
         
         /* Overlay de texto */
@@ -71,6 +78,16 @@
     </div>
     <div class="slider-wrapper" id="wrapper-catalog">
         <div class="slide-track" id="catalog-track">
+            
+
+            <!-- ELEMENTO: COLISÉO ETÉRICO -->
+<a href="coliseo.html" class="slide-item" style="pointer-events: auto;">
+    <img src="multimedia/coliseo.png" alt="Coliseo Etérico">
+    <div class="label-overlay">
+        <h3>Coliseo Etérico</h3>
+        <p>Forja tu leyenda en el combate infinito. ¡Zashoom!</p>
+    </div>
+</a>
             <div class="slide-item"><img src="multimedia/Olympus.jpeg"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div></div>
             <div class="slide-item"><img src="multimedia/arcadia.jpg"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></div>
             <div class="slide-item"><img src="multimedia/elbeso.jpg"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Vence al tiempo.</p></div></div>
