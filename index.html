@@ -12,50 +12,42 @@
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.9); z-index: 100; backdrop-filter: blur(10px); }
         .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; }
 
-        /* --- CONTENEDOR DE SLIDER TÁCTIL --- */
-        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; }
+        /* --- SLIDERS KINÉTICOS --- */
+        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; }
         .slider-wrapper:active { cursor: grabbing; }
         .slide-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
-        .slide-item { 
-    min-width: 100%; 
-    position: relative; 
-    text-decoration: none; 
-    color: inherit; 
-    display: block; /* Asegura que ocupe el espacio */
-    pointer-events: auto; /* IMPORTANTE: Esto permite que el clic funcione */
-}
-        .slide-item img { width: 100%; height: auto; display: block; -webkit-user-drag: none; }
         
-        /* Overlay de texto */
-        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: left; pointer-events: none; }
+        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; display: block; }
+        .slide-item img { width: 100%; height: auto; display: block; -webkit-user-drag: none; pointer-events: none; }
+        
+        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: left; }
         .label-overlay h3 { color: var(--cian); font-size: 1.5rem; margin-bottom: 5px; }
         
-        /* Bullets */
-        .dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 10; pointer-events: auto; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
+        .dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 10; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
         .dot.active { background: var(--cian); transform: scale(1.4); }
 
         .section-title { padding: 60px 20px 20px; text-align: center; }
         .section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 
-        /* Estilo Hero */
         .hero-link { display: block; text-decoration: none; background: var(--gris-claro); }
         .hero-link img { width: 100%; height: auto; display: block; }
 
-        /* Mite Chat */
+        /* --- MITE CHAT --- */
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         #mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); }
         #chat-window { position: fixed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; text-align: left; }
         .chat-header { background: var(--cian); color: white; padding: 12px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; }
         .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.8rem; color: #333; }
-        .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; }
+        .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; line-height: 1.4; }
         .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 10px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
 
         footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; }
-        .secret-link { opacity: 0.05; text-decoration: none; color: #000; }
+        .secret-link { opacity: 0.05; text-decoration: none; color: #000; cursor: default; font-family: monospace; }
+        .matrix-collapse { filter: invert(1) hue-rotate(90deg) brightness(1.2); transition: 2s; background: #000 !important; }
     </style>
 </head>
-<body>
+<body id="main-body">
 
     <header>
         <div class="logo">PROIECTIO&trade;</div>
@@ -71,41 +63,62 @@
         </div>
     </section>
 
-    <!-- FASE 2: CATÁLOGO DE ADICCIÓN -->
+    <!-- FASE 2: CATÁLOGO DE ADICCIÓN (6 SUBMUNDOS) -->
     <div class="section-title">
         <h2>Ecosistemas de Inmersión</h2>
-        <p style="color: #86868b;">Seleccione su destino.</p>
+        <p style="color: #86868b;">Toque un destino para sincronizar.</p>
     </div>
     <div class="slider-wrapper" id="wrapper-catalog">
         <div class="slide-track" id="catalog-track">
-            
-
-            <!-- ELEMENTO: COLISÉO ETÉRICO -->
-<a href="coliseo.html" class="slide-item" style="pointer-events: auto;">
-    <img src="multimedia/coliseo.png" alt="Coliseo Etérico">
-    <div class="label-overlay">
-        <h3>Coliseo Etérico</h3>
-        <p>Forja tu leyenda en el combate infinito. ¡Zashoom!</p>
-    </div>
-</a>
-            <div class="slide-item"><img src="multimedia/Olympus.jpeg"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div></div>
-            <div class="slide-item"><img src="multimedia/arcadia.jpg"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></div>
-            <div class="slide-item"><img src="multimedia/elbeso.jpg"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Vence al tiempo.</p></div></div>
-            <div class="slide-item"><img src="multimedia/neon.jpg"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Sensaciones puras.</p></div></div>
-            <div class="slide-item"><img src="multimedia/chronos.jog"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></div>
+            <!-- 1. OLYMPUS -->
+            <a href="olympus.html" class="slide-item">
+                <img src="multimedia/Olympus.jpeg">
+                <div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div>
+            </a>
+            <!-- 2. ARCADIA -->
+            <a href="arcadia.html" class="slide-item">
+                <img src="multimedia/arcadia.jpg">
+                <div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza que la historia nos arrebató.</p></div>
+            </a>
+            <!-- 3. BESO PROHIBIDO -->
+            <a href="beso.html" class="slide-item">
+                <img src="multimedia/elbeso.jpg">
+                <div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div>
+            </a>
+            <!-- 4. NEON NIRVANA -->
+            <a href="neon.html" class="slide-item">
+                <img src="multimedia/neon.png">
+                <div class="label-overlay"><h3>Neon Nirvana</h3><p>Hedonismo sensorial bajo vigilancia.</p></div>
+            </a>
+            <!-- 5. CHRONOS -->
+            <a href="chronos.html" class="slide-item">
+                <img src="multimedia/chronos.png">
+                <div class="label-overlay"><h3>Chronos</h3><p>La historia grabada en su piel.</p></div>
+            </a>
+            <!-- 6. COLISEO -->
+            <a href="coliseo.html" class="slide-item">
+                <img src="multimedia/coliseo.jog">
+                <div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda. ¡Zashoom!</p></div>
+            </a>
         </div>
         <div class="dots-container" id="catalog-dots"></div>
     </div>
 
-    <!-- FASE 3: CICLO DE RECARGA -->
+    <!-- FASE 3: CICLO DE RECARGA (DUAL) -->
     <div class="section-title">
         <h2>Ciclo de Recarga</h2>
-        <p style="color: #86868b;">Combustible biológico.</p>
+        <p style="color: #86868b;">Combustible biológico de Nivel 7.</p>
     </div>
     <div class="slider-wrapper" id="wrapper-nutri">
         <div class="slide-track" id="nutri-track">
-            <div class="slide-item"><img src="multimedia/solaris-web.png"><div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro.</p></div></div>
-            <div class="slide-item"><img src="multimedia/velvet-web.png"><div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>Reinicio profundo.</p></div></div>
+            <a href="solaris.html" class="slide-item">
+                <img src="multimedia/solaris-web.png">
+                <div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro para su jornada operativa.</p></div>
+            </a>
+            <a href="velvet.html" class="slide-item">
+                <img src="multimedia/velvet-web.png">
+                <div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>El interruptor definitivo del descanso.</p></div>
+            </a>
         </div>
         <div class="dots-container" id="nutri-dots"></div>
     </div>
@@ -120,16 +133,17 @@
         </div>
     </div>
 
-    <!-- WIDGET MITE -->
+    <!-- WIDGET MITE CON ARRAY ENRIQUECIDO -->
     <div id="mite-widget">
         <div id="chat-window">
-            <div class="chat-header"><span>MITE Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
+            <div class="chat-header"><span>MITE Virtual Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
             <div class="chat-body" id="chat-log">
-                <div class="mite-msg">¡Zashoom! Soy Mite. ¿Necesitas Fragmentos de Éter? ¡Ding-Pum! 💎</div>
+                <div class="mite-msg">¡Zashoom! Soy Mite. ¿Necesitas Fragmentos de Éter para tu avatar? ¡Ding-Pum! 💎</div>
             </div>
-            <div style="padding: 10px; border-top: 1px solid #eee;">
+            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; flex-wrap: wrap; gap: 5px;">
                 <button class="opt-btn" onclick="miteDice('sincronia')">Sincronía</button>
                 <button class="opt-btn" onclick="miteDice('eter')">Gamas Éter</button>
+                <button class="opt-btn" onclick="miteDice('vance')">Seguridad</button>
             </div>
         </div>
         <img src="multimedia/mite.png" id="mite-bubble" onclick="toggleChat()" alt="Mite">
@@ -137,125 +151,95 @@
 
     <footer>
         <p>&copy; 202X HUMANIA GLOBAL SYSTEMS. "VOLUNTAS PRO PACE".</p>
-        <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8_sincronia_caotica</a>
+        <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8_sincronia_caotica_detectada</a>
     </footer>
 
     <script>
-        // --- MOTOR KINÉTICO DE SLIDERS (TOUCH & DRAG) ---
-        function createSlider(wrapperId, trackId, dotsId, count) {
+        // --- MOTOR KINÉTICO UNIVERSAL ---
+        function setupSlider(wrapperId, trackId, dotsId, count) {
             const wrapper = document.getElementById(wrapperId);
             const track = document.getElementById(trackId);
             const dotsContainer = document.getElementById(dotsId);
-            let index = 0;
-            let startX = 0;
-            let currentTranslate = 0;
-            let prevTranslate = 0;
-            let animationID = 0;
-            let isDragging = false;
+            let isDragging = false, startX, currentTranslate = 0, prevTranslate = 0, animationID, currentIndex = 0;
 
-            // Crear Dots
             for (let i = 0; i < count; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => { index = i; setPositionByIndex(); });
+                dot.addEventListener('click', () => { currentIndex = i; setPosition(); });
                 dotsContainer.appendChild(dot);
             }
 
-            // Eventos Touch/Mouse
-            wrapper.addEventListener('touchstart', touchStart(index));
-            wrapper.addEventListener('touchend', touchEnd);
-            wrapper.addEventListener('touchmove', touchMove);
-            wrapper.addEventListener('mousedown', touchStart(index));
-            wrapper.addEventListener('mouseup', touchEnd);
-            wrapper.addEventListener('mouseleave', touchEnd);
-            wrapper.addEventListener('mousemove', touchMove);
+            wrapper.addEventListener('touchstart', dragStart);
+            wrapper.addEventListener('touchend', dragEnd);
+            wrapper.addEventListener('touchmove', dragAction);
+            wrapper.addEventListener('mousedown', dragStart);
+            wrapper.addEventListener('mouseup', dragEnd);
+            wrapper.addEventListener('mousemove', dragAction);
+            wrapper.addEventListener('mouseleave', dragEnd);
 
-            function touchStart(idx) {
-                return function(event) {
-                    isDragging = true;
-                    startX = getPositionX(event);
-                    animationID = requestAnimationFrame(animation);
-                }
+            function dragStart(e) {
+                isDragging = true;
+                startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                animationID = requestAnimationFrame(animation);
             }
-
-            function touchMove(event) {
+            function dragAction(e) {
                 if (isDragging) {
-                    const currentX = getPositionX(event);
+                    const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
                     currentTranslate = prevTranslate + currentX - startX;
                 }
             }
-
-            function touchEnd() {
+            function dragEnd() {
                 isDragging = false;
                 cancelAnimationFrame(animationID);
                 const movedBy = currentTranslate - prevTranslate;
-
-                if (movedBy < -100 && index < count - 1) index += 1;
-                if (movedBy > 100 && index > 0) index -= 1;
-
-                setPositionByIndex();
+                if (movedBy < -100 && currentIndex < count - 1) currentIndex++;
+                if (movedBy > 100 && currentIndex > 0) currentIndex--;
+                setPosition();
             }
-
-            function getPositionX(event) {
-                return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-            }
-
             function animation() {
-                setSliderPosition();
+                track.style.transform = `translateX(${currentTranslate}px)`;
                 if (isDragging) requestAnimationFrame(animation);
             }
-
-            function setSliderPosition() {
-                track.style.transform = `translateX(${currentTranslate}px)`;
-            }
-
-            function setPositionByIndex() {
-                currentTranslate = index * -wrapper.offsetWidth;
+            function setPosition() {
+                currentTranslate = currentIndex * -wrapper.offsetWidth;
                 prevTranslate = currentTranslate;
                 track.style.transform = `translateX(${currentTranslate}px)`;
-                updateDots();
-            }
-
-            function updateDots() {
                 const dots = dotsContainer.querySelectorAll('.dot');
-                dots.forEach((d, i) => d.className = 'dot' + (i === index ? ' active' : ''));
+                dots.forEach((d, i) => d.className = 'dot' + (i === currentIndex ? ' active' : ''));
             }
-
-            window.addEventListener('resize', setPositionByIndex);
-
-            // Auto-deslizar
-            setInterval(() => {
-                if (!isDragging) {
-                    index = (index + 1) % count;
-                    setPositionByIndex();
-                }
-            }, 6000);
+            setInterval(() => { if (!isDragging) { currentIndex = (currentIndex + 1) % count; setPosition(); } }, 6000);
         }
 
-        // Inicializar
         window.onload = () => {
-            createSlider('wrapper-catalog', 'catalog-track', 'catalog-dots', 5);
-            createSlider('wrapper-nutri', 'nutri-track', 'nutri-dots', 2);
+            setupSlider('wrapper-catalog', 'catalog-track', 'catalog-dots', 6);
+            setupSlider('wrapper-nutri', 'nutri-track', 'nutri-dots', 2);
         };
 
-        // Mite Chat
+        // --- CHAT DE MITE (ARRAY ENRIQUECIDO) ---
         function toggleChat() {
-            const chat = document.getElementById('chat-window');
-            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+            const win = document.getElementById('chat-window');
+            win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
         }
         function miteDice(t) {
             const log = document.getElementById('chat-log');
-            const resp = {'sincronia': ["¡100% eficiente! 🚀", "¡Vuela, cielo! 💎"], 'eter': ["¡Oro digital! 💸", "¡Usa tu Éter! 🐉"]};
-            const m = document.createElement('div'); m.className = 'mite-msg';
-            m.textContent = "MITE: " + resp[t][Math.floor(Math.random() * resp[t].length)];
-            log.appendChild(m); log.scrollTop = log.scrollHeight;
+            const responses = {
+                'sincronia': ["¡Es la gloria! Eficiencia mental al 100%. 🚀", "¡En Proiectio puedes volar, cariño! 💎", "Es el puente al BIFROST. ✨"],
+                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres una skin de Dragón? 🐉", "¡Sin reembolsos, precioso cliente! 💎"],
+                'vance': ["Vance vigila tus pensamientos para que no sufras. 🛡️", "¡Paz total bajo la Red A.N.I.M.A.! 🕊️", "El Director está ocupado. ¡Pero yo te cuido mejor! 🤖"]
+            };
+            const msg = document.createElement('div');
+            msg.className = 'mite-msg';
+            msg.textContent = "MITE: " + responses[t][Math.floor(Math.random() * responses[t].length)];
+            log.appendChild(msg);
+            log.scrollTop = log.scrollHeight;
         }
 
-        // Secret Door
+        // --- ENTRADA MATRIX ---
         document.getElementById('matrix-trigger').addEventListener('click', (e) => {
-            e.preventDefault(); document.body.style.filter = "invert(1) hue-rotate(90deg)";
-            setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 1500);
+            e.preventDefault();
+            document.body.classList.add('matrix-collapse');
+            setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
         });
     </script>
 </body>
-</html>
+    </html>
