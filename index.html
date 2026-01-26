@@ -83,6 +83,12 @@
         /* --- FOOTER (RE-INCLUIDO) --- */
         footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; background: #fff; }
         .secret-link { opacity: 0.05; text-decoration: none; color: #000; cursor: default; font-family: monospace; }
+        /* --- PROTOCOLO DE INCURSIÓN TENEBROSA (Efecto Matrix) --- */
+        .matrix-collapse { 
+            filter: invert(1) hue-rotate(90deg) brightness(1.2) contrast(1.5) !important; 
+            transition: all 2s ease-in-out !important; 
+            background: #000 !important; 
+        }
     </style>
 </head>
 <body id="main-body">
@@ -401,11 +407,19 @@
             log.scrollTop = log.scrollHeight;
         }
 
-        // --- ENTRADA MATRIX ---
-        document.getElementById('matrix-trigger').addEventListener('click', (e) => {
+        // --- ENTRADA SECRETA CON RETRASO NARRATIVO ---
+        document.getElementById('matrix-trigger').addEventListener('click', function(e) {
             e.preventDefault();
+            // Inyectamos la clase de colapso en el cuerpo de la página
             document.body.classList.add('matrix-collapse');
-            setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
+            
+            // Registramos el evento en consola (Solo para Agentes)
+            console.log("ALERTA: Sincronía Caótica detectada. Redirigiendo...");
+
+            // Esperamos 2 segundos de "terror visual" antes de saltar
+            setTimeout(() => { 
+                window.location.href = "sincro.html?nodo=login"; 
+            }, 2000);
         });
     </script>
 </body>
