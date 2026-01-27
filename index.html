@@ -193,12 +193,42 @@
     <!-- 6. FOOTER MODULAR -->
     <div id="footer-placeholder"></div>
     
-    <!-- SCRIPTS -->
+        <!-- WIDGET MITE -->
     <script src="mite.js"></script>
+    
     <script>
         // Header
         fetch('header.html').then(r => r.text()).then(d => document.getElementById('header-placeholder').innerHTML = d);
 
+       <!-- SCRIPTS -->
+    <script>
+        // --- CARGADOR MODULAR INTELIGENTE ---
+        async function cargarComponentes() {
+            // Cargar Header
+            const headerResp = await fetch('header.html');
+            document.getElementById('header-placeholder').innerHTML = await headerResp.text();
+          // Cargar Footer
+            const footerResp = await fetch('footer.html');
+            document.getElementById('footer-placeholder').innerHTML = await footerResp.text();
+
+        document.getElementById('matrix-trigger').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.classList.add('matrix-collapse');
+                setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
+            });
+        }
+
+        document.getElementById('matrix-trigger').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.classList.add('matrix-collapse');
+                setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
+            });
+        }
+        
+        // Ejecutar carga
+        cargarComponentes();
+
+        // ... (Aquí sigue el resto de tus scripts de Sliders, SPN y Motion) ...    
         // Sliders
         function setupSlider(wrapperId, trackId, dotsId, count) {
             const wrapper = document.getElementById(wrapperId), track = document.getElementById(trackId), dotsContainer = document.getElementById(dotsId);
