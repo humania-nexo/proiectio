@@ -47,87 +47,106 @@
         <div class="dots-container" id="catalog-dots"></div>
     </div>
 
-    <!-- 2.5 EVENTO GLOBAL (VISUAL IMPACT) -->
-    <section class="event-section">
-        <!-- La Imagen de Fondo (El Dragón y la Nave) -->
-        <div class="event-bg" style="background-image: url('multimedia/evento-live.jpeg');"></div>
+    <!-- 2.5 EVENTO GLOBAL (VISIBILIDAD TOTAL) -->
+    <style>
+        /* ESTILOS DE EMERGENCIA PARA EL DRAGÓN */
+        .event-section { 
+            position: relative; 
+            width: 100%; 
+            height: 85vh; /* Altura máxima para ver el arte */
+            display: flex; 
+            align-items: flex-end; /* Empuja el texto al fondo */
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 40px;
+            background: #000;
+        }
         
-        <!-- El Degradado para que el texto se lea abajo -->
-        <div class="event-gradient"></div>
+        .event-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* Sin blur, centrado arriba para ver la nave y el dragón */
+            background: url('multimedia/evento-live.jpg') center top / cover no-repeat;
+            z-index: 0;
+        }
 
-        <!-- La Información (HUD) -->
+        /* Degradado Táctico: Transparente arriba -> Negro abajo */
+        .event-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 70%, #000 100%);
+            z-index: 1;
+        }
+
+        .event-content { 
+            position: relative; 
+            z-index: 2; 
+            text-align: center; 
+            color: white; 
+            padding-bottom: 40px; 
+            padding-left: 20px; 
+            padding-right: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .live-tag { 
+            font-size: 0.7rem; color: #ff3b30; border: 1px solid #ff3b30; 
+            display: inline-block; padding: 4px 12px; border-radius: 20px; 
+            margin-bottom: 15px; font-weight: bold; letter-spacing: 2px; 
+            background: rgba(0,0,0,0.6);
+            animation: pulse-red 2s infinite;
+        }
+
+        .event-title {
+            font-size: 2.5rem; font-weight: 800; text-transform: uppercase; 
+            letter-spacing: -1px; margin-bottom: 10px; line-height: 1;
+            text-shadow: 0 0 20px rgba(0,195,255,0.4);
+        }
+
+        .countdown { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .time-box { 
+            background: rgba(20,20,20,0.8); 
+            padding: 10px 15px; border-radius: 8px; 
+            min-width: 65px; border: 1px solid #333; 
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-event { 
+            padding: 15px 50px; background: linear-gradient(90deg, #00c3ff, #005f73); 
+            color: white; border: none; font-size: 0.9rem; font-weight: bold; 
+            letter-spacing: 2px; cursor: pointer; 
+            box-shadow: 0 0 20px rgba(0,195,255,0.4);
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        
+        /* Ajuste móvil */
+        @media (max-width: 768px) {
+            .event-section { height: 70vh; }
+            .event-title { font-size: 1.8rem; }
+        }
+    </style>
+
+    <section class="event-section">
+        <div class="event-bg"></div>
+        <div class="event-overlay"></div>
+        
         <div class="event-content">
             <div class="live-tag">🔴 EN VIVO: TEMPORADA 47</div>
-            
-            <h2 style="font-size: 2.5rem; line-height: 1; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">JUEGOS ETÉRICOS</h2>
-            <p style="color: #ddd; font-size: 1rem; margin-bottom: 20px; text-shadow: 0 1px 5px rgba(0,0,0,0.8);">La arena reclama sangre y Éter. ¿Responderás al llamado?</p>
+            <h2 class="event-title">Juegos Etéricos</h2>
+            <p style="color: #ccc; margin-bottom: 25px; font-size: 1rem; text-shadow: 0 2px 5px #000;">La arena reclama sangre y Éter. ¿Responderás al llamado?</p>
 
-            <!-- Contador Compacto -->
-            <div class="timer-row">
-                <div class="t-unit"><span id="d">04</span><small>DÍAS</small></div>:
-                <div class="t-unit"><span id="h">00</span><small>HRS</small></div>:
-                <div class="t-unit"><span id="m">00</span><small>MIN</small></div>:
-                <div class="t-unit"><span id="s" style="color:var(--cian)">00</span><small>SEG</small></div>
+            <div class="countdown">
+                <div class="time-box"><span id="d" style="font-size: 1.5rem; font-weight: bold;">04</span><br><span style="font-size: 0.6rem; color: #888;">DÍAS</span></div>
+                <div class="time-box"><span id="h" style="font-size: 1.5rem; font-weight: bold;">00</span><br><span style="font-size: 0.6rem; color: #888;">HRS</span></div>
+                <div class="time-box"><span id="m" style="font-size: 1.5rem; font-weight: bold;">00</span><br><span style="font-size: 0.6rem; color: #888;">MIN</span></div>
+                <div class="time-box"><span id="s" style="font-size: 1.5rem; font-weight: bold; color: #00c3ff;">00</span><br><span style="font-size: 0.6rem; color: #888;">SEG</span></div>
             </div>
 
             <button class="btn-event" onclick="window.location.href='seguridad.html'">INSCRIPCIÓN DE CLAN</button>
         </div>
     </section>
 
-    <style>
-        .event-section { 
-            position: relative; 
-            width: 100%; 
-            height: 80vh; /* Altura para que se vea el dragón */
-            display: flex; 
-            align-items: flex-end; /* Contenido abajo */
-            justify-content: center;
-            overflow: hidden;
-            margin-top: 40px;
-        }
-        .event-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center top; /* Enfoca la acción arriba */
-            z-index: -2;
-            transition: transform 10s ease; /* Efecto Zoom lento */
-        }
-        .event-section:hover .event-bg { transform: scale(1.05); } /* Zoom al pasar mouse */
-
-        .event-gradient {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 70%;
-            background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.8) 40%, transparent 100%);
-            z-index: -1;
-        }
-        .event-content { text-align: center; color: white; padding-bottom: 40px; width: 100%; max-width: 700px; padding-left: 20px; padding-right: 20px; }
-        
-        .live-tag { 
-            background: rgba(255,0,0,0.8); color: white; 
-            padding: 5px 15px; border-radius: 20px; 
-            font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; 
-            display: inline-block; margin-bottom: 15px; 
-            box-shadow: 0 0 15px rgba(255,0,0,0.5);
-            animation: pulse-red 2s infinite;
-        }
-
-        .timer-row { 
-            display: flex; justify-content: center; align-items: center; gap: 10px; 
-            font-size: 1.5rem; font-weight: bold; margin-bottom: 25px; 
-            font-family: monospace;
-        }
-        .t-unit { display: flex; flex-direction: column; line-height: 1; }
-        .t-unit small { font-size: 0.6rem; color: #888; font-family: sans-serif; font-weight: normal; margin-top: 5px; }
-
-        .btn-event { 
-            padding: 15px 40px; 
-            background: var(--cian); color: #000; 
-            border: none; font-weight: bold; letter-spacing: 2px; 
-            cursor: pointer; clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-            transition: 0.3s;
-        }
-        .btn-event:hover { background: #fff; transform: translateY(-3px); }
-
-        @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-    </style>
     
     <!-- 3. CICLO DE RECARGA -->
     <div class="section-title"><h2>Ciclo de Recarga</h2><p>Combustible biológico.</p></div>
