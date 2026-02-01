@@ -48,20 +48,14 @@
         <div class="dots-container" id="catalog-dots"></div>
     </div>
 
-    <!-- SECTOR 2.5: EVENTO GLOBAL (VIDEO BACKGROUND) -->
+    
+   <!-- 2.5 EVENTO GLOBAL (REFORJA CINEMÁTICA) -->
     <style>
-        /* Ajuste de transparencia y posición para no tapar caras */
-        .overlay-text { 
-            background: rgba(255, 255, 255, 0.35) !important; /* Más transparente */
-            backdrop-filter: blur(10px);
-            align-self: flex-end; /* Lo empuja hacia abajo */
-            margin-bottom: 40px;
-        }
-
+        /* Contenedor adaptativo: Evita el zoom excesivo */
         .event-section { 
             position: relative; 
             width: 100%; 
-            height: 85vh; 
+            aspect-ratio: 16 / 9; /* Formato cine en PC */
             display: flex; 
             align-items: flex-end; 
             justify-content: center; 
@@ -70,51 +64,92 @@
             background: #000; 
         }
 
-        /* Capa de Video */
         .video-bg {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: cover; 
+            object-position: center top; /* Prioriza ver al Dragón */
             z-index: 0;
         }
 
+        /* Degradado Táctico: Más sutil arriba, oscuro abajo para el texto */
         .event-overlay { 
             position: absolute; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, #000 100%); 
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.8) 100%); 
             z-index: 1; 
         }
 
-        .event-content { position: relative; z-index: 2; text-align: center; color: white; padding-bottom: 40px; width: 100%; max-width: 800px; }
+        .event-content { 
+            position: relative; 
+            z-index: 2; 
+            text-align: center; 
+            color: white; 
+            padding-bottom: 5%; 
+            width: 90%; 
+            max-width: 800px; 
+        }
+
+        .live-tag { 
+            background: rgba(255, 59, 48, 0.8); color: white; 
+            padding: 4px 12px; border-radius: 20px; 
+            font-size: 0.6rem; font-weight: bold; letter-spacing: 2px; 
+            display: inline-block; margin-bottom: 10px; 
+            animation: pulse-red 2s infinite;
+        }
+
+        /* Ajuste para las cajas del Hero/REM para que no tapen caras */
+        .overlay-text { 
+            background: rgba(255, 255, 255, 0.3) !important; 
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+            margin-bottom: 20px !important;
+        }
+
+        @media (max-width: 768px) {
+            .event-section { 
+                aspect-ratio: 3 / 4; /* Formato vertical para móvil: muestra más altura del video */
+            }
+            .event-content h2 { font-size: 1.8rem; }
+            .event-content p { font-size: 0.8rem; }
+        }
     </style>
 
     <section class="event-section">
         <!-- VIDEO EN BUCLE -->
         <video autoplay muted loop playsinline class="video-bg" poster="multimedia/evento-live.jpeg">
             <source src="multimedia/evento-live.mp4" type="video/mp4">
-            <!-- Imagen de respaldo si el video no carga -->
-            <img src="multimedia/evento-live.jpg" alt="Evento Live">
         </video>
 
         <div class="event-overlay"></div>
         
         <div class="event-content">
             <div class="live-tag">🔴 EN VIVO: TEMPORADA 47</div>
-            <h2 style="font-size: 2.5rem; font-weight: 800; text-transform: uppercase; text-shadow: 0 0 20px rgba(0,195,255,0.6);">Juegos Etéricos</h2>
-            <p style="color: #ccc; margin-bottom: 25px; text-shadow: 0 2px 5px #000;">La arena reclama sangre y Éter. ¿Responderás al llamado?</p>
+            <h2 style="font-size: 2.2rem; font-weight: 800; text-transform: uppercase; text-shadow: 0 0 15px rgba(0,0,0,0.5);">Juegos Etéricos</h2>
+            <p style="color: #eee; margin-bottom: 20px; text-shadow: 0 2px 4px #000;">La arena reclama Éter. ¿Responderás al llamado?</p>
             
-            <div class="countdown">
-                <div class="time-box"><span id="d">04</span><br><small>DÍAS</small></div>
-                <div class="time-box"><span id="h">00</span><br><small>HRS</small></div>
-                <div class="time-box"><span id="m">00</span><br><small>MIN</small></div>
-                <div class="time-box"><span id="s" style="color:#00c3ff">00</span><br><small>SEG</small></div>
+            <div class="countdown" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+                <div class="time-box" style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 8px; min-width: 60px; border: 1px solid rgba(255,255,255,0.2);">
+                    <span id="d" style="font-size: 1.2rem; font-weight: bold;">04</span><br><small style="font-size: 0.5rem; opacity: 0.7;">DÍAS</small>
+                </div>
+                <div class="time-box" style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 8px; min-width: 60px; border: 1px solid rgba(255,255,255,0.2);">
+                    <span id="h" style="font-size: 1.2rem; font-weight: bold;">00</span><br><small style="font-size: 0.5rem; opacity: 0.7;">HRS</small>
+                </div>
+                <div class="time-box" style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 8px; min-width: 60px; border: 1px solid rgba(255,255,255,0.2);">
+                    <span id="m" style="font-size: 1.2rem; font-weight: bold;">00</span><br><small style="font-size: 0.5rem; opacity: 0.7;">MIN</small>
+                </div>
+                <div class="time-box" style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 8px; min-width: 60px; border: 1px solid rgba(0,195,255,0.5);">
+                    <span id="s" style="font-size: 1.2rem; font-weight: bold; color: #00c3ff;">00</span><br><small style="font-size: 0.5rem; opacity: 0.7;">SEG</small>
+                </div>
             </div>
             
-            <button class="btn-event" onclick="window.location.href='seguridad.html'">INSCRIPCIÓN DE CLAN</button>
+            <button class="btn-event" style="padding: 12px 35px; font-size: 0.8rem;" onclick="window.location.href='seguridad.html'">INSCRIPCIÓN DE CLAN</button>
         </div>
-    </section>
+    </section>     
 
     <!-- 3. CICLO DE RECARGA -->
     <div class="section-title"><h2>Ciclo de Recarga</h2></div>
