@@ -52,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button class="opt-btn" onclick="miteResponder('secreto')">🔒 Secreto</button>
             </div>
         </div>
-        <img src="multimedia/mite.png" id="mite-bubble" alt="Mite">
+        
+        <img src="multimedia/mite.gif" id="mite-bubble" alt="Mite">
     `;
     document.body.appendChild(widget);
 
