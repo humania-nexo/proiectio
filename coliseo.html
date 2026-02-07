@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROIECTIO | Ficha de Inmersión</title>
+    <!-- VINCULACIÓN AL CEREBRO ESTÉTICO GLOBAL -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body { background-color: #ffffff; color: #1d1d1f; }
+
+        /* SECTOR DEL VIDEO (SIN RECORTES) */
+        .video-showcase {
+            width: 100%;
+            background: #000; /* Fondo negro por si el video tiene barras */
+            line-height: 0;
+        }
+        .video-showcase video {
+            width: 100%;
+            height: auto; /* Respeta la proporción original */
+            display: block;
+        }
+
+        /* CONTENIDO DESCRIPTIVO */
+        .content-body {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .world-category {
+            color: var(--cian);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .world-title {
+            font-size: 2.2rem;
+            font-weight: 200;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: #0a2540;
+        }
+
+        /* Ficha Técnica */
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f5f5f7;
+            border-radius: 12px;
+        }
+        .tech-item { border-left: 2px solid #eee; padding-left: 12px; }
+        .tech-label { font-size: 0.6rem; color: #999; text-transform: uppercase; display: block; }
+        .tech-value { font-size: 0.9rem; font-weight: bold; }
+
+        /* Texto Lorem Ipsum */
+        .description-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 40px;
+        }
+
+        .btn-sync {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: #0a2540;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .btn-sync:hover { background: var(--cian); transform: translateY(-2px); }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #999;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <!-- 0. HEADER MODULAR -->
+    <div id="header-placeholder"></div>
+
+    <!-- 1. VIDEO PRINCIPAL (REFORJADO) -->
+    <section class="video-showcase">
+        <video autoplay muted loop playsinline 
+               poster="multimedia/coliseo.jpg" 
+               style="width: 100%; height: auto; display: block;">
+            
+            <!-- Intento 1: WebM (Si existe y el navegador lo soporta) -->
+            <source src="multimedia/coliseo.webm" type="video/webm">
+            
+            <!-- Intento 2: MP4 (El respaldo universal) -->
+            <source src="multimedia/coliseo.mp4" type="video/mp4">
+
+            <!-- Mensaje de error si nada funciona -->
+            Su dispositivo no soporta la visualización de este rastro de memoria.
+        </video>
+    </section>
+
+    <!-- 2. CONTENIDO EDITORIAL -->
+    <main class="content-body">
+        <p class="world-category">Ecosistema de Inmersión Autorizado</p>
+        <h1 class="world-title">Nombre del Mundo</h1>
+
+        <div class="technical-grid">
+            <div class="tech-item">
+                <span class="tech-label">Frecuencia REM</span>
+                <span class="tech-value">Sincronizada (0.8ms)</span>
+            </div>
+            <div class="tech-item">
+                <span class="tech-label">Costo de Sesión</span>
+                <span class="tech-value">500 FE</span>
+            </div>
+            <div class="tech-item">
+                <span class="tech-label">Capacidad de Nodo</span>
+                <span class="tech-value">Ilimitada</span>
+            </div>
+            <div class="tech-item">
+                <span class="tech-label">Seguridad</span>
+                <span class="tech-value">Vance-Core Active</span>
+            </div>
+        </div>
+
+        <div class="description">
+            <p class="description-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p class="description-text">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+
+        <a href="javascript:void(0)" onclick="activarSPN()" class="btn-sync">INICIAR SINCRONIZACIÓN</a>
+        
+        <a href="index.html" class="back-link">← Regresar al Mapa Global</a>
+    </main>
+
+    <!-- 3. FOOTER MODULAR -->
+    <div id="footer-placeholder"></div>
+
+    <!-- WIDGET MITE (La asistente también te guía aquí) -->
+    <script src="mite.js"></script>
+
+    <!-- SCRIPTS DE CARGA Y LOGICA -->
+    <script>
+        async function cargarMódulos() {
+            const h = await fetch('header.html').then(r => r.text());
+            document.getElementById('header-placeholder').innerHTML = h;
+            const f = await fetch('footer.html').then(r => r.text());
+            document.getElementById('footer-placeholder').innerHTML = f;
+
+            // Reactivar Matrix si existe el trigger en el footer
+            setTimeout(() => {
+                const m = document.getElementById('matrix-trigger');
+                if(m) m.addEventListener('click', e => {
+                    e.preventDefault();
+                    document.body.style.filter = "invert(1) hue-rotate(90deg)";
+                    setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 1500);
+                });
+            }, 500);
+        }
+
+        function activarSPN() {
+            alert("SINCRO-ERROR: Se requiere validación de chip CNB-3 para este sector.");
+            if (typeof window.miteResponder === "function") {
+                window.miteResponder('eter'); 
+            }
+        }
+
+        cargarMódulos();
+    </script>
+</body>
+</html>
