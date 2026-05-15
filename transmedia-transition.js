@@ -22,6 +22,14 @@
             transform-origin: 50% 50%;
         }
         
+        /* Utilidad para evitar transición en el seteo inicial */
+        #transmedia-svg.no-transition #tm-core,
+        #transmedia-svg.no-transition #tm-play,
+        #transmedia-svg.no-transition #tm-pillar-l,
+        #transmedia-svg.no-transition #tm-pillar-r {
+            transition: none !important;
+        }
+
         /* ESTADO: HUMANIA (La jaula / La H) */
         .state-humania #tm-core { transform: scale(1); fill: #00d8ff; }
         .state-humania #tm-play { transform: scale(0) rotate(-90deg); opacity: 0; }
@@ -67,28 +75,28 @@
         if (goesToProiectio || goesToHumania) {
             e.preventDefault();
 
-            // Configurar el estado inicial para que coincida con la página donde estamos
-            // Forza un "reflow" para que el CSS aplique antes de poner la opacidad
+            // Configurar el estado inicial SIN transición
             if (isHumania) {
-                svg.setAttribute('class', 'state-humania');
+                svg.setAttribute('class', 'no-transition state-humania');
             } else {
-                svg.setAttribute('class', 'state-proiectio');
+                svg.setAttribute('class', 'no-transition state-proiectio');
             }
             
-            // Un pequeño truco para forzar el repintado del navegador y evitar saltos
+            // Forzar repintado
             void svg.offsetWidth;
 
-            // Mostrar el fondo
+            // Reactivar transiciones y mostrar fondo
+            svg.classList.remove('no-transition');
             overlay.classList.add('active');
 
-            // Disparar la animación
+            // Disparar la animación hacia el destino
             setTimeout(() => {
                 if (goesToProiectio) {
                     svg.setAttribute('class', 'state-proiectio'); // Abrir jaula
                 } else if (goesToHumania) {
                     svg.setAttribute('class', 'state-humania'); // Cerrar jaula
                 }
-            }, 600); // Dar suficiente tiempo para que el fade-in termine
+            }, 500); // 500ms es perfecto para que la opacidad del overlay suba
 
             // Redirigir
             setTimeout(() => {
