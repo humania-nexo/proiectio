@@ -413,5 +413,76 @@
             "retina_detect": true
         });
     </script>
+    <!-- MOTOR DE CYBER-AUDIO (Web Audio API Sintetizado) -->
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let cyberAudioCtx = null;
+
+        function initCyberAudio() {
+            if (!cyberAudioCtx) {
+                cyberAudioCtx = new AudioContext();
+            }
+            if (cyberAudioCtx.state === 'suspended') {
+                cyberAudioCtx.resume();
+            }
+        }
+
+        // Zumbido eléctrico súper sutil al pasar el mouse (Hover)
+        function playHoverSound() {
+            if (!cyberAudioCtx) return;
+            const osc = cyberAudioCtx.createOscillator();
+            const gain = cyberAudioCtx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(120, cyberAudioCtx.currentTime); 
+            osc.frequency.exponentialRampToValueAtTime(80, cyberAudioCtx.currentTime + 0.1);
+            
+            // Volumen muy bajo para no ser molesto
+            gain.gain.setValueAtTime(0, cyberAudioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.015, cyberAudioCtx.currentTime + 0.03); 
+            gain.gain.exponentialRampToValueAtTime(0.001, cyberAudioCtx.currentTime + 0.1);
+            
+            osc.connect(gain);
+            gain.connect(cyberAudioCtx.destination);
+            
+            osc.start();
+            osc.stop(cyberAudioCtx.currentTime + 0.15);
+        }
+
+        // Clic futurista corto al hacer clic
+        function playClickSound() {
+            if (!cyberAudioCtx) return;
+            const osc = cyberAudioCtx.createOscillator();
+            const gain = cyberAudioCtx.createGain();
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, cyberAudioCtx.currentTime); 
+            osc.frequency.exponentialRampToValueAtTime(1400, cyberAudioCtx.currentTime + 0.05);
+            
+            gain.gain.setValueAtTime(0.05, cyberAudioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, cyberAudioCtx.currentTime + 0.1);
+            
+            osc.connect(gain);
+            gain.connect(cyberAudioCtx.destination);
+            
+            osc.start();
+            osc.stop(cyberAudioCtx.currentTime + 0.1);
+        }
+
+        // Event Delegation para aplicar sonidos a todos los elementos interactivos
+        document.body.addEventListener('click', (e) => {
+            initCyberAudio();
+            if (e.target.closest('.slide-item') || e.target.closest('button') || e.target.closest('#mite-bubble') || e.target.closest('.opt-btn') || e.target.closest('a')) {
+                playClickSound();
+            }
+        });
+
+        // Usamos capture: true para detectar mouseenter en elementos anidados dinámicos
+        document.body.addEventListener('mouseenter', (e) => {
+            if (e.target.closest('.slide-item') || e.target.closest('button') || e.target.closest('#mite-bubble') || e.target.closest('.opt-btn') || e.target.closest('a')) {
+                playHoverSound();
+            }
+        }, true);
+    </script>
 </body>
                                                                                                                                                                                                          </html>
