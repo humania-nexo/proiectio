@@ -98,12 +98,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // --- CEREBRO DE RESPUESTAS ---
         if (tema === 'guiame') {
             const rutas = [
-                "¡Vamos a **Arcadia**! Es mi lugar favorito para no hacer nada. 🌲", 
-                "¿Te sientes fuerte? ¡El **Coliseo** te espera! ⚔️",
-                "Si buscas fiesta, **Neon Nirvana** es la única opción. 🍸"
+                "¡Zashoom! Vamos a **Arcadia**. Es perfecto para desconectar y fingir que todo está bien. 🌲", 
+                "¿Con ganas de gastar energía? ¡El **Coliseo** tiene unas ofertas de dolor en edición limitada! ⚔️",
+                "Si buscas luces y tragos de dudosa procedencia, **Neon Nirvana** es mi mejor recomendación. 🍸"
             ];
             resp = rutas[Math.floor(Math.random() * rutas.length)];
-            // Añadir botones de navegación dinámicos
             accion = `
                 <div style="margin-top:5px; display:flex; gap:5px;">
                     <button class="opt-btn" onclick="location.href='arcadia.html'">Ir a Arcadia</button>
@@ -111,10 +110,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>`;
         } 
         else if (tema === 'eter') {
-            resp = "¡El Éter mueve el mundo! Puedes comprarlo en la tienda o ganarlo... si sobrevives en el Coliseo. ¿Tienes tarjeta de crédito de Humania?";
+            resp = "¡El Éter es el rey! Puedes adquirir un paquete corporativo, o ganarlo arriesgando el pellejo en el Coliseo. No hacemos reembolsos si pierdes tu avatar, claro está. ¡Ding-Pum!";
         } 
         else if (tema === 'secreto') {
-            resp = "Shhh... 🤫 Dicen que si agitas tu teléfono muy fuerte, el sistema se marea y puedes ver cosas que no deberías. Pero yo no te dije nada. ¡Ding-Pum!";
+            const secretos = [
+                "<span style='color: #888; font-style: italic;'>*Susurro de estática*</span> 🤫 Dicen que si agitas tu teléfono con demasiada fuerza, el algoritmo de seguridad se marea y te caes por una grieta del sistema. Pero yo no te dije nada...",
+                "<span style='color: #888; font-style: italic;'>*Voz muy baja*</span> 🤫 Baja hasta el mismísimo fondo de esta página. Busca unas letras grises, casi invisibles, que no parecen un enlace. ¿Qué pasa si las tocas? Mmm... huele a contrabando.",
+                "<span style='color: #888; font-style: italic;'>*Mira a los lados*</span> 🤫 Si alguna vez logras entrar a esa terminal clandestina que Vance tanto odia, y necesitas borrar tus huellas... escribe la palabra 'DELETE'. Es un atajo de los Creadores. Oro puro."
+            ];
+            resp = secretos[Math.floor(Math.random() * secretos.length)];
         }
 
         // Escribir respuesta de Mite
