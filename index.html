@@ -427,26 +427,30 @@
             }
         }
 
-        // Zumbido eléctrico súper sutil al pasar el mouse (Hover)
+        // Zumbido eléctrico al pasar el mouse (Hover) - Mejorado para audibilidad
         function playHoverSound() {
             if (!cyberAudioCtx) return;
+            // Solo reproducir si el contexto está activo (el usuario ya hizo clic alguna vez)
+            if (cyberAudioCtx.state === 'suspended') return;
+
             const osc = cyberAudioCtx.createOscillator();
             const gain = cyberAudioCtx.createGain();
             
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(120, cyberAudioCtx.currentTime); 
-            osc.frequency.exponentialRampToValueAtTime(80, cyberAudioCtx.currentTime + 0.1);
+            // Onda de sierra tiene más armónicos y suena más "eléctrica/cibernética"
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(200, cyberAudioCtx.currentTime); 
+            osc.frequency.exponentialRampToValueAtTime(100, cyberAudioCtx.currentTime + 0.1);
             
-            // Volumen muy bajo para no ser molesto
+            // Volumen ajustado para ser sutil pero audible
             gain.gain.setValueAtTime(0, cyberAudioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.015, cyberAudioCtx.currentTime + 0.03); 
-            gain.gain.exponentialRampToValueAtTime(0.001, cyberAudioCtx.currentTime + 0.1);
+            gain.gain.linearRampToValueAtTime(0.04, cyberAudioCtx.currentTime + 0.02); 
+            gain.gain.exponentialRampToValueAtTime(0.001, cyberAudioCtx.currentTime + 0.15);
             
             osc.connect(gain);
             gain.connect(cyberAudioCtx.destination);
             
             osc.start();
-            osc.stop(cyberAudioCtx.currentTime + 0.15);
+            osc.stop(cyberAudioCtx.currentTime + 0.2);
         }
 
         // Clic futurista corto al hacer clic
