@@ -227,7 +227,7 @@
                     trigger.addEventListener('click', e => {
                         e.preventDefault();
                         document.body.classList.add('matrix-collapse');
-                        setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
+                        setTimeout(() => { window.location.href = "https://humania-nexo.github.io/DevaTerminal/"; }, 2000);
                     });
                 }
             } catch (err) { console.error("Error en módulos", err); }
@@ -266,8 +266,40 @@
             setTimeout(() => { document.getElementById('spn-status').style.display='none'; document.getElementById('spn-error').style.display='block'; if(typeof window.miteResponder==="function") window.miteResponder('eter'); }, 3000);
         }
 
-        // Sensor de Movimiento
-        let lX, lY, lZ, lU = 0; window.addEventListener('devicemotion', e => { let acc=e.accelerationIncludingGravity, now=new Date().getTime(); if((now-lU)>100) { let diff=now-lU, speed=Math.abs(acc.x+acc.y+acc.z-lX-lY-lZ)/diff*10000; if(speed>2000) { document.body.classList.add('matrix-collapse'); window.location.href="sincro.html?nodo=motion"; } lX=acc.x; lY=acc.y; lZ=acc.z; lU=now; } });
+        // ==========================================
+        // SENSOR DE MOVIMIENTO (MECÁNICA "SHAKE")
+        // ==========================================
+        // Esta función lee el giroscopio del celular. Si el lector lo agita fuerte, 
+        // rompe la página y lo lanza a la terminal de DEVA.
+        let lastX, lastY, lastZ, lastUpdate = 0; 
+        
+        window.addEventListener('devicemotion', (e) => { 
+            let acc = e.accelerationIncludingGravity;
+            let now = new Date().getTime(); 
+            
+            // Revisa el sensor cada 100 milisegundos (evita congelar el teléfono)
+            if ((now - lastUpdate) > 100) { 
+                let diff = now - lastUpdate;
+                
+                // Fórmula para calcular qué tan fuerte se agitó (fuerza G combinada)
+                let speed = Math.abs(acc.x + acc.y + acc.z - lastX - lastY - lastZ) / diff * 10000; 
+                
+                // Si la fuerza supera 2000 (un sacudón claro)...
+                if (speed > 2000) { 
+                    // 1. Activa la animación CSS de colapso visual
+                    document.body.classList.add('matrix-collapse'); 
+                    
+                    // 2. Te saca de Humania y te lleva directo a DEVA
+                    window.location.href = "https://humania-nexo.github.io/DevaTerminal/"; 
+                } 
+                
+                // Guarda la posición actual para compararla en los próximos 100ms
+                lastX = acc.x; 
+                lastY = acc.y; 
+                lastZ = acc.z; 
+                lastUpdate = now; 
+            } 
+        });
 
         iniciarSistema();
     </script>
