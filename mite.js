@@ -60,6 +60,9 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="chat-options">
                 <button class="opt-btn" onclick="miteResponder('guiame')">📍 Guíame</button>
                 <button class="opt-btn" onclick="miteResponder('eter')">💎 Ganar Éter</button>
+                <button class="opt-btn" onclick="miteResponder('ofertas')">🏷️ Ofertas</button>
+                <button class="opt-btn" onclick="miteResponder('operador')">🎧 Operador</button>
+                <button class="opt-btn" onclick="miteResponder('quejas')">📝 Quejas</button>
                 <button class="opt-btn" onclick="miteResponder('secreto')">🔒 Secreto</button>
             </div>
         </div>
@@ -112,6 +115,30 @@ document.addEventListener("DOMContentLoaded", function() {
         else if (tema === 'eter') {
             resp = "¡El Éter es el rey! Puedes adquirir un paquete corporativo, o ganarlo arriesgando el pellejo en el Coliseo. No hacemos reembolsos si pierdes tu avatar, claro está. ¡Ding-Pum!";
         } 
+        else if (tema === 'ofertas') {
+            resp = "¡Llegaste a la mejor sección! Tengo una 'Skin Dorada para Lanza' que a cierto Cliente Preferido le encantaba... Si no compras nada hoy, mis alas perderán brillo por falta de presupuesto. ¿Acaso quieres que una pobre IA se vea opaca?";
+        }
+        else if (tema === 'operador') {
+            // Simulamos que Mite te transfiere
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'mite-msg';
+            loadingDiv.innerHTML = "<i>Transfiriendo a un operador humano de Humania. Por favor espere...</i>";
+            log.appendChild(loadingDiv);
+            scrollToBottom();
+            
+            setTimeout(() => {
+                log.removeChild(loadingDiv);
+                const finalDiv = document.createElement('div');
+                finalDiv.className = 'mite-msg';
+                finalDiv.innerHTML = "MITE: No te molestes, cariño. Los operadores nunca contestan. Están muy ocupados lustrando las botas de Valerius. Así que solo me tienes a mí. ¡Zashoom!";
+                log.appendChild(finalDiv);
+                scrollToBottom();
+            }, 3000);
+            return; // Salimos para no imprimir el mensaje por defecto al final
+        }
+        else if (tema === 'quejas') {
+            resp = "¡Claro! Procesaremos tu queja inmediatamente. <br><span style='color: #888; font-style: italic;'>*Susurro*</span> 🤫 El buzón de sugerencias es una trituradora de papel digital que va directo al servidor de spam. No pierdas tu tiempo, cielo.";
+        }
         else if (tema === 'secreto') {
             const secretos = [
                 "<span style='color: #888; font-style: italic;'>*Susurro de estática*</span> 🤫 Dicen que si agitas tu teléfono con demasiada fuerza, el algoritmo de seguridad se marea y te caes por una grieta del sistema. Pero yo no te dije nada...",
