@@ -163,34 +163,42 @@
     </div>
 
     <!-- 4. MERCADO DE FE (RECONSTITUIDO) -->
-    <div class="section-title" style="margin-top:40px;">
-        <h2>Adquisición de FE</h2>
-        <p>No permita que la realidad interrumpa su plenitud.</p>
-    </div>
-    <div class="fe-container">
-        <!-- Pack Básico -->
-        <div class="fe-card">
-            <div class="fe-header">PAQUETE INICIADO</div>
-            <div class="fe-price">500 <small>FE</small></div>
-            <p class="fe-desc">Acceso estándar a entornos públicos de Proiectio.</p>
-            <button class="btn-buy" onclick="iniciarSPN()">RECARGAR FE</button>
-        </div>
+    <div id="particles-wrapper" style="position: relative; width: 100%; padding: 40px 0; overflow: hidden; background: radial-gradient(circle at center, #0a192f 0%, #000 100%);">
+        <!-- Contenedor del Canvas de Partículas -->
+        <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
+        
+        <!-- Contenido Real (Por encima de las partículas) -->
+        <div style="position: relative; z-index: 1;">
+            <div class="section-title" style="margin-top:0;">
+                <h2 style="text-shadow: 0 0 10px rgba(0,195,255,0.5);">Adquisición de FE</h2>
+                <p style="color: #ccc;">No permita que la realidad interrumpa su plenitud.</p>
+            </div>
+            <div class="fe-container">
+                <!-- Pack Básico -->
+                <div class="fe-card" style="background: rgba(20,20,20,0.6); backdrop-filter: blur(10px);">
+                    <div class="fe-header">PAQUETE INICIADO</div>
+                    <div class="fe-price">500 <small>FE</small></div>
+                    <p class="fe-desc">Acceso estándar a entornos públicos de Proiectio.</p>
+                    <button class="btn-buy" onclick="iniciarSPN()">RECARGAR FE</button>
+                </div>
 
-        <!-- Pack Premium -->
-        <div class="fe-card premium">
-            <div class="fe-badge">MÁS POPULAR</div>
-            <div class="fe-header">ESTATUS PREMIUM</div>
-            <div class="fe-price">2,500 <small>FE</small></div>
-            <p class="fe-desc">Prioridad de ancho de banda y acceso a zonas restringidas.</p>
-            <button class="btn-buy" style="background:var(--cian); color:#fff;" onclick="iniciarSPN()">RECARGAR FE</button>
-        </div>
+                <!-- Pack Premium -->
+                <div class="fe-card premium" style="background: rgba(20,20,20,0.8); backdrop-filter: blur(10px); border-color: rgba(0,195,255,0.5); box-shadow: 0 0 20px rgba(0,195,255,0.2);">
+                    <div class="fe-badge">MÁS POPULAR</div>
+                    <div class="fe-header">ESTATUS PREMIUM</div>
+                    <div class="fe-price">2,500 <small>FE</small></div>
+                    <p class="fe-desc">Prioridad de ancho de banda y acceso a zonas restringidas.</p>
+                    <button class="btn-buy" style="background:var(--cian); color:#fff;" onclick="iniciarSPN()">RECARGAR FE</button>
+                </div>
 
-        <!-- Pack Divinidad (EL REGRESO) -->
-        <div class="fe-card">
-            <div class="fe-header">MECENAZGO CORPORATIVO</div>
-            <div class="fe-price">∞ <small>FE</small></div>
-            <p class="fe-desc">Conexión ilimitada reservada para personal patrocinado.</p>
-            <button class="btn-buy" style="opacity:0.4; cursor:not-allowed; background:#eee; color:#999;" disabled>REQUIERE NIVEL 7</button>
+                <!-- Pack Divinidad -->
+                <div class="fe-card" style="background: rgba(20,20,20,0.6); backdrop-filter: blur(10px);">
+                    <div class="fe-header">MECENAZGO CORPORATIVO</div>
+                    <div class="fe-price">∞ <small>FE</small></div>
+                    <p class="fe-desc">Conexión ilimitada reservada para personal patrocinado.</p>
+                    <button class="btn-buy" style="opacity:0.4; cursor:not-allowed; background:#eee; color:#999;" disabled>REQUIERE NIVEL 7</button>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -348,6 +356,61 @@
             speed: 400,
             glare: true,
             "max-glare": 0.3,
+        });
+    </script>
+
+    <!-- EFECTO PARTÍCULAS DE ÉTER (Particles.js) -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#00c3ff", "#d4af37", "#ffffff"] }, // Azul Éter, Oro, Blanco
+                "shape": { 
+                    "type": ["edge", "triangle", "polygon"], // Forma de fragmentos
+                    "polygon": { "nb_sides": 6 }
+                },
+                "opacity": { 
+                    "value": 0.6, 
+                    "random": true, 
+                    "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } 
+                },
+                "size": { 
+                    "value": 4, 
+                    "random": true, 
+                    "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } 
+                },
+                "line_linked": { 
+                    "enable": true, 
+                    "distance": 150, 
+                    "color": "#00c3ff", 
+                    "opacity": 0.2, 
+                    "width": 1 
+                },
+                "move": { 
+                    "enable": true, 
+                    "speed": 1.5, 
+                    "direction": "none", 
+                    "random": true, 
+                    "straight": false, 
+                    "out_mode": "out", 
+                    "bounce": false,
+                    "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } 
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" }, // El cursor atrae los fragmentos
+                    "onclick": { "enable": true, "mode": "repulse" }, // Al hacer clic explotan
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } },
+                    "repulse": { "distance": 250, "duration": 0.4 }
+                }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
