@@ -1,0 +1,5 @@
+# robots.txt para PROIECTIO — www.proiect.io
+User-agent: *
+Allow: /
+
+Sitemap: https://www.proiect.io/sitemap.xml
