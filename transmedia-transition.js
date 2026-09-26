@@ -1,15 +1,27 @@
 // Sistema de Transición Transmedia - Proiectio / Humania
 // Coreografía Cinemática: «La Jaula de Humania (H)» <-> «El Despertar de Proiectio (P)»
 (function() {
+    function detectSite() {
+        const href = window.location.href.toLowerCase();
+        const title = document.title.toLowerCase();
+
+        // 1. Proiectio: Si la URL o el título pertenecen a Proiectio
+        if (href.includes('proiect.io') || href.includes('/proiectio') || href.includes('humania-nexo-proiectio') || title.includes('proiectio')) {
+            return 'proiectio';
+        }
+        // 2. Humania: Si la URL o el título pertenecen a Humania
+        if (href.includes('humania.space') || href.includes('/humania') || href.includes('humania-repo') || title.includes('humania')) {
+            return 'humania';
+        }
+        return title.includes('proiectio') ? 'proiectio' : 'humania';
+    }
+
     function initTransmedia() {
         if (document.getElementById('transmedia-overlay')) return; // Evitar duplicados
 
-        // Identificar el origen actual (Humania vs Proiectio)
-        const isHumania = window.location.hostname.includes('humania') || 
-                          window.location.pathname.includes('humania') || 
-                          document.title.toLowerCase().includes('humania');
+        const currentSite = detectSite();
 
-        // 1. Inyectar Estilos de Transición Kinética
+        // 1. Inyectar Estilos Cinemáticos
         const style = document.createElement('style');
         style.innerHTML = `
             #transmedia-overlay {
@@ -18,14 +30,14 @@
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background: #ffffff; /* Fondo blanco puro */
-                z-index: 9999999;
+                background: #ffffff; /* Fondo blanco inmaculado */
+                z-index: 99999999;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 opacity: 0;
                 pointer-events: none;
-                transition: opacity 0.35s ease;
+                transition: opacity 0.3s ease;
             }
             #transmedia-overlay.active {
                 opacity: 1;
@@ -41,11 +53,10 @@
             #tm-core, #tm-play, #tm-pillar-l, #tm-pillar-r {
                 transform-box: fill-box;
                 transform-origin: center;
-                transition: all 1.1s cubic-bezier(0.77, 0, 0.175, 1);
+                transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s ease;
             }
 
             /* --- ESTADO: HUMANIA (La Jaula de Control / La H) --- */
-            /* Dos pilares negros encerrando el punto azul central */
             .state-humania #tm-core {
                 transform: scale(1);
                 fill: #00d8ff;
@@ -64,7 +75,6 @@
             }
 
             /* --- ESTADO: PROIECTIO (El Despertar / La P) --- */
-            /* Los pilares expulsados lejos a los costados y el núcleo cian expandido */
             .state-proiectio #tm-core {
                 transform: scale(2.4);
                 fill: #00d8ff;
@@ -74,21 +84,21 @@
                 opacity: 1;
             }
             .state-proiectio #tm-pillar-l {
-                transform: translateX(-160px);
+                transform: translateX(-180px);
                 opacity: 0;
             }
             .state-proiectio #tm-pillar-r {
-                transform: translateX(160px);
+                transform: translateX(180px);
                 opacity: 0;
             }
         `;
         document.head.appendChild(style);
 
-        // 2. Inyectar HTML del Escenario Vectorial con el estado nativo pre-configurado
+        // 2. Inyectar SVG con la clase inicial exacta según la página donde estamos
         const overlay = document.createElement('div');
         overlay.id = 'transmedia-overlay';
         overlay.innerHTML = `
-            <svg viewBox="0 0 100 100" id="transmedia-svg" class="${isHumania ? 'state-humania' : 'state-proiectio'}">
+            <svg viewBox="0 0 100 100" id="transmedia-svg" class="${currentSite === 'humania' ? 'state-humania' : 'state-proiectio'}">
                 <!-- Núcleo Cyan -->
                 <circle id="tm-core" cx="50" cy="50" r="12" fill="#00d8ff" />
                 
@@ -104,41 +114,44 @@
 
         const svg = document.getElementById('transmedia-svg');
         
-        // Ejecución precisa de la coreografía transmedia
+        // Función de navegación transmedia
         function handleTransmediaTransition(e, targetHref) {
             if (!targetHref || targetHref.startsWith('#') || targetHref.startsWith('javascript:')) return;
 
-            const goesToProiectio = targetHref.includes('proiect.io') || targetHref.includes('proiectio');
-            const goesToHumania = targetHref.includes('humania.space') || targetHref.includes('humania-repo') || targetHref.includes('humania');
+            const lowerHref = targetHref.toLowerCase();
+            const goesToProiectio = lowerHref.includes('proiect.io') || lowerHref.includes('proiectio');
+            const goesToHumania = lowerHref.includes('humania.space') || (lowerHref.includes('humania') && !goesToProiectio);
 
-            // Solo disparar en salto transmedia cruzado (Humania -> Proiectio o Proiectio -> Humania)
-            const isCrossTransition = (isHumania && goesToProiectio) || (!isHumania && goesToHumania);
+            const siteNow = detectSite();
 
-            if (isCrossTransition) {
+            // Salto cruzado: de Proiectio a Humania O de Humania a Proiectio
+            const isCross = (siteNow === 'proiectio' && goesToHumania) || (siteNow === 'humania' && goesToProiectio);
+
+            if (isCross) {
                 e.preventDefault();
                 e.stopPropagation();
 
-                // 1. Asegurar que el estado inicial de partida esté fijado con precisión
-                svg.setAttribute('class', isHumania ? 'state-humania' : 'state-proiectio');
+                // 1. Asegurar estado inicial idéntico a la página de origen
+                svg.setAttribute('class', siteNow === 'humania' ? 'state-humania' : 'state-proiectio');
                 
-                // 2. Encender overlay blanco
+                // 2. Activar overlay blanco
                 overlay.classList.add('active');
 
-                // 3. Tras 300ms de mostrar el logo de origen, disparar la transformación al destino
+                // 3. Tras 350ms, transformar hacia el destino
                 setTimeout(() => {
                     if (goesToProiectio) {
-                        // De H a P: Los barrotes se expulsan a los costados (-160px / +160px) y el núcleo cian se expande
+                        // De H a P: Los barrotes se expulsan a los costados y el núcleo cian se expande a P
                         svg.setAttribute('class', 'state-proiectio');
                     } else if (goesToHumania) {
-                        // De P a H: El núcleo cian se contrae a punto y los barrotes entran desde lejos (-160px / +160px) para encerrarlo
+                        // De P a H: El núcleo cian se reduce y los barrotes entran desde lejos (-180px / +180px) para encerrarlo
                         svg.setAttribute('class', 'state-humania');
                     }
-                }, 300);
+                }, 350);
 
-                // 4. Salto de navegación al culminar el movimiento
+                // 4. Salto de navegación al completarse el clímax
                 setTimeout(() => {
                     window.location.href = targetHref;
-                }, 1750);
+                }, 1800);
             }
         }
 
