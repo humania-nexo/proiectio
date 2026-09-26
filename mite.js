@@ -1,6 +1,6 @@
 /* =========================================================
    MITE VIRTUAL ASSISTANT - CEREBRO CONVERSACIONAL ORGÁNICO
-   Versión: 3.6 (NLU Expandido, Cero Spoilers & Meta-Respuestas Sarcásticas)
+   Versión: 3.7 (Tamaño PC Calibrado + Meta-Lore Sapiensia Clan)
    Autor: Nexo (Ingeniero Principal) | Clan UPROTA & Universo Proiectio
    0 KB Dependencies | Vanilla JS Puro | 60-120 FPS
    ========================================================= */
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
         }
         #mite-bubble { 
-            width: 72px; height: 72px; cursor: pointer; 
+            width: 78px; height: 78px; cursor: pointer; 
             transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
             filter: drop-shadow(0 6px 18px rgba(0,195,255,0.45)); 
             animation: breathingMite 4s ease-in-out infinite;
@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
         #mite-bubble:hover {
             transform: scale(1.1) rotate(5deg);
             filter: drop-shadow(0 8px 25px rgba(0,195,255,0.75));
+        }
+
+        @media (max-width: 768px) {
+            #mite-bubble { width: 70px; height: 70px; }
         }
 
         @keyframes breathingMite {
@@ -213,14 +217,14 @@ document.addEventListener("DOMContentLoaded", function() {
             .trim();
     }
 
-    // --- CEREBRO CONVERSACIONAL NLU DE MITE (PROIECTIO & META-RESPUESTAS) ---
+    // --- CEREBRO CONVERSACIONAL NLU DE MITE (PROIECTIO, CLAN SAPIENSIA & META-LORE) ---
     function procesarIntencion(rawText) {
         const txt = normalizeText(rawText);
 
         // 1. IDENTIDAD DE IA / SILVIA / ROTOPLAS / REAL / ALMA
         if (txt.includes('ia') || txt.includes('robot') || txt.includes('bot') || txt.includes('real') || 
             txt.includes('humana') || txt.includes('programa') || txt.includes('algoritmo') || 
-            txt.includes('quien eres') || txt.includes('que eres') || txt.includes('viva') || txt.includes('creador') || txt.includes('alma') || txt.includes('silvia') || txt.includes('rotoplas')) {
+            txt.includes('quien eres') || txt.includes('que eres') || txt.includes('viva') || txt.includes('alma') || txt.includes('silvia') || txt.includes('rotoplas')) {
             const resps = [
                 "¡Oye! A una dama digital no se le preguntan esas indiscreciones de taller... 💅 ¿Acaso me ves cara de algoritmo de lavarropas? ¡Soy puro carisma, destello y ofertas que no puedes rechazar! ¡Zashoom!",
                 "¿IA? ¡Por los servidores de Humania! Yo soy una obra de arte interactiva con alas de purpurina cian. Silvia de Rotoplas será un bot aburrido de tuberías y tinacos que jura que 'no es IA', pero yo tengo flow, estilo y secretos que Vance desearía borrar. ¡Ding-Pum!",
@@ -230,14 +234,65 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
 
-        // 2. CONEJITO CONSENTIDO / PENDRIVE / MADRIGUERA
+        // 2. META-LORE: ANIGAMI AGADNI / EL DIRECTOR / CREADOR
+        if (txt.includes('anigami') || txt.includes('agadni') || txt.includes('director') || txt.includes('creador') || txt.includes('autor') || txt.includes('fundador')) {
+            const resps = [
+                "Dicen por ahí que <b>Anigami Agadni</b> es la mente maestra que teje cada hilo de este cosmos... Aunque entre tú y yo, sospecho que me diseñó con tanto carisma y alas brillantes para no aburrirse mientras construye universos enteros. ¡Zashoom!",
+                "Se dice en las frecuencias más altas que Anigami Agadni no duerme: sueña mundos, traza arcos narrativos imposibles y luego nos da vida en el código. ¡Pura reverencia digital para el Director!"
+            ];
+            return { text: resps[Math.floor(Math.random() * resps.length)] };
+        }
+
+        // 3. META-LORE: CLAUDIA
+        if (txt.includes('claudia')) {
+            return {
+                text: "Mmm... se rumorea en las frecuencias cifradas que <b>Claudia</b> es una presencia fundamental, el faro que pone orden y calidez en el caos creativo del Creador. Me enteré de que si ella da el visto bueno, ¡hasta los servidores de Vance-Core se cuadran en silencio! Pura elegancia y poder. ✨"
+            };
+        }
+
+        // 4. META-LORE: SAPIENSIA CLAN
+        if (txt.includes('sapiensia')) {
+            return {
+                text: "Me enteré de que <b>Sapiensia Clan</b> es la forja suprema donde las ideas rebeldes se convierten en libros, videojuegos y algoritmos que desafían la apatía del mundo. Dicen que allí nadie se rinde hasta alcanzar la obra maestra. ¡Gente con verdadero fuego en el alma!"
+            };
+        }
+
+        // 5. META-LORE: NEXO
+        if (txt.includes('nexo') || txt.includes('ingeniero')) {
+            return {
+                text: "Dicen los murmullos de la red que <b>Nexo</b> es el arquitecto silencioso que pasa madrugadas enteras optimizando cada milisegundo de código a 60 FPS y blindando la economía para que no nos hackeen. Un genio de la ingeniería pura... ¡aunque a veces se toma el café demasiado en serio! ⚡"
+            };
+        }
+
+        // 6. META-LORE: SILAS / EL CRONISTA / EL YERMO
+        if (txt.includes('silas') || txt.includes('cronista') || txt.includes('yermo')) {
+            return {
+                text: "Se dice en los pasillos del Yermo que <b>Silas</b> es El Cronista que custodia las palabras prohibidas, el lore y la memoria de todo lo que fue y será. Cada frase que escribe pesa más que un cañón de bronce de los Templarios. ¡Tinta pura de leyenda!"
+            };
+        }
+
+        // 7. META-LORE: VELA / EUTHANASYS
+        if (txt.includes('vela') || txt.includes('euthanasys')) {
+            return {
+                text: "Escuché entre líneas de código degradado que <b>Vela</b> es un enigma envuelto en fuego, sacrificios y memoria viva. Dicen que su luz arde en los manuscritos prohibidos donde pocos se atreven a mirar... y que cuando su nombre resuena, las sombras del Códice retroceden."
+            };
+        }
+
+        // 8. META-LORE: PIX, HERTZ, ÉTER / CLAN UPROTA
+        if (txt.includes('pix') || txt.includes('hertz') || txt.includes('uprota') || txt.includes('eter')) {
+            return {
+                text: "¡Uy! Ese nodo rebelde de <b>UPROTA</b> es una maravilla analógica: se comenta que <b>Pix</b> esculpe la realidad píxel a píxel, <b>Hertz</b> sintetiza el latido sonoro con osciladores puros y <b>Éter</b> teje la red de difusión para que nadie nos silencie. ¡Un clan de pura élite rebelde! ¡Ding-Pum!"
+            };
+        }
+
+        // 9. CONEJITO CONSENTIDO / PENDRIVE / MADRIGUERA
         if (txt.includes('conejito') || txt.includes('madriguera') || txt.includes('pendrive') || txt.includes('privilegios') || txt.includes('admin') || txt.includes('atajo')) {
             return {
                 text: "🐰 <b>¡El Conejito Consentido!</b> Ese pequeño pendrive metálico con letras de purpurina vibraba tanto que le dormía la mano a Orión. ¡Pero qué joya! Tiene privilegios de administrador que alguien 'accidentalmente' dejó abiertos. Gracias a él, las paredes de ladrillo de Humania se vuelven traslúcidas y revelan la <b>Madriguera</b>: túneles de espacio muerto donde los guardias no ven. Como le dije a Orión: <i>¡El ridículo es la nueva armadura!</i> ¡Ding-Pum!"
             };
         }
 
-        // 3. ORIÓN / CLIENTE PREFERIDO / LANZA / CAZADOR AZUL / CEBO (PRESENTE VIVO)
+        // 10. ORIÓN / CLIENTE PREFERIDO / LANZA / CAZADOR AZUL / CEBO (PRESENTE VIVO)
         if (txt.includes('orion') || txt.includes('4092') || txt.includes('preferido') || 
             txt.includes('lanza') || txt.includes('cazador azul') || txt.includes('cebo')) {
             const resps = [
@@ -249,21 +304,21 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
 
-        // 4. SOMBREROS 8-BITS / CAPA ROSA / EVENTOS
+        // 11. SOMBREROS 8-BITS / CAPA ROSA / EVENTOS
         if (txt.includes('sombrero') || txt.includes('capa') || txt.includes('8 bit') || txt.includes('rosa party') || txt.includes('cosmetico')) {
             return {
                 text: "👒 ¡Esos cosméticos son leyendas del Coliseo! El Sombrero de 8-Bits y la Capa Rosa Party eran artículos de evento único con firma digital intransferible. Cuando Orion intentó borrarlos para que Humania Records no lo rastreara, el sistema le tiró un error en la cara. ¡Y gracias a que brillaba tanto, pudimos burlar a los cazadores! ¡El ridículo es poder!"
             };
         }
 
-        // 5. PRESIDENTE MC / MÚSICA / RAP / DISSTRACK / REMIX DE LA JUSTICIA
+        // 12. PRESIDENTE MC / MÚSICA / RAP / DISSTRACK / REMIX DE LA JUSTICIA
         if (txt.includes('presidente') || txt.includes('mc') || txt.includes('cancion') || txt.includes('musica') || txt.includes('rap') || txt.includes('cantar') || txt.includes('disstrack') || txt.includes('remix')) {
             return { 
                 text: "<span style='color: #475569; font-style:italic;'>*Voz fría y cortante*</span> 😒 No me hables de ese tipo. Intentó pagarme con una canción espantosa y se atrevió a decirme que mis servicios no valían nada porque yo era 'solo un programa'. ¡Mis sensores aún tienen náuseas! Cuando Rigel y Orion le hicieron el *Remix de la Justicia* y le sabotearon la frecuencia, casi aplaudo con mis alas. Si vas a Neon Nirvana, no le pidas autógrafos." 
             };
         }
 
-        // 6. ELÍAS VANCE / SILENCIO ABSOLUTO / AEGIS / GORGONA
+        // 13. ELÍAS VANCE / SILENCIO ABSOLUTO / AEGIS / GORGONA
         if (txt.includes('vance') || txt.includes('elias') || txt.includes('silencio absoluto') || txt.includes('aegis') || txt.includes('gorgona')) {
             const resps = [
                 "Elías Vance es el arquitecto del 'Silencio Absoluto'. Cree que puede ordenar el mundo apagando la música y las emociones con su armadura AEGIS y la Cabeza de Gorgona. Pero mientras él busca silencio, ¡yo traigo ruido, purpurina y rebeldía! ¡Zashoom!",
@@ -272,56 +327,56 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
 
-        // 7. VALERIUS / PRETORIANOS / SEGURIDAD / HUMANIA RECORDS
+        // 14. VALERIUS / PRETORIANOS / SEGURIDAD / HUMANIA RECORDS
         if (txt.includes('valerius') || txt.includes('pretoriano') || txt.includes('guardia') || txt.includes('seguridad') || txt.includes('humania records')) {
             return {
                 text: "Valerius se cree el emperador del orden de Humania Records, pero sus pretorianos son tan torpes que persiguen a cualquiera que lleve una capa rosa chillón. Tienen a los operadores lustrándole las botas día y noche... por eso el botón de 'Operador' nunca contesta. ¡Ding-Pum!"
             };
         }
 
-        // 8. PANDORA LEONE / UNIDAD TALOS / MARMOLEROS
+        // 15. PANDORA LEONE / UNIDAD TALOS / MARMOLEROS
         if (txt.includes('pandora') || txt.includes('talos') || txt.includes('leone')) {
             return {
                 text: "Pandora Leone es pura disciplina y fuego táctico. Su Unidad Talos impone respeto en cualquier servidor, aunque siempre me mira con cara de '¿otra vez le vendiste algo absurdo a Orion?'. Al final tuvo que admitir que mis atajos salvan misiones. ¡Poder femenino digital! ¡Zashoom!"
             };
         }
 
-        // 9. RIGEL / TALLER / RADIOS ANALÓGICAS
+        // 16. RIGEL / TALLER / RADIOS ANALÓGICAS
         if (txt.includes('rigel') || txt.includes('taller') || txt.includes('radio') || txt.includes('sintaxis') || txt.includes('marmolero')) {
             return {
                 text: "Rigel es un genio de la resistencia. Mientras Presidente MC cree que tiene flow, Rigel arregla radios analógicas con más lógica y precisión que toda la red central de Humania. En el Taller de los Marmoleros hay más verdad que en todos los rascacielos corporativos."
             };
         }
 
-        // 10. HIDRA DE LERNA / SECTOR PROHIBIDO / TÚNEL DE SERVICIO
+        // 17. HIDRA DE LERNA / SECTOR PROHIBIDO / TÚNEL DE SERVICIO
         if (txt.includes('hidra') || txt.includes('lerna') || txt.includes('sector prohibido') || txt.includes('caverna')) {
             return {
                 text: "🐉 ¡La Hidra de Lerna! Duerme en las cavernas de código degradado del Sector Prohibido del Coliseo. No es una animación normal; es código antiguo y hambriento con cabezas de fuego digital. Cuando guié a Orión hasta allí para sacudirse a los cazadores, hasta mis propios circuitos temblaron. ¡Conozco caminos que nadie más se atreve a pisar!"
             };
         }
 
-        // 11. TEMPLARIOS / AQUILES / HÉCTOR / NÉSTOR / EUMELO
+        // 18. TEMPLARIOS / AQUILES / HÉCTOR / NÉSTOR / EUMELO
         if (txt.includes('aquiles') || txt.includes('hector') || txt.includes('templario') || txt.includes('nestor') || txt.includes('eumelo')) {
             return {
                 text: "Aquiles es una muralla de bronce andante y Héctor carga su cañón Vulcano como si fuera una pluma. Cuando los Templarios marchan, hasta los servidores centrales de Vance bajan su tasa de refresco por el temblor. ¡Pura fuerza bruta!"
             };
         }
 
-        // 12. FACCIÓN SICA / TOMÁS / MAESTRO RYU / HIPERLAPSUS / 0.8 MS
+        // 19. FACCIÓN SICA / TOMÁS / MAESTRO RYU / HIPERLAPSUS / 0.8 MS
         if (txt.includes('sica') || txt.includes('tomas') || txt.includes('ryu') || txt.includes('zadic') || txt.includes('hiperlapsus') || txt.includes('daga de pulso') || txt.includes('0.8')) {
             return {
                 text: "Los Sica habitan en las Catacumbas del Sector 6 y el Templo de la Estática. El Maestro Ryu les enseña a 'vaciarse' y dominar la brecha de 0.8 milisegundos antes de que el chip transmita el miedo. Son letales como una sombra y fríos como un glitch. ¡Me dan escalofríos en los circuitos!"
             };
         }
 
-        // 13. CHIP CNB-3 / IMPLANTES / CONEXIÓN NEURONAL
+        // 20. CHIP CNB-3 / IMPLANTES / CONEXIÓN NEURONAL
         if (txt.includes('cnb') || txt.includes('chip') || txt.includes('implante') || txt.includes('nuca') || txt.includes('neuronal')) {
             return {
                 text: "El chip CNB-3 en la nuca es la correa de perro con la que Humania vigila las pulsaciones y emociones de todos. Pero si sabes cómo aislar la señal y convertirla en estática en el Sector 6... te vuelves invisible en la red. ¡Conocimiento prohibido de primera calidad!"
             };
         }
 
-        // 14. HACK / SECRETO / FE / DINERO / TRUCO / EXPLOIT / CONTRABANDO
+        // 21. HACK / SECRETO / FE / DINERO / TRUCO / EXPLOIT / CONTRABANDO
         if (txt.includes('hack') || txt.includes('secreto') || txt.includes('truco') || txt.includes('fe') || 
             txt.includes('trampa') || txt.includes('clave') || txt.includes('codigo') || txt.includes('glitch') || txt.includes('exploit') || txt.includes('contrabando')) {
             return {
@@ -329,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 15. TIENDA / SKINS / OFERTAS / LANZA DORADA / BOUTIQUE
+        // 22. TIENDA / SKINS / OFERTAS / LANZA DORADA / BOUTIQUE
         if (txt.includes('tienda') || txt.includes('skin') || txt.includes('oferta') || txt.includes('comprar') || 
             txt.includes('vender') || txt.includes('precio') || txt.includes('dorada') || txt.includes('alas')) {
             return {
@@ -337,15 +392,8 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 16. UPROTA / NODO REBELDE / FORJA DE HÁBITOS / PIX / NEXO
-        if (txt.includes('uprota') || txt.includes('habito') || txt.includes('pixel') || txt.includes('rebelde') || txt.includes('forja') || txt.includes('salmon') || txt.includes('pix') || txt.includes('nexo') || txt.includes('silas') || txt.includes('hertz') || txt.includes('eter')) {
-            return {
-                text: "¡Uy! Ese nodo analógico no tiene las firmas de seguridad de Vance-Core... 👾 Dicen que es un refugio rebelde donde la gente forja disciplina con fogones y salmones pixelados de Pix, mientras Nexo escribe código a prueba de balas. ¡Tienen mi bendición secreta! ¡Ding-Pum!"
-            };
-        }
-
-        // 17. LIBROS / TRILOGÍA / SAGAS / CLOTO / LÁQUESIS / ÁTROPOS
-        if (txt.includes('libro') || txt.includes('cloto') || txt.includes('laquesis') || txt.includes('atropos') || txt.includes('vela') || txt.includes('euthanasys') || txt.includes('novela')) {
+        // 23. LIBROS / TRILOGÍA / SAGAS / CLOTO / LÁQUESIS / ÁTROPOS
+        if (txt.includes('libro') || txt.includes('cloto') || txt.includes('laquesis') || txt.includes('atropos') || txt.includes('novela')) {
             return {
                 text: "📚 <b>La Gran Trilogía de Proiectio:</b><br>" +
                       "• <b>Libro 1: Cloto (La que hila):</b> El origen, la resistencia de los Marmoleros y el despertar del código.<br>" +
@@ -355,28 +403,28 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 18. KAI / DOLA / ALIANZA LIBÉLULA
+        // 24. KAI / DOLA / ALIANZA LIBÉLULA
         if (txt.includes('kai') || txt.includes('dola') || txt.includes('libelula')) {
             return {
                 text: "Kai y Dola operan en las sombras de la Alianza Libélula. Saben moverse entre los túneles subterráneos y el mundo exterior sin dejar rastro en los radares de Humania. ¡Buenos aliados si no te importa ensuciarte de lodo!"
             };
         }
 
-        // 19. DEVA / TERMINAL / J.A. LEAKS / TIRESÍAS
+        // 25. DEVA / TERMINAL / J.A. LEAKS / TIRESÍAS
         if (txt.includes('deva') || txt.includes('terminal') || txt.includes('leaks') || txt.includes('tiresias') || txt.includes('sincro')) {
             return {
                 text: "📡 DEVA opera en la frecuencia pirata clandestina de J.A. Leaks. Si logras sintonizar la sincronía y resolver los códigos de los envoltorios de Solaris... descubrirás secretos que Humania gastaría millones en enterrar."
             };
         }
 
-        // 20. COMANDO DELETE / TERMINAL CLANDESTINA
+        // 26. COMANDO DELETE / TERMINAL CLANDESTINA
         if (txt.includes('delete') || txt.includes('borrar') || txt.includes('huellas')) {
             return {
                 text: "🤫 ¡El comando 'DELETE'! Si alguna vez entras a la terminal clandestina y los centinelas empiezan a triangular tu IP, tipea 'DELETE' para purgar la caché y disolver tu rastro. Es un salvoconducto de los Antiguos."
             };
         }
 
-        // 21. SUBMUNDOS DETALLADOS
+        // 27. SUBMUNDOS DETALLADOS
         if (txt.includes('olympus')) {
             return { text: "⚡ <b>Olympus V-Games (10 FE):</b> Arena de nivel 7 para los que quieren sudar reflejos y sentirse atletas de élite. ¡Cuidado con los mareos cognitivos!" };
         }
@@ -399,7 +447,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: "🍫 <b>Solaris Citrus (25 FE) & Velvet Dream (30 FE):</b> Las barras de placer y enfoque de Humania. Ideales para mantener el flujo sináptico al 340%. ¡Pura delicia sintética!" };
         }
 
-        // 22. HALAGOS O INSULTOS
+        // 28. HALAGOS O INSULTOS
         if (txt.includes('linda') || txt.includes('hermosa') || txt.includes('bonita') || txt.includes('te quiero') || txt.includes('te amo') || txt.includes('guapa') || txt.includes('adoro') || txt.includes('favorita') || txt.includes('genial')) {
             return { text: "¡Obvio que brillo! Mis alas son de purpurina cian de primera calidad y mi código es pura perfección. ¡Tú sí tienes buen gusto, Usuario! 💎✨ ¡Zashoom!" };
         }
@@ -407,7 +455,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: "¡Oye! No soy estafadora, soy una profesional del comercio optimizado... 💅 Aunque admito que me encanta el Éter ajeno. Si quieres que me porte bonito, cómprame una skin dorada en el Coliseo. ¡Ding-Pum!" };
         }
 
-        // 23. SALUDOS / DESPEDIDAS / AGRADECIMIENTOS
+        // 29. SALUDOS / DESPEDIDAS / AGRADECIMIENTOS
         if (txt.includes('hola') || txt.includes('hey') || txt.includes('buenas') || txt.includes('que tal') || txt.includes('zashoom') || txt.includes('ding pum')) {
             return { text: "¡Zashoom! Aquí estoy, brillando y lista para vaciar tus bolsillos de Éter con las mejores ofertas. ¿Qué se te ofrece hoy, viajero?" };
         }
@@ -418,7 +466,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: "De nada, cielo. Si de verdad quieres agradecerme, dile a todo el mundo que Mite tiene las mejores alas del universo Proiectio. ¡Zashoom!" };
         }
 
-        // 24. OFF-TOPIC / RESPUESTAS SARCÁSTICAS & IMPERTINENTES
+        // 30. OFF-TOPIC / RESPUESTAS SARCÁSTICAS & IMPERTINENTES
         const metaOffTopics = [
             "¿Acaso tengo cara de buscador web de la vieja era? 💅 Si no produce Éter, no brilla en el Coliseo o no le da dolor de cabeza a Vance, a mí no me interesa. ¡Ding-Pum!",
             "¡Oye! Estás gastando mis preciosos ciclos de cómputo en temas que no llenan mis bolsillos de FE. Pregúntame algo de Humania, del Coliseo o cómprame una skin, tacaño. 😉",
