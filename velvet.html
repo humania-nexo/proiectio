@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROIECTIO | Fase Nocturna: Velvet Dream</title>
+    <!-- VINCULACIÓN AL CEREBRO ESTÉTICO GLOBAL -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body { background-color: #0c121e; color: #f2f2f7; }
+
+        /* SECTOR DE CABECERA VISUAL */
+        .image-showcase {
+            width: 100%;
+            max-height: 480px;
+            background: #050811;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-showcase img {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* CONTENIDO DESCRIPTIVO */
+        .content-body {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .world-category {
+            color: #c5a059;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .world-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: #ffffff;
+        }
+
+        /* Ficha Técnica */
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        .tech-item { border-left: 2px solid #c5a059; padding-left: 12px; }
+        .tech-label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; display: block; letter-spacing: 1px; }
+        .tech-value { font-size: 0.95rem; font-weight: bold; color: #ffffff; }
+
+        /* Texto Editorial */
+        .description-text {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #d1d5db;
+            margin-bottom: 25px;
+        }
+
+        .formula-box {
+            background: rgba(8, 28, 46, 0.6);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .formula-box h4 {
+            margin-top: 0;
+            color: #c5a059;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .formula-box p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .btn-sync {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+            border: 1px solid #c5a059;
+            color: #c5a059;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .btn-sync:hover { background: #c5a059; color: #081c2e; transform: translateY(-2px); }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <!-- 0. HEADER MODULAR -->
+    <div id="header-placeholder"></div>
+
+    <!-- 1. IMAGEN PRINCIPAL -->
+    <section class="image-showcase">
+        <img src="multimedia/velvet-web.png" alt="Velvet Dream — Fase Nocturna">
+    </section>
+
+    <!-- 2. CONTENIDO EDITORIAL -->
+    <main class="content-body">
+        <p class="world-category">Ciclo de Recarga Vital // Fase Nocturna</p>
+        <h1 class="world-title">Velvet Dream: Reinicio Profundo</h1>
+
+        <div class="technical-grid">
+            <div class="tech-item">
+                <span class="tech-label">Inducción REM</span>
+                <span class="tech-value">Inmediata (0.2ms)</span>
+            </div>
+            <div class="tech-item">
+                <span class="tech-label">Atenuación Traumática</span>
+                <span class="tech-value">99.8% Calibrada</span>
+            </div>
+            <div class="tech-item">
+                <span class="tech-label">Costo por Ración</span>
+                <span class="tech-value">30 FE</span>
+            </div>
+            <div class="tech-item">
+                <span class="tech-label">Seguridad Neural</span>
+                <span class="tech-value">Paz Preventiva Inmune</span>
+            </div>
+        </div>
+
+        <div class="description">
+            <p class="description-text">
+                <strong>Velvet Dream</strong> es el sedante neuro-óptico por excelencia. Diseñado para mitigar la sobrecarga sensorial y el estrés bio-digital de la vigilia, relaja los neurotransmisores de la corteza y prepara los canales sinápticos del biochip para una inmersión plácida y sin traumas en los submundos de <em>Proiectio</em>.
+            </p>
+            <p class="description-text">
+                Bajo la influencia de Velvet, las memorias dolorosas del mundo físico se disuelven en una calma satinada. Los ciudadanos despiertan con sus registros emocionales estabilizados, libres de la angustia residual y listos para reintegrarse al orden armónico de Humania.
+            </p>
+        </div>
+
+        <div class="formula-box">
+            <h4>🌙 Farmacopea Sináptica Vance</h4>
+            <p>Compuesto bio-adaptogénico con microencapsulación de melatonina cuántica y moduladores de ondas theta. Induce un sueño lúcido con acoplamiento directo a la frecuencia de los servidores centrales.</p>
+        </div>
+
+        <a href="javascript:void(0)" onclick="solicitarSuministro()" class="btn-sync">SOLICITAR SUMINISTRO (30 FE)</a>
+        
+        <a href="index.html" class="back-link">← Regresar a la Plataforma Global</a>
+    </main>
+
+    <!-- 3. FOOTER MODULAR -->
+    <div id="footer-placeholder"></div>
+
+    <!-- WIDGET MITE -->
+    <script src="mite.js"></script>
+
+    <!-- SCRIPTS DE CARGA Y LÓGICA -->
+    <script>
+        async function cargarModulos() {
+            const h = await fetch('header.html').then(r => r.text());
+            document.getElementById('header-placeholder').innerHTML = h;
+            const f = await fetch('footer.html').then(r => r.text());
+            document.getElementById('footer-placeholder').innerHTML = f;
+
+            setTimeout(() => {
+                const m = document.getElementById('matrix-trigger');
+                if(m) m.addEventListener('click', e => {
+                    e.preventDefault();
+                    document.body.style.filter = "invert(1) hue-rotate(90deg)";
+                    setTimeout(() => { window.location.href = "https://humania-nexo.github.io/DevaTerminal/"; }, 1500);
+                });
+            }, 500);
+        }
+
+        function solicitarSuministro() {
+            alert("SUMINISTRO VELVET: Ración asignada a su terminal. Inmersión nocturna programada.");
+            if (typeof window.miteResponder === "function") {
+                window.miteResponder('eter');
+            }
+        }
+
+        cargarModulos();
+    </script>
+</body>
+</html>
