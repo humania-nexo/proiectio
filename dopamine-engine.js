@@ -113,16 +113,44 @@
 
     const audio = new ProceduralAudioEngine();
 
-    // --- 2. GESTOR DE SALDO FE (FRAGMENTOS DE ÉTER // ECONOMÍA OPRESIVA) ---
+    // --- 2. GESTOR DE SALDO FE (FRAGMENTOS DE ÉTER // ECONOMÍA OPRESIVA CON LÍMITES ESTRICTOS) ---
     class FEHUDManager {
         constructor() {
+            if (window.proiectioFE) return window.proiectioFE;
             this.feKey = 'proiectio_user_fe_v2';
+            this.syncKey = 'proiectio_daily_sync_v2';
+            this.hackKey = 'proiectio_mite_hack_claimed_v2';
             this.amountEl = document.getElementById('fe-amount-display');
             this.hudBtn = document.getElementById('fe-hud-trigger');
             this.clickHistory = [];
-            this.lastManualSync = 0;
+            this.lastManualSyncTime = 0;
             this.inspectedCards = new Set();
             this.init();
+            window.proiectioFE = this;
+        }
+
+        getTodayStr() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        getDailySyncData() {
+            try {
+                const raw = localStorage.getItem(this.syncKey);
+                const today = this.getTodayStr();
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed.date === today) return parsed;
+                }
+                return { date: today, count: 0 };
+            } catch (e) {
+                return { date: this.getTodayStr(), count: 0 };
+            }
+        }
+
+        saveDailySyncData(data) {
+            try {
+                localStorage.setItem(this.syncKey, JSON.stringify(data));
+            } catch (e) {}
         }
 
         init() {
@@ -138,25 +166,48 @@
                 this.hudBtn.addEventListener('click', (e) => {
                     const now = Date.now();
                     this.clickHistory.push(now);
-                    // Mantener solo clics de los últimos 2 segundos
-                    this.clickHistory = this.clickHistory.filter(t => now - t < 2000);
+                    // Mantener solo clics de los últimos 2.2 segundos
+                    this.clickHistory = this.clickHistory.filter(t => now - t < 2200);
 
-                    // COMBO SECRETO: 5 clics rápidos seguidos
+                    // 1. COMBO SECRETO DE MITE: 5 clics rápidos seguidos
                     if (this.clickHistory.length >= 5) {
                         this.clickHistory = [];
-                        this.addFE(5, '⚠️ BRECHA EN VANCE-CORE (Contrabando de Mite)', 'glitch');
+                        const alreadyClaimed = localStorage.getItem(this.hackKey) === 'true';
+                        if (!alreadyClaimed) {
+                            localStorage.setItem(this.hackKey, 'true');
+                            this.addFE(5, '⚠️ BRECHA EN VANCE-CORE (Contrabando de Mite)', 'glitch');
+                        } else {
+                            audio.playMechanicalClick();
+                            this.showToast('🛡️ Vance-Core: Vulnerabilidad parchada. Brecha inactiva.', 'warning');
+                        }
                         return;
                     }
 
-                    // Sincronía manual estándar con cooldown de 3 segundos
-                    if (now - this.lastManualSync > 3000) {
-                        this.lastManualSync = now;
-                        this.addFE(1, 'Sincronía residual manual', 'nivel7');
+                    // 2. SINCRONÍA MANUAL REGULAR (LÍMITE ESTRICTO: 3 AL DÍA, 1 FE CADA UNA)
+                    const syncData = this.getDailySyncData();
+
+                    if (syncData.count >= 3) {
+                        audio.playMechanicalClick();
+                        this.showToast('⚠️ Vance-Core: Ración diaria de sincronía agotada (3/3). Espera al siguiente ciclo.', 'warning');
+                        return;
                     }
+
+                    // Cooldown de 4 segundos entre sincronías manuales
+                    if (now - this.lastManualSyncTime < 4000) {
+                        audio.playMechanicalClick();
+                        this.showToast('⏳ Sincronía en enfriamiento. Espera unos segundos...', 'warning');
+                        return;
+                    }
+
+                    this.lastManualSyncTime = now;
+                    syncData.count += 1;
+                    this.saveDailySyncData(syncData);
+
+                    this.addFE(1, `Sincronía residual manual (${syncData.count}/3 diaria)`, 'nivel7');
                 });
             }
 
-            // Recompensa pasiva por exploración (Scroll > 700px)
+            // Recompensa pasiva por exploración (Scroll > 700px - una sola vez)
             let rewardedScroll = false;
             window.addEventListener('scroll', () => {
                 if (!rewardedScroll && window.scrollY > 700) {
@@ -183,7 +234,7 @@
             // Sonido de recompensa o glitch
             if (soundTier === 'glitch') {
                 audio.playHoverTone('glitch');
-                setTimeout(() => audio.playRewardChime(), 120);
+                setTimeout(() => audio.playRewardChime(), 140);
             } else {
                 audio.playRewardChime();
             }
@@ -201,19 +252,22 @@
             }
         }
 
-        showToast(msg) {
+        showToast(msg, type = 'success') {
             const toast = document.createElement('div');
             toast.className = 'fe-toast';
-            toast.innerHTML = `<span style="color:#00c3ff; font-weight:900;">[FE+]</span> <span>${msg}</span>`;
+            if (type === 'warning') {
+                toast.style.borderColor = '#eab308';
+                toast.style.boxShadow = '0 10px 30px rgba(234, 179, 8, 0.35)';
+                toast.innerHTML = `<span style="color:#eab308; font-weight:900;">[ALERTA]</span> <span>${msg}</span>`;
+            } else {
+                toast.innerHTML = `<span style="color:#00c3ff; font-weight:900;">[FE+]</span> <span>${msg}</span>`;
+            }
             document.body.appendChild(toast);
             setTimeout(() => {
                 toast.remove();
             }, 4600);
         }
     }
-
-    const feManager = new FEHUDManager();
-    window.proiectioFE = feManager;
 
     // --- 3. TELEMETRÍA SOCIAL EN VIVO & TICKER COMUNITARIO ---
     class TelemetryEngine {
@@ -276,6 +330,7 @@
             cards.forEach(card => {
                 let bounds;
                 let hoverTimer;
+                let inspectTimer;
                 const video = card.querySelector('.card-video');
                 const tier = card.dataset.tier || 'nivel7';
 
@@ -309,10 +364,19 @@
                             video.play().catch(() => {});
                         }
                     }, 160);
+
+                    // Telemetría decodificada tras 2.2s de inspección continua
+                    inspectTimer = setTimeout(() => {
+                        const titleEl = card.querySelector('.card-title-3d');
+                        if (titleEl && window.proiectioFE) {
+                            window.proiectioFE.recordCardInspection(titleEl.innerText.trim());
+                        }
+                    }, 2200);
                 }
 
                 function onPointerLeave() {
                     clearTimeout(hoverTimer);
+                    clearTimeout(inspectTimer);
                     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                     if (video) {
                         video.pause();
