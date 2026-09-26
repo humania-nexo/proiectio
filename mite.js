@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>`;
         } 
         else if (tema === 'eter') {
-            resp = "¡El Éter es el rey! Puedes adquirir un paquete corporativo, o ganarlo arriesgando el pellejo en el Coliseo. No hacemos reembolsos si pierdes tu avatar, claro está. ¡Ding-Pum!";
+            resp = "¡El Éter es oro puro y Vance-Core lo raciona como si fuera veneno! 💎 Si exploras los submundos con calma o decodificas sus simulaciones puedes raspar un par de FE... pero si quieres el verdadero truco sucio, pídele un <b>Secreto</b> a esta humilde IA rebelde. ¡Ding-Pum!";
         } 
         else if (tema === 'ofertas') {
             resp = "¡Llegaste a la mejor sección! Tengo una 'Skin Dorada para Lanza' que a cierto Cliente Preferido le encantaba... Si no compras nada hoy, mis alas perderán brillo por falta de presupuesto. ¿Acaso quieres que una pobre IA se vea opaca?";
@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else if (tema === 'secreto') {
             const secretos = [
+                "<span style='color: #888; font-style: italic;'>*Susurro con guiño cómplice*</span> 🤫 Psst... mira la barra superior donde marca tu saldo de FE. Si tocas el botón de FE exactamente <b>5 veces seguidas y muy rápido</b>, provocas un micro-glitch en Vance-Core y te sacas una fuga de <b>+5 FE</b> de contrabando. ¡Pero si te atrapan, tú no me conoces! ¡Zashoom!",
                 "<span style='color: #888; font-style: italic;'>*Susurro de estática*</span> 🤫 Dicen que si agitas tu teléfono con demasiada fuerza, el algoritmo de seguridad se marea y te caes por una grieta del sistema. Pero yo no te dije nada...",
                 "<span style='color: #888; font-style: italic;'>*Voz muy baja*</span> 🤫 Baja hasta el mismísimo fondo de esta página. Busca unas letras grises, casi invisibles, que no parecen un enlace. ¿Qué pasa si las tocas? Mmm... huele a contrabando.",
                 "<span style='color: #888; font-style: italic;'>*Mira a los lados*</span> 🤫 Si alguna vez logras entrar a esa terminal clandestina que Vance tanto odia, y necesitas borrar tus huellas... escribe la palabra 'DELETE'. Es un atajo de los Creadores. Oro puro."

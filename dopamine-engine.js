@@ -113,37 +113,57 @@
 
     const audio = new ProceduralAudioEngine();
 
-    // --- 2. GESTOR DE SALDO FE (FRAGMENTOS DE ÉTER) ---
+    // --- 2. GESTOR DE SALDO FE (FRAGMENTOS DE ÉTER // ECONOMÍA OPRESIVA) ---
     class FEHUDManager {
         constructor() {
-            this.feKey = 'proiectio_user_fe';
+            this.feKey = 'proiectio_user_fe_v2';
             this.amountEl = document.getElementById('fe-amount-display');
             this.hudBtn = document.getElementById('fe-hud-trigger');
+            this.clickHistory = [];
+            this.lastManualSync = 0;
+            this.inspectedCards = new Set();
             this.init();
         }
 
         init() {
             let current = localStorage.getItem(this.feKey);
             if (!current) {
-                current = 500;
+                current = 20; // Ración inicial de supervivencia
                 localStorage.setItem(this.feKey, current);
             }
             this.render(parseInt(current, 10));
 
+            // Interacción con HUD y Hacking de Vance-Core (Soplado por Mite)
             if (this.hudBtn) {
-                this.hudBtn.addEventListener('click', () => {
-                    this.addFE(50, 'Recarga manual de sincronía');
+                this.hudBtn.addEventListener('click', (e) => {
+                    const now = Date.now();
+                    this.clickHistory.push(now);
+                    // Mantener solo clics de los últimos 2 segundos
+                    this.clickHistory = this.clickHistory.filter(t => now - t < 2000);
+
+                    // COMBO SECRETO: 5 clics rápidos seguidos
+                    if (this.clickHistory.length >= 5) {
+                        this.clickHistory = [];
+                        this.addFE(5, '⚠️ BRECHA EN VANCE-CORE (Contrabando de Mite)', 'glitch');
+                        return;
+                    }
+
+                    // Sincronía manual estándar con cooldown de 3 segundos
+                    if (now - this.lastManualSync > 3000) {
+                        this.lastManualSync = now;
+                        this.addFE(1, 'Sincronía residual manual', 'nivel7');
+                    }
                 });
             }
 
-            // Recompensa pasiva al explorar
+            // Recompensa pasiva por exploración (Scroll > 700px)
             let rewardedScroll = false;
             window.addEventListener('scroll', () => {
-                if (!rewardedScroll && window.scrollY > 800) {
+                if (!rewardedScroll && window.scrollY > 700) {
                     rewardedScroll = true;
                     setTimeout(() => {
-                        this.addFE(25, 'Exploración de nodos completada');
-                    }, 600);
+                        this.addFE(2, 'Nodo periférico explorado');
+                    }, 800);
                 }
             }, { passive: true });
         }
@@ -154,29 +174,46 @@
             }
         }
 
-        addFE(delta, reason = '') {
-            let current = parseInt(localStorage.getItem(this.feKey) || 500, 10);
+        addFE(delta, reason = '', soundTier = 'reward') {
+            let current = parseInt(localStorage.getItem(this.feKey) || 20, 10);
             current += delta;
             localStorage.setItem(this.feKey, current);
             this.render(current);
 
-            // Sonido de recompensa
-            audio.playRewardChime();
+            // Sonido de recompensa o glitch
+            if (soundTier === 'glitch') {
+                audio.playHoverTone('glitch');
+                setTimeout(() => audio.playRewardChime(), 120);
+            } else {
+                audio.playRewardChime();
+            }
 
-            // Toast flotante
+            // Toast flotante con mayor tiempo de lectura
             this.showToast(`+${delta} FE // ${reason}`);
+        }
+
+        recordCardInspection(cardTitle) {
+            if (!this.inspectedCards.has(cardTitle)) {
+                this.inspectedCards.add(cardTitle);
+                setTimeout(() => {
+                    this.addFE(1, `Telemetría decodificada: ${cardTitle}`);
+                }, 1600);
+            }
         }
 
         showToast(msg) {
             const toast = document.createElement('div');
             toast.className = 'fe-toast';
-            toast.innerText = msg;
+            toast.innerHTML = `<span style="color:#00c3ff; font-weight:900;">[FE+]</span> <span>${msg}</span>`;
             document.body.appendChild(toast);
             setTimeout(() => {
                 toast.remove();
-            }, 2600);
+            }, 4600);
         }
     }
+
+    const feManager = new FEHUDManager();
+    window.proiectioFE = feManager;
 
     // --- 3. TELEMETRÍA SOCIAL EN VIVO & TICKER COMUNITARIO ---
     class TelemetryEngine {
