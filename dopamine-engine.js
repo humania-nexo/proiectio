@@ -181,7 +181,7 @@
                             this.addFE(5, '⚠️ BRECHA EN VANCE-CORE (Contrabando de Mite)', 'glitch');
                         } else {
                             audio.playMechanicalClick();
-                            this.showToast('🛡️ Vance-Core: Vulnerabilidad parchada temporalmente. Centinelas en alerta.', 'warning');
+                            this.showToast('🛡️ Vance-Core: Vulnerabilidad parchada. Centinelas en alerta.', 'warning');
                         }
                         return;
                     }
