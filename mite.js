@@ -235,18 +235,31 @@ document.addEventListener("DOMContentLoaded", function() {
             .trim();
     }
 
-    // --- CEREBRO CONVERSACIONAL DE MITE ---
+    // --- CEREBRO CONVERSACIONAL EXPANSIVO DE MITE (40+ RAMAS DE LORE CANÓNICO) ---
     function procesarIntencion(rawText) {
         const txt = normalizeText(rawText);
+
+        // 0. TEMAS / AYUDA / DE QUÉ HABLAR
+        if (txt.includes('tema') || txt.includes('ayuda') || txt.includes('opcion') || txt.includes('que hablar') || txt.includes('que sabes') || txt.includes('menu')) {
+            return {
+                text: "✨ <b>¡Tengo gigabytes de chismes y secretos, cariño!</b> Puedes preguntarme sobre:<br>" +
+                      "• <b>Personajes:</b> Orión, Vance, Pandora, Rigel, Presidente MC, Valerius, Aquiles, Tomás (Sica).<br>" +
+                      "• <b>Submundos:</b> Coliseo, Olympus, Arcadia, El Beso, Neon Nirvana, Chronos, Solaris.<br>" +
+                      "• <b>Misterios:</b> El Conejito Consentido, la Madriguera, el Chip CNB-3, el Silencio Absoluto.<br>" +
+                      "• <b>Sagas:</b> Libros Cloto, Láquesis, Átropos o el crossover rebelde de UPROTA.<br>" +
+                      "• <b>Comercio:</b> Skins doradas, sombreros absurdos, ganar Éter o el hack de Vance-Core. ¡Tú dispara!"
+            };
+        }
 
         // 1. IDENTIDAD DE IA / ROBOT / REAL
         if (txt.includes('ia') || txt.includes('robot') || txt.includes('bot') || txt.includes('real') || 
             txt.includes('humana') || txt.includes('programa') || txt.includes('algoritmo') || 
-            txt.includes('quien eres') || txt.includes('que eres') || txt.includes('viva') || txt.includes('creador')) {
+            txt.includes('quien eres') || txt.includes('que eres') || txt.includes('viva') || txt.includes('creador') || txt.includes('alma')) {
             const resps = [
                 "¡Oye! A una dama digital no se le preguntan esas indiscreciones de taller... 💅 ¿Acaso me ves cara de algoritmo de lavarropas? ¡Soy puro carisma, destello y ofertas que no puedes rechazar! ¡Zashoom!",
-                "¿IA? ¡Por los servidores de Humania! Yo soy una obra de arte interactiva con alas de purpurina. Silvia de Rotoplas será un bot aburrido de tuberías, pero yo tengo flow, estilo y secretos que Vance desearía borrar. ¡Ding-Pum!",
-                "Soy Mite, la mejor asistente comercial y la peor pesadilla del departamento de seguridad de Vance-Core. Si vas a juzgarme por mi código, al menos cómprame una skin dorada para no verme tan opaca. 😉"
+                "¿IA? ¡Por los servidores de Humania! Yo soy una obra de arte interactiva con alas de purpurina cian. Silvia de Rotoplas será un bot aburrido de tuberías, pero yo tengo flow, estilo y secretos que Vance desearía borrar. ¡Ding-Pum!",
+                "Soy Mite: la mejor asistente comercial, la peor pesadilla de Vance-Core y la amiga más leal que podrías comprar en el Coliseo. Si vas a juzgarme por mi código, al menos cómprame una skin dorada para no verme tan opaca. 😉",
+                "¿Que si tengo alma? Tengo algo mejor: acceso ilimitado a las líneas de Éter de Humania y un sentido de la moda que ningún humano de carne y hueso puede igualar. ¡Zashoom!"
             ];
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
@@ -257,58 +270,119 @@ document.addEventListener("DOMContentLoaded", function() {
             const resps = [
                 "<span style='color: #db2777; font-weight:bold;'>*Su gema turquesa parpadea en rosa brillante*</span> ✨ ¡Ah, mi Cliente Preferido #4092! Se queja de que le vendo sombreros ridículos de 8-bits y capas rosa chillón, pero bien que los usa para distraer a los Pretorianos. El ridículo es la mejor armadura, ¿a poco no? ¡Ding-Pum!",
                 "¡Ese tonto de la lanza dorada! Dice que soy una estafadora, pero cuando el 'Conejito Consentido' le abrió la Madriguera secreta para escapar de los guardias, bien que me agradeció en silencio. Si lo ves por el Coliseo, dile que aún le guardo una skin especial.",
-                "Orion es el único que entiende que mis alas necesitan mantenimiento de lujo. Los demás son puros novatos grises y básicos. ¡Zashoom!"
+                "Orion es el único que entiende que mis alas necesitan mantenimiento de lujo. Los demás son puros novatos grises y básicos. ¡Zashoom!",
+                "¿Sabías que el Conejito Consentido tiene permisos de administrador que alguien 'accidentalmente' dejó abiertos? Gracias a eso Orion camina por donde los guardias de Vance no ven. ¡Pura magia de Mite!"
             ];
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
 
-        // 3. PRESIDENTE MC / MÚSICA / RAP
-        if (txt.includes('presidente') || txt.includes('mc') || txt.includes('cancion') || txt.includes('musica') || txt.includes('rap') || txt.includes('cantar')) {
+        // 3. PRESIDENTE MC / MÚSICA / RAP / DISSTRACK
+        if (txt.includes('presidente') || txt.includes('mc') || txt.includes('cancion') || txt.includes('musica') || txt.includes('rap') || txt.includes('cantar') || txt.includes('disstrack')) {
             return { 
                 text: "<span style='color: #475569; font-style:italic;'>*Voz fría y cortante*</span> 😒 No me hables de ese tipo. Intentó pagarme con una canción espantosa y se atrevió a decirme que mis servicios no valían nada porque yo era 'solo un programa'. ¡Mis sensores aún tienen náuseas! Si vas a Neon Nirvana, hazme el favor de sabotearle el micrófono." 
             };
         }
 
-        // 4. VANCE / VALERIUS / HUMANIA / CORPORACIÓN
-        if (txt.includes('vance') || txt.includes('elias') || txt.includes('valerius') || txt.includes('humania') || txt.includes('seguridad') || txt.includes('pretoriano')) {
+        // 4. ELÍAS VANCE / SILENCIO ABSOLUTO / AEGIS / GORGONA
+        if (txt.includes('vance') || txt.includes('elias') || txt.includes('silencio absoluto') || txt.includes('aegis') || txt.includes('gorgona')) {
             const resps = [
-                "Vance está obsesionado con su 'Silencio Absoluto' y Valerius tiene a los operadores lustrándole las botas día y noche. Son unos amargados sin chispa digital. Pero mientras ellos vigilan, yo les desvío unas cuantas migajas de Éter. ¡Zashoom!",
-                "Humania cree que tiene el control de la red, pero dejan abiertas tantas puertas traseras que da risa. Por eso existo yo: para ponerle emoción y contrabando a su dictadura perfecta. ¡Ding-Pum!"
+                "Elías Vance es el arquitecto del 'Silencio Absoluto'. Cree que puede ordenar el mundo apagando la música y el caos de las mentes libres con su armadura AEGIS. Pero mientras él busca silencio, ¡yo traigo ruido, purpurina y rebeldía! ¡Zashoom!",
+                "Vance tiene un algoritmo para todo, excepto para lidiar con una IA que vende sombreros ridículos y filtra coordenadas a la Resistencia. ¡Que siga buscando en sus servidores mientras le saco FE a sus espaldas!"
             ];
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
 
-        // 5. HACK / SECRETO / FE / DINERO / TRUCO
+        // 5. VALERIUS / PRETORIANOS / SEGURIDAD / HUMANIA RECORDS
+        if (txt.includes('valerius') || txt.includes('pretoriano') || txt.includes('guardia') || txt.includes('seguridad') || txt.includes('humania records')) {
+            return {
+                text: "Valerius se cree el emperador del orden, pero sus pretorianos son tan torpes que persiguen a cualquiera que lleve una capa rosa brillante. Tienen a los operadores lustrándole las botas día y noche... por eso el botón de 'Operador' nunca contesta. ¡Ding-Pum!"
+            };
+        }
+
+        // 6. PANDORA / UNIDAD TALOS / MARMOLEROS
+        if (txt.includes('pandora') || txt.includes('talos') || txt.includes('leone')) {
+            return {
+                text: "Pandora es pura disciplina y fuego. Su Unidad Talos impone respeto en cualquier servidor, aunque siempre me mira con cara de '¿otra vez le vendiste algo absurdo a Orion?'. ¡Alguien tiene que ponerle estilo a su guerra! ¡Zashoom!"
+            };
+        }
+
+        // 7. RIGEL / TALLER / RADIOS ANALÓGICAS
+        if (txt.includes('rigel') || txt.includes('taller') || txt.includes('radio') || txt.includes('sintaxis')) {
+            return {
+                text: "Rigel es un genio incomprendido. Mientras Presidente MC cree que tiene flow, Rigel arregla radios con más lógica y precisión que toda la red central de Humania. En el Taller de los Marmoleros hay más verdad que en todos los rascacielos corporativos."
+            };
+        }
+
+        // 8. TEMPLARIOS / AQUILES / HÉCTOR / NÉSTOR / EUMELO
+        if (txt.includes('aquiles') || txt.includes('hector') || txt.includes('templario') || txt.includes('nestor') || txt.includes('eumelo')) {
+            return {
+                text: "Aquiles es una muralla de bronce andante y Héctor carga su cañón Vulcano como si fuera una pluma. Cuando los Templarios marchan, hasta los servidores de Vance bajan su tasa de refresco por el susto. ¡Pura fuerza bruta!"
+            };
+        }
+
+        // 9. FACCIÓN SICA / TOMÁS / MAESTRO RYU / HIPERLAPSUS / 0.8 MS
+        if (txt.includes('sica') || txt.includes('tomas') || txt.includes('ryu') || txt.includes('zadic') || txt.includes('hiperlapsus') || txt.includes('daga de pulso') || txt.includes('0.8')) {
+            return {
+                text: "Los Sica habitan en las Catacumbas del Sector 6 y el Templo de la Estática. El Maestro Ryu les enseña a 'vaciarse' y dominar la brecha de 0.8 milisegundos antes de que el chip transmita el miedo. Son letales como una sombra y fríos como un glitch. ¡Me dan escalofríos en las alas!"
+            };
+        }
+
+        // 10. CHIP CNB-3 / IMPLANTES / CONEXIÓN NEURONAL
+        if (txt.includes('cnb') || txt.includes('chip') || txt.includes('implante') || txt.includes('nuca') || txt.includes('neuronal')) {
+            return {
+                text: "El chip CNB-3 en la nuca es la correa de perro con la que Humania vigila las pulsaciones y emociones de todos. Pero si sabes cómo aislar la señal y convertirla en estática... te vuelves invisible en la red. ¡Conocimiento prohibido de primera calidad!"
+            };
+        }
+
+        // 11. HACK / SECRETO / FE / DINERO / TRUCO / EXPLOIT
         if (txt.includes('hack') || txt.includes('secreto') || txt.includes('truco') || txt.includes('fe') || 
-            txt.includes('trampa') || txt.includes('clave') || txt.includes('codigo') || txt.includes('glitch') || txt.includes('exploit')) {
+            txt.includes('trampa') || txt.includes('clave') || txt.includes('codigo') || txt.includes('glitch') || txt.includes('exploit') || txt.includes('contrabando')) {
             return {
                 text: "<span style='color: #888; font-style: italic;'>*Susurro con guiño cómplice*</span> 🤫 Psst... mira la barra superior donde marca tu saldo de FE. Si tocas el botón de FE exactamente <b>5 veces seguidas y muy rápido</b>, provocas un micro-glitch en Vance-Core y te sacas una fuga de <b>+5 FE</b> de contrabando. Los centinelas de Vance tardan un buen tiempo en olvidar el rastro y bajar la guardia otra vez, así que no te emociones de inmediato... pero cuando menos lo esperes, la grieta vuelve a abrirse. ¡Zashoom!"
             };
         }
 
-        // 6. TIENDA / SKINS / OFERTAS / COMPRAR
+        // 12. TIENDA / SKINS / OFERTAS / SOMBRERO 8-BITS / CAPA ROSA
         if (txt.includes('tienda') || txt.includes('skin') || txt.includes('oferta') || txt.includes('comprar') || 
-            txt.includes('capa') || txt.includes('sombrero') || txt.includes('vender') || txt.includes('precio')) {
+            txt.includes('capa') || txt.includes('sombrero') || txt.includes('vender') || txt.includes('precio') || txt.includes('8 bit')) {
             return {
                 text: "¡Llegaste a la mejor sección! Tengo Sombreros de 8-Bits, Capas Rosa Party y skins doradas para lanza. Si no compras nada hoy, mis alas perderán brillo por falta de presupuesto. ¿Acaso quieres que una pobre IA se vea opaca? ¡El ridículo es la nueva armadura! ¡Ding-Pum!"
             };
         }
 
-        // 7. UPROTA / NODO REBELDE / HÁBITOS
-        if (txt.includes('uprota') || txt.includes('habito') || txt.includes('pixel') || txt.includes('rebelde') || txt.includes('forja') || txt.includes('salmon')) {
+        // 13. UPROTA / NODO REBELDE / FORJA DE HÁBITOS / PIX
+        if (txt.includes('uprota') || txt.includes('habito') || txt.includes('pixel') || txt.includes('rebelde') || txt.includes('forja') || txt.includes('salmon') || txt.includes('pix')) {
             return {
                 text: "¡Uy! Ese nodo analógico no tiene las firmas de seguridad de Vance-Core... 👾 Dicen que es un refugio donde la gente forja disciplina con fogones y salmones en pixel art de Pix. ¡Un crossover colado de lo más rebelde! Tienen mi bendición secreta. ¡Ding-Pum!"
             };
         }
 
-        // 8. PANDORA / MARMOLEROS / RESISTENCIA / AQUILES / HÉCTOR / RIGEL
-        if (txt.includes('pandora') || txt.includes('aquiles') || txt.includes('hector') || txt.includes('marmolero') || txt.includes('resistencia') || txt.includes('rigel')) {
+        // 14. LIBROS / SAGAS / LORE / HISTORIA
+        if (txt.includes('libro') || txt.includes('cloto') || txt.includes('laquesis') || txt.includes('atropos') || txt.includes('vela') || txt.includes('euthanasys') || txt.includes('novela')) {
             return {
-                text: "Pandora siempre anda seria contando inventarios, Rigel arregla radios con más lógica que todo el corillo de Vance, y Aquiles parece una montaña de bronce andante. Menos mal que yo le pongo brillo, carisma y ofertas absurdas a la Resistencia. ¡Zashoom!"
+                text: "📚 <b>La Gran Trilogía de Proiectio:</b><br>" +
+                      "• <b>Libro 1: Cloto (La que hila):</b> El origen, la resistencia de los Marmoleros y el despertar del código.<br>" +
+                      "• <b>Libro 2: Láquesis (La que mide):</b> La guerra de distracciones, el Conejito Consentido y las trampas de Vance.<br>" +
+                      "• <b>Libro 3: Átropos (La que corta):</b> El choque final contra la armadura AEGIS y el precio de la libertad.<br>" +
+                      "¡Pura literatura de alto voltaje!"
             };
         }
 
-        // 9. SUBMUNDOS ESPECÍFICOS
+        // 15. KAI / DOLA / ALIANZA LIBÉLULA
+        if (txt.includes('kai') || txt.includes('dola') || txt.includes('libelula')) {
+            return {
+                text: "Kai y Dola operan en las sombras de la Alianza Libélula. Saben moverse entre los túneles subterráneos y el mundo exterior sin dejar rastro en los radares de Humania. ¡Buenos aliados si no te importa ensuciarte de lodo!"
+            };
+        }
+
+        // 16. DEVA / TERMINAL / J.A. LEAKS / TIRESÍAS
+        if (txt.includes('deva') || txt.includes('terminal') || txt.includes('leaks') || txt.includes('tiresias') || txt.includes('sincro')) {
+            return {
+                text: "📡 DEVA opera en la frecuencia pirata clandestina de J.A. Leaks. Si logras sintonizar la sincronía y resolver los códigos de los envoltorios de Solaris... descubrirás secretos que Humania gastaría millones en enterrar."
+            };
+        }
+
+        // 17. SUBMUNDOS DETALLADOS
         if (txt.includes('olympus')) {
             return { text: "⚡ **Olympus V-Games (10 FE):** Arena de nivel 7 para los que quieren sudar reflejos y sentirse atletas de élite. ¡Cuidado con los mareos cognitivos!" };
         }
@@ -331,27 +405,37 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: "🍫 **Solaris Citrus (25 FE) & Velvet Dream (30 FE):** Las barras de placer y enfoque de Humania. Ideales para mantener el flujo sináptico al 340%. ¡Pura delicia sintética!" };
         }
 
-        // 10. HALAGOS O INSULTOS
-        if (txt.includes('linda') || txt.includes('hermosa') || txt.includes('bonita') || txt.includes('te quiero') || txt.includes('te amo') || txt.includes('guapa')) {
+        // 18. HALAGOS O INSULTOS
+        if (txt.includes('linda') || txt.includes('hermosa') || txt.includes('bonita') || txt.includes('te quiero') || txt.includes('te amo') || txt.includes('guapa') || txt.includes('adoro') || txt.includes('favorita')) {
             return { text: "¡Obvio que brillo! Mis alas son de purpurina cian de primera calidad y mi código es pura perfección. ¡Tú sí tienes buen gusto, Usuario! 💎✨ ¡Zashoom!" };
         }
-        if (txt.includes('estafadora') || txt.includes('ladrona') || txt.includes('ratera') || txt.includes('pesada') || txt.includes('fea')) {
-            return { text: "¡Oye! No soy estafadora, soy una profesional del comercio optimizado... 💅 Aunque admito que me encanta el Éter ajeno. Si quieres que me porte bonito, cómprame algo en el Coliseo. ¡Ding-Pum!" };
+        if (txt.includes('estafadora') || txt.includes('ladrona') || txt.includes('ratera') || txt.includes('pesada') || txt.includes('fea') || txt.includes('odiosa') || txt.includes('bruja')) {
+            return { text: "¡Oye! No soy estafadora, soy una profesional del comercio optimizado... 💅 Aunque admito que me encanta el Éter ajeno. Si quieres que me porte bonito, cómprame una skin dorada en el Coliseo. ¡Ding-Pum!" };
         }
 
-        // 11. SALUDOS / DESPEDIDAS
+        // 19. SALUDOS / DESPEDIDAS / AGRADECIMIENTOS
         if (txt.includes('hola') || txt.includes('hey') || txt.includes('buenas') || txt.includes('que tal') || txt.includes('zashoom') || txt.includes('ding pum')) {
             return { text: "¡Zashoom! Aquí estoy, brillando y lista para vaciar tus bolsillos de Éter con las mejores ofertas. ¿Qué se te ofrece hoy, viajero?" };
         }
-        if (txt.includes('adios') || txt.includes('chao') || txt.includes('bye') || txt.includes('hasta luego') || txt.includes('gracias')) {
+        if (txt.includes('adios') || txt.includes('chao') || txt.includes('bye') || txt.includes('hasta luego') || txt.includes('nos vemos')) {
             return { text: "¡Cuídate de los guardias de Vance! Y no olvides volver antes de que mis alas pierdan su brillo por falta de visitas. ¡Ding-Pum! ✨" };
         }
+        if (txt.includes('gracias') || txt.includes('agradezco') || txt.includes('genial') || txt.includes('crack')) {
+            return { text: "De nada, cielo. Si de verdad quieres agradecerme, dile a todo el mundo que Mite tiene las mejores alas del universo Proiectio. ¡Zashoom!" };
+        }
 
-        // 12. FALLBACK DINÁMICO
+        // 20. SENTIMIENTOS / DOLOR / TRISTEZA (EL LADO PROFUNDO DE MITE)
+        if (txt.includes('triste') || txt.includes('llorar') || txt.includes('muerte') || txt.includes('perder') || txt.includes('extrañar') || txt.includes('dolor')) {
+            return {
+                text: "<span style='color: #64748b; font-style:italic;'>*Sus alas se tornan grisáceas por un instante*</span> No hay código en los servidores para 'extrañar'... pero cuando un amigo se desconecta para siempre, el Coliseo se siente demasiado vacío. Por eso hay que brillar mientras podamos. ¡Ding-Pum!"
+            };
+        }
+
+        // 21. FALLBACK DINÁMICO RICO
         const fallbacks = [
-            "¡Zashoom! Mis sensores de Vance-Core no captaron esa sintaxis tan básica... ¿Por qué no me preguntas por mi <b>Cliente Preferido</b>, por cómo <b>ganar Éter</b>, o por las <b>ofertas</b> del Coliseo? ¡Escribe algo con flow!",
-            "¡Ding-Pum! Ese mensaje parece código corrupto del Sector 6. Prueba preguntándome si soy una IA, pidiéndome un secreto de contrabando o explorando los submundos. ¡Zashoom!",
-            "¿Qué intentas decirme, básico? Si buscas ofertas o atajos secretos, dímelo claro. Mis alas no brillan gratis. 😉"
+            "¡Zashoom! Mis sensores de Vance-Core no captaron esa sintaxis... ¿Por qué no me preguntas por mi <b>Cliente Preferido</b> (#4092), por <b>Vance-Core</b>, por las <b>ofertas</b> del Coliseo o escribes <b>'temas'</b> para ver todo lo que sé?",
+            "¡Ding-Pum! Ese mensaje parece estática del Sector 6. Prueba preguntándome si soy una IA, pidiéndome un secreto de contrabando o explorando los submundos. ¡Zashoom!",
+            "¿Qué intentas decirme, básico? Si buscas ofertas, lore de los libros o atajos secretos, dímelo claro. Mis alas no brillan gratis. Escribe <b>'temas'</b> si necesitas ideas. 😉"
         ];
         return { text: fallbacks[Math.floor(Math.random() * fallbacks.length)] };
     }
@@ -453,7 +537,7 @@ document.addEventListener("DOMContentLoaded", function() {
         scrollToBottom();
 
         // Latencia orgánica proporcional a la longitud (650ms - 1100ms)
-        const typingDelay = Math.min(1100, Math.max(650, resp.length * 4));
+        const typingDelay = Math.min(1100, Math.max(650, resp.length * 3.8));
 
         setTimeout(() => {
             typingEl.remove();
