@@ -50,6 +50,7 @@
     
     <!-- CEREBRO DE ESTILOS MAESTROS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="proiect-cards.css">
     
     <!-- ESTILOS ESPECÍFICOS PARA EL EVENTO -->
     <style>
@@ -70,6 +71,26 @@
     <!-- CONTENEDOR HEADER -->
     <div id="header-placeholder"></div>
 
+    <!-- BARRA DE TELEMETRÍA SOCIAL EN VIVO & HUD FE -->
+    <div class="telemetry-bar">
+        <div class="telemetry-left">
+            <div class="live-minds-badge">
+                <span class="live-dot"></span>
+                <span id="live-minds-count">14,892</span> MENTES SINCRONIZADAS
+            </div>
+        </div>
+        <div class="telemetry-center">
+            <div class="ticker-content" id="resonance-ticker-text">
+                <span class="ticker-tag">[Clan Marmoleros]</span> ⚡ Orión_42 acaba de sincronizar el Coliseo Etérico
+            </div>
+        </div>
+        <div class="fe-hud-box" id="fe-hud-trigger" title="Saldo de Fragmentos de Éter — Clic para recarga">
+            <span class="fe-hud-icon">🪙</span>
+            <span class="fe-hud-amount" id="fe-amount-display">500</span>
+            <span class="fe-hud-unit">FE</span>
+        </div>
+    </div>
+
     <!-- 1. HERO SECTION -->
     <section class="parallax-section" style="background-image: url('multimedia/hero.jpg');">
         <div class="overlay-text">
@@ -78,18 +99,183 @@
         </div>
     </section>
 
-    <!-- 2. CATÁLOGO DE SUBMUNDOS -->
-    <div class="section-title"><h2>Ecosistemas de Inmersión</h2><p>Toque un destino para sincronizar.</p></div>
-    <div class="slider-wrapper" id="wrapper-catalog">
-        <div class="slide-track" id="catalog-track">
-            <a href="olympus.html" class="slide-item" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.05"><img src="multimedia/Olympus.jpeg"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial.</p></div></a>
-            <a href="arcadia.html" class="slide-item" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.05"><img src="multimedia/arcadia.jpg"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></a>
-            <a href="beso.html" class="slide-item" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.05"><img src="multimedia/elbeso.jpg"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div></a>
-            <a href="neon.html" class="slide-item" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.05"><img src="multimedia/neonnir.png"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Placer bajo vigilancia.</p></div></a>
-            <a href="chronos.html" class="slide-item" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.05"><img src="multimedia/chronos.png"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></a>
-            <a href="coliseo.html" class="slide-item" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.05"><img src="multimedia/coliseo.jpg"><div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda.</p></div></a>
-        </div>
-        <div class="dots-container" id="catalog-dots"></div>
+    <!-- 2. CATÁLOGO DE SUBMUNDOS HIGH-VOLTAGE -->
+    <div class="section-title">
+        <h2>Ecosistemas de Inmersión</h2>
+        <p>Posa el cursor para previsualización cinemática o toca para sincronizar.</p>
+    </div>
+
+    <div class="cards-showcase-grid">
+        <!-- OLYMPUS V-GAMES -->
+        <a href="olympus.html" class="proiect-3d-card" data-tier="nivel7" style="--card-glow: var(--glow-cyan);">
+            <div class="card-media-box">
+                <img src="multimedia/Olympus.jpeg" class="card-poster" alt="Olympus V-Games">
+                <video class="card-video" muted loop playsinline poster="multimedia/Olympus.jpeg">
+                    <source src="multimedia/olympus.webm" type="video/webm">
+                    <source src="multimedia/olympus.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-nivel7">NIVEL 7</span>
+                        <span class="card-badge badge-popular">DESTACADO</span>
+                    </div>
+                    <h3 class="card-title-3d">Olympus V-Games</h3>
+                    <p class="card-desc-3d">Redefina su potencial cognitivo y motor en la arena definitiva.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost">500 FE</span>
+                    <span class="card-cta-btn">EXPLORAR</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- ARCADIA ETERNA -->
+        <a href="arcadia.html" class="proiect-3d-card" data-tier="popular" style="--card-glow: var(--glow-emerald);">
+            <div class="card-media-box">
+                <img src="multimedia/arcadia.jpg" class="card-poster" alt="Arcadia Eterna">
+                <video class="card-video" muted loop playsinline poster="multimedia/arcadia.jpg">
+                    <source src="multimedia/arcadia.webm" type="video/webm">
+                    <source src="multimedia/arcadia.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-popular">MÁS POPULAR</span>
+                        <span class="card-badge">TIERRA PURA</span>
+                    </div>
+                    <h3 class="card-title-3d">Arcadia Eterna</h3>
+                    <p class="card-desc-3d">La pureza original de la naturaleza reconstruida sin fallos.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost">45 FE</span>
+                    <span class="card-cta-btn">EXPLORAR</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- COLISEO ETÉRICO -->
+        <a href="coliseo.html" class="proiect-3d-card" data-tier="epico" style="--card-glow: var(--glow-gold);">
+            <div class="card-media-box">
+                <img src="multimedia/coliseo.jpg" class="card-poster" alt="Coliseo Etérico">
+                <video class="card-video" muted loop playsinline poster="multimedia/coliseo.jpg">
+                    <source src="multimedia/coliseo.webm" type="video/webm">
+                    <source src="multimedia/coliseo.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-epico">ÉPICO</span>
+                        <span class="card-badge">COMBATE</span>
+                    </div>
+                    <h3 class="card-title-3d">Coliseo Etérico</h3>
+                    <p class="card-desc-3d">Forje su leyenda en el combate dimensional por honor y Éter.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost">80 FE</span>
+                    <span class="card-cta-btn">EXPLORAR</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- EL BESO PROHIBIDO -->
+        <a href="beso.html" class="proiect-3d-card" data-tier="sensorial" style="--card-glow: var(--glow-magenta);">
+            <div class="card-media-box">
+                <img src="multimedia/elbeso.jpg" class="card-poster" alt="El Beso Prohibido">
+                <video class="card-video" muted loop playsinline poster="multimedia/elbeso.jpg">
+                    <source src="multimedia/elbeso.webm" type="video/webm">
+                    <source src="multimedia/elbeso.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-sensorial">SENSORIAL</span>
+                        <span class="card-badge">INTIMIDAD</span>
+                    </div>
+                    <h3 class="card-title-3d">El Beso Prohibido</h3>
+                    <p class="card-desc-3d">Donde los adioses nunca existieron. Reencuentros de alta fidelidad.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost">60 FE</span>
+                    <span class="card-cta-btn">EXPLORAR</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- NEON NIRVANA -->
+        <a href="neon.html" class="proiect-3d-card" data-tier="popular" style="--card-glow: var(--glow-cyan);">
+            <div class="card-media-box">
+                <img src="multimedia/neonnir.png" class="card-poster" alt="Neon Nirvana">
+                <video class="card-video" muted loop playsinline poster="multimedia/neonnir.png">
+                    <source src="multimedia/neonnir.webm" type="video/webm">
+                    <source src="multimedia/neonnir.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-popular">VIGILADO</span>
+                        <span class="card-badge">CYBER-CLUB</span>
+                    </div>
+                    <h3 class="card-title-3d">Neon Nirvana</h3>
+                    <p class="card-desc-3d">Placer nocturno sin consecuencias bajo la red de Humania.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost">50 FE</span>
+                    <span class="card-cta-btn">EXPLORAR</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- CHRONOS -->
+        <a href="chronos.html" class="proiect-3d-card" data-tier="lore" style="--card-glow: var(--glow-purple);">
+            <div class="card-media-box">
+                <img src="multimedia/chronos.png" class="card-poster" alt="Chronos">
+                <video class="card-video" muted loop playsinline poster="multimedia/chronos.png">
+                    <source src="multimedia/chronos.webm" type="video/webm">
+                    <source src="multimedia/chronos.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-lore">MEMORIA</span>
+                        <span class="card-badge">HISTORIA</span>
+                    </div>
+                    <h3 class="card-title-3d">Chronos</h3>
+                    <p class="card-desc-3d">La historia en su propia piel. Archivos vivientes del viejo mundo.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost">75 FE</span>
+                    <span class="card-cta-btn">EXPLORAR</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- UPROTA: EL CROSSOVER COLADO (ANOMALÍA EN REVISIÓN) -->
+        <a href="https://uprota.com" target="_blank" class="proiect-3d-card" data-tier="glitch" style="--card-glow: var(--glow-glitch); border: 1px dashed #eab308;">
+            <div class="card-media-box" style="background: radial-gradient(circle, #2e1065 0%, #090314 100%); display: flex; justify-content: center; align-items: center;">
+                <img src="multimedia/uprota-card.png" class="card-poster" alt="UPROTA" style="max-height: 80%; width: auto; margin: auto; object-fit: contain; filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.4));">
+            </div>
+            <div class="card-info-box">
+                <div>
+                    <div class="card-badge-container">
+                        <span class="card-badge badge-glitch">⚠️ EN REVISIÓN</span>
+                        <span class="card-badge" style="color: #fde047; border: 1px solid #eab308;">NODO EXTERNO</span>
+                    </div>
+                    <h3 class="card-title-3d" style="color: #fef08a;">UPROTA: Forja de Hábitos</h3>
+                    <p class="card-desc-3d">Anomalía analógica detectada. Simulación de disciplina y resistencia sináptica colada en la red.</p>
+                </div>
+                <div class="card-bottom-row">
+                    <span class="card-fe-cost" style="color: #eab308;">0 FE // ACCESO LIBRE</span>
+                    <span class="card-cta-btn" style="color: #fde047;">CONECTAR NODO</span>
+                </div>
+            </div>
+        </a>
     </div>
 
     
@@ -529,6 +715,7 @@
             }
         }, true);
     </script>
+    <script src="dopamine-engine.js"></script>
     <script src="transmedia-transition.js"></script>
 </body>
 </html>
