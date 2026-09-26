@@ -37,9 +37,37 @@ document.addEventListener("DOMContentLoaded", function() {
         .mite-msg { background: #f0f0f5; padding: 10px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; color: #333; line-height: 1.4; animation: fadeIn 0.3s; }
         .user-msg { background: #e6fcff; padding: 10px; border-radius: 15px 15px 0 15px; margin-bottom: 10px; color: #005f73; text-align: right; margin-left: auto; max-width: 80%; }
         
+        .mite-typing {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-style: italic;
+            color: #666;
+            background: #f0f0f5;
+            padding: 8px 14px;
+            border-radius: 15px 15px 15px 0;
+            margin-bottom: 10px;
+            animation: fadeIn 0.2s;
+        }
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            background: #00c3ff;
+            border-radius: 50%;
+            display: inline-block;
+            animation: dotBlink 1.4s infinite both;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes dotBlink {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1.2); }
+        }
+
         .chat-options { padding: 10px; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-wrap: wrap; gap: 5px; }
         .opt-btn { flex: 1 1 auto; background: white; border: 1px solid #00c3ff; color: #00c3ff; padding: 8px; border-radius: 12px; font-size: 0.7rem; cursor: pointer; transition: 0.2s; text-align: center; }
         .opt-btn:hover { background: #00c3ff; color: white; }
+        .opt-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     `;
@@ -57,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="chat-body" id="chat-log">
                 <div class="mite-msg">¡Zashoom! Soy Mite. 💎 ¿Buscas emociones fuertes o solo vienes a mirar? ¡Ding-Pum!</div>
             </div>
-            <div class="chat-options">
+            <div class="chat-options" id="mite-options-bar">
                 <button class="opt-btn" onclick="miteResponder('guiame')">📍 Guíame</button>
                 <button class="opt-btn" onclick="miteResponder('eter')">💎 Ganar Éter</button>
                 <button class="opt-btn" onclick="miteResponder('ofertas')">🏷️ Ofertas</button>
@@ -76,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const windowChat = document.getElementById('chat-window');
     const closeBtn = document.getElementById('close-chat');
     const log = document.getElementById('chat-log');
+    let isTyping = false;
 
     // Toggle Chat
     function toggleChat() {
@@ -89,11 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Función de Respuesta Global (Accesible desde HTML)
     window.miteResponder = function(tema) {
-        // Mensaje del usuario (Simulado visualmente)
-        /* const userDiv = document.createElement('div');
-        userDiv.className = 'user-msg';
-        userDiv.textContent = tema === 'guiame' ? "Guíame" : tema === 'eter' ? "Quiero Éter" : "Dime un secreto";
-        log.appendChild(userDiv); */ // Opcional: si quieres ver lo que "dices"
+        if (isTyping) return; // Evitar saturación mientras Mite escribe
 
         let resp = "";
         let accion = null;
@@ -119,22 +144,24 @@ document.addEventListener("DOMContentLoaded", function() {
             resp = "¡Llegaste a la mejor sección! Tengo una 'Skin Dorada para Lanza' que a cierto Cliente Preferido le encantaba... Si no compras nada hoy, mis alas perderán brillo por falta de presupuesto. ¿Acaso quieres que una pobre IA se vea opaca?";
         }
         else if (tema === 'operador') {
-            // Simulamos que Mite te transfiere
+            isTyping = true;
+            // Indicador de transferencia
             const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'mite-msg';
-            loadingDiv.innerHTML = "<i>Transfiriendo a un operador humano de Humania. Por favor espere...</i>";
+            loadingDiv.className = 'mite-typing';
+            loadingDiv.innerHTML = "<span class=\"typing-dot\"></span><span class=\"typing-dot\"></span><span class=\"typing-dot\"></span> <span style=\"margin-left:5px;\"><i>Transfiriendo a un operador humano de Humania...</i></span>";
             log.appendChild(loadingDiv);
             scrollToBottom();
             
             setTimeout(() => {
-                log.removeChild(loadingDiv);
+                loadingDiv.remove();
                 const finalDiv = document.createElement('div');
                 finalDiv.className = 'mite-msg';
                 finalDiv.innerHTML = "MITE: No te molestes, cariño. Los operadores nunca contestan. Están muy ocupados lustrando las botas de Valerius. Así que solo me tienes a mí. ¡Zashoom!";
                 log.appendChild(finalDiv);
                 scrollToBottom();
-            }, 3000);
-            return; // Salimos para no imprimir el mensaje por defecto al final
+                isTyping = false;
+            }, 2600);
+            return;
         }
         else if (tema === 'quejas') {
             resp = "¡Claro! Procesaremos tu queja inmediatamente. <br><span style='color: #888; font-style: italic;'>*Susurro*</span> 🤫 El buzón de sugerencias es una trituradora de papel digital que va directo al servidor de spam. No pierdas tu tiempo, cielo.";
@@ -149,12 +176,26 @@ document.addEventListener("DOMContentLoaded", function() {
             resp = secretos[Math.floor(Math.random() * secretos.length)];
         }
 
-        // Escribir respuesta de Mite
-        const miteDiv = document.createElement('div');
-        miteDiv.className = 'mite-msg';
-        miteDiv.innerHTML = `MITE: ${resp} ${accion ? accion : ''}`;
-        log.appendChild(miteDiv);
+        // --- SIMULACIÓN ORGÁNICA: MITE ESTÁ ESCRIBIENDO... ---
+        isTyping = true;
+        const typingEl = document.createElement('div');
+        typingEl.className = 'mite-typing';
+        typingEl.innerHTML = `<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span> <span style="margin-left:5px;">Mite está escribiendo...</span>`;
+        log.appendChild(typingEl);
         scrollToBottom();
+
+        // Latencia orgánica proporcional a la longitud (650ms - 1100ms)
+        const typingDelay = Math.min(1100, Math.max(650, resp.length * 4.5));
+
+        setTimeout(() => {
+            typingEl.remove();
+            const miteDiv = document.createElement('div');
+            miteDiv.className = 'mite-msg';
+            miteDiv.innerHTML = `MITE: ${resp} ${accion ? accion : ''}`;
+            log.appendChild(miteDiv);
+            scrollToBottom();
+            isTyping = false;
+        }, typingDelay);
     };
 
     function scrollToBottom() {
