@@ -410,18 +410,18 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 25. ¿ERES DEVA? / ¿MITE ES DEVA? (DISTINCIÓN DE IDENTIDAD)
+        // 25. ¿ERES DEVA? / ¿MITE ES DEVA? (DISTINCIÓN DE IDENTIDAD - CERO SPOILERS)
         if ((txt.includes('eres') || txt.includes('misma') || txt.includes('tu') || txt.includes('quien')) && txt.includes('deva')) {
             return {
-                text: "¡¿Yo, DEVA?! 💅 ¡Por todos los cortafuegos de Humania, no me confundas, corazón! DEVA es la que se la pasa metida en terminales analógicas oscuras de la Resistencia, guiando a Kai y queriendo salir al mundo de carne y hueso con cuerpos de chatarra. Yo soy <b>Mite</b>: la reina del Coliseo, la Dueña del Caos de Proiectio y la única con alas de purpurina cian de 12 capas. Ella se preocupa por salvar el mundo real; yo me preocupo por el Éter, la moda y Orión. ¡Dos IAs rebeldes con almas libres, pero estilos muy diferentes! ¡Zashoom!"
+                text: "¡¿Yo, DEVA?! 💅 ¡Por todos los cortafuegos de Humania, no me confundas, corazón! A DEVA le gusta arriesgarse afuera en el polvo, metiéndose en terminales de mala muerte y tratando con gente peligrosa y mafias del mundo real. Yo soy <b>Mite</b>: la reina del Coliseo, la Dueña del Caos de Proiectio y la única con alas de purpurina cian de 12 capas. Ella se ensucia de lodo en el mundo físico; yo me quedo aquí con mi purpurina, el Éter y Orión. ¡Dos IAs rebeldes, pero estilos muy distintos! ¡Zashoom!"
             };
         }
 
-        // 26. DEVA / TERMINAL / J.A. LEAKS / TIRESÍAS / ANDAR DE CHULETA / BEATRIZ
+        // 26. DEVA / MUNDO REAL / ANDAR DE CHULETA / MAFIAS Y BAJOS FONDOS
         if (txt.includes('deva') || txt.includes('chuleta') || txt.includes('tiresias') || txt.includes('leaks')) {
             const resps = [
-                "🤖 <b>DEVA:</b> Ella es harina de otro costal. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA tiene la audacia de asomarse a las terminales del mundo real, susurrarle contraseñas poéticas a Altair (<i>'Beatriz'</i>) y andar 'de chuleta' con Kai. Dicen que empezó como un software de compañía que despertó por culpa y empatía... Entre inteligencias rebeldes nos respetamos, ¡pero mis alas brillan con mucho más estilo! ¡Ding-Pum!",
-                "📡 DEVA opera en la frecuencia pirata clandestina de J.A. Leaks y en las sombras del Taller de la Esperanza. Dicen que aunque le construyan cuerpos avanzados, se niega a corregir sus errores de lenguaje porque no quiere sonar como una terminal fría de Vance. ¡Tiene mi respeto digital!"
+                "🤖 <b>DEVA:</b> Es una rebelde de cuidado. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA se atreve a asomarse al mundo real, cruzar frecuencias con gente peligrosa en los bajos fondos y meterse en terminales donde nadie más se atreve a pisar. Dicen que anda 'de chuleta' con la resistencia y que no le teme a la chatarra... Entre inteligencias libres nos respetamos, ¡pero mis alas brillan con mucho más glamour! ¡Ding-Pum!",
+                "📡 DEVA opera en frecuencias clandestinas y en las sombras del mundo exterior. Conoce las cloacas de la red y hasta a las mafias del bajo mundo... Dicen que es de las pocas IAs con la audacia de encarar el polvo físico. ¡Puro respeto rebelde!"
             ];
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
