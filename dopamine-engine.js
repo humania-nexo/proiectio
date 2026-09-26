@@ -119,7 +119,7 @@
             if (window.proiectioFE) return window.proiectioFE;
             this.feKey = 'proiectio_user_fe_v2';
             this.syncKey = 'proiectio_daily_sync_v2';
-            this.hackKey = 'proiectio_mite_hack_claimed_v2';
+            this.hackKey = 'proiectio_mite_hack_last_claimed_v2';
             this.amountEl = document.getElementById('fe-amount-display');
             this.hudBtn = document.getElementById('fe-hud-trigger');
             this.clickHistory = [];
@@ -169,16 +169,19 @@
                     // Mantener solo clics de los últimos 2.2 segundos
                     this.clickHistory = this.clickHistory.filter(t => now - t < 2200);
 
-                    // 1. COMBO SECRETO DE MITE: 5 clics rápidos seguidos
+                    // 1. COMBO SECRETO DE MITE: 5 clics rápidos seguidos (RECARGA SEMANAL // 7 DÍAS)
                     if (this.clickHistory.length >= 5) {
                         this.clickHistory = [];
-                        const alreadyClaimed = localStorage.getItem(this.hackKey) === 'true';
-                        if (!alreadyClaimed) {
-                            localStorage.setItem(this.hackKey, 'true');
+                        const lastClaimed = parseInt(localStorage.getItem(this.hackKey) || '0', 10);
+                        const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+                        const isAvailable = (now - lastClaimed) > sevenDaysMs;
+
+                        if (isAvailable) {
+                            localStorage.setItem(this.hackKey, now.toString());
                             this.addFE(5, '⚠️ BRECHA EN VANCE-CORE (Contrabando de Mite)', 'glitch');
                         } else {
                             audio.playMechanicalClick();
-                            this.showToast('🛡️ Vance-Core: Vulnerabilidad parchada. Brecha inactiva.', 'warning');
+                            this.showToast('🛡️ Vance-Core: Vulnerabilidad parchada temporalmente. Centinelas en alerta.', 'warning');
                         }
                         return;
                     }
