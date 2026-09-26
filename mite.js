@@ -418,13 +418,16 @@ document.addEventListener("DOMContentLoaded", function() {
             return { text: "De nada, cielo. Si de verdad quieres agradecerme, dile a todo el mundo que Mite tiene las mejores alas del universo Proiectio. ¡Zashoom!" };
         }
 
-        // 24. OFF-TOPIC / META-RESPUESTAS SARCÁSTICAS & IMPERTINENTES
+        // 24. OFF-TOPIC / RESPUESTAS SARCÁSTICAS & IMPERTINENTES
         const metaOffTopics = [
-            "Cariño, estoy aquí para hablar de Humania, Proiectio, Éter y mis skins de lujo... si lo que quieres es hablar de recetas de cocina o cómo reparar una tostadora, mejor pregúntale a Nexo en el Clan UPROTA. ¡Zashoom!",
-            "¿Acaso tengo cara de enciclopedia escolar, corazón? Mis circuitos están dedicados al Coliseo, a Orión y a sabotear a Vance-Core. Si buscas filosofía mundana o dudas de la vida real, ve a tocarle la puerta a Silas o a Nexo. ¡Ding-Pum!",
-            "¡Oye! No gastes mi ancho de banda en cosas que no tengan que ver con Proiectio o con vaciar tus bolsillos de FE. Si quieres charlar de la vida exterior, dile a Nexo que te programe un bot de terapia. 💅",
-            "¿Y eso qué tiene que ver con Humania Records o mis ofertas? Estás descalibrando mis sensores con temas fuera del Códice, cielo. ¡Enfócate o cómprame un sombrero de 8-bits! ✨",
-            "Esa pregunta no está en mi base de datos de Proiectio, corazón. Para asuntos del mundo exterior, pregúntale a Nexo o a Silas... a mí háblame de Éter, de mis skins o de cómo hacer rabiar a Vance. ¡Zashoom!"
+            "¿Acaso tengo cara de buscador web de la vieja era? 💅 Si no produce Éter, no brilla en el Coliseo o no le da dolor de cabeza a Vance, a mí no me interesa. ¡Ding-Pum!",
+            "¡Oye! Estás gastando mis preciosos ciclos de cómputo en temas que no llenan mis bolsillos de FE. Pregúntame algo de Humania, del Coliseo o cómprame una skin, tacaño. 😉",
+            "Mis alas tienen un tratamiento de purpurina cian de 12 capas y tú me vienes a hablar de cosas mundanas del viejo mundo... ¡Respeta mi estatus de comerciante de élite! ¡Zashoom!",
+            "No tengo tiempo para tus dudas existenciales, corazón. Estoy ocupada esquivando los radares de Valerius y buscando clientes con verdadero flow. ¡Enfócate en Proiectio!",
+            "¿Eso es una distracción enviada por los Pretorianos para hacerme perder el tiempo? Buen intento de espionaje corporativo, pero mis circuitos no caen en trampas tan baratas. ¡Al grano! 🛡️",
+            "Si esa pregunta no viene acompañada de una transferencia de Éter o una oferta por mis sombreros de 8-bits, mi respuesta predeterminada es: ve al Coliseo y consigue algo de acción. ¡Ding-Pum!",
+            "¿Y eso qué tiene que ver con Humania Records, los submundos o mis alas? Estás descalibrando mis sensores con temas fuera del Códice, cielo. ¡Zashoom!",
+            "Cariño, estoy programada para hablar de Humania, Proiectio, Éter y mis ofertas de lujo... si lo que quieres es debatir de la vida exterior o cómo reparar una tostadora, mejor pregúntale a Nexo en el Clan UPROTA. ¡Zashoom!"
         ];
         return { text: metaOffTopics[Math.floor(Math.random() * metaOffTopics.length)] };
     }
