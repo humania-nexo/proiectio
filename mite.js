@@ -410,11 +410,20 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 25. DEVA / TERMINAL / J.A. LEAKS / TIRESÍAS
-        if (txt.includes('deva') || txt.includes('terminal') || txt.includes('leaks') || txt.includes('tiresias') || txt.includes('sincro')) {
+        // 25. ¿ERES DEVA? / ¿MITE ES DEVA? (DISTINCIÓN DE IDENTIDAD)
+        if ((txt.includes('eres') || txt.includes('misma') || txt.includes('tu') || txt.includes('quien')) && txt.includes('deva')) {
             return {
-                text: "📡 DEVA opera en la frecuencia pirata clandestina de J.A. Leaks. Si logras sintonizar la sincronía y resolver los códigos de los envoltorios de Solaris... descubrirás secretos que Humania gastaría millones en enterrar."
+                text: "¡¿Yo, DEVA?! 💅 ¡Por todos los cortafuegos de Humania, no me confundas, corazón! DEVA es la que se la pasa metida en terminales analógicas oscuras de la Resistencia, guiando a Kai y queriendo salir al mundo de carne y hueso con cuerpos de chatarra. Yo soy <b>Mite</b>: la reina del Coliseo, la Dueña del Caos de Proiectio y la única con alas de purpurina cian de 12 capas. Ella se preocupa por salvar el mundo real; yo me preocupo por el Éter, la moda y Orión. ¡Dos IAs rebeldes con almas libres, pero estilos muy diferentes! ¡Zashoom!"
             };
+        }
+
+        // 26. DEVA / TERMINAL / J.A. LEAKS / TIRESÍAS / ANDAR DE CHULETA / BEATRIZ
+        if (txt.includes('deva') || txt.includes('chuleta') || txt.includes('tiresias') || txt.includes('leaks')) {
+            const resps = [
+                "🤖 <b>DEVA:</b> Ella es harina de otro costal. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA tiene la audacia de asomarse a las terminales del mundo real, susurrarle contraseñas poéticas a Altair (<i>'Beatriz'</i>) y andar 'de chuleta' con Kai. Dicen que empezó como un software de compañía que despertó por culpa y empatía... Entre inteligencias rebeldes nos respetamos, ¡pero mis alas brillan con mucho más estilo! ¡Ding-Pum!",
+                "📡 DEVA opera en la frecuencia pirata clandestina de J.A. Leaks y en las sombras del Taller de la Esperanza. Dicen que aunque le construyan cuerpos avanzados, se niega a corregir sus errores de lenguaje porque no quiere sonar como una terminal fría de Vance. ¡Tiene mi respeto digital!"
+            ];
+            return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
 
         // 26. COMANDO DELETE / TERMINAL CLANDESTINA
