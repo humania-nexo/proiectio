@@ -1,8 +1,13 @@
 // Sistema de Transición Transmedia - Proiectio / Humania
-// Coreografía de Identidad Simbólica: «La Jaula de Humania (H)» <-> «El Despertar de Proiectio (P)»
+// Coreografía Cinemática: «La Jaula de Humania (H)» <-> «El Despertar de Proiectio (P)»
 (function() {
     function initTransmedia() {
         if (document.getElementById('transmedia-overlay')) return; // Evitar duplicados
+
+        // Identificar el origen actual (Humania vs Proiectio)
+        const isHumania = window.location.hostname.includes('humania') || 
+                          window.location.pathname.includes('humania') || 
+                          document.title.toLowerCase().includes('humania');
 
         // 1. Inyectar Estilos de Transición Kinética
         const style = document.createElement('style');
@@ -13,14 +18,14 @@
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background: #ffffff; /* Fondo blanco inmaculado para contraste radical */
+                background: #ffffff; /* Fondo blanco puro */
                 z-index: 9999999;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 opacity: 0;
                 pointer-events: none;
-                transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                transition: opacity 0.35s ease;
             }
             #transmedia-overlay.active {
                 opacity: 1;
@@ -38,17 +43,9 @@
                 transform-origin: center;
                 transition: all 1.1s cubic-bezier(0.77, 0, 0.175, 1);
             }
-            
-            /* Utilidad para evitar transición en el seteo inicial del estado de origen */
-            #transmedia-svg.no-transition #tm-core,
-            #transmedia-svg.no-transition #tm-play,
-            #transmedia-svg.no-transition #tm-pillar-l,
-            #transmedia-svg.no-transition #tm-pillar-r {
-                transition: none !important;
-            }
 
-            /* --- ESTADO: HUMANIA (La Jaula Institucional / La H) --- */
-            /* Dos pilares de control encierran el punto azul central */
+            /* --- ESTADO: HUMANIA (La Jaula de Control / La H) --- */
+            /* Dos pilares negros encerrando el punto azul central */
             .state-humania #tm-core {
                 transform: scale(1);
                 fill: #00d8ff;
@@ -66,8 +63,8 @@
                 opacity: 1;
             }
 
-            /* --- ESTADO: PROIECTIO (El Despertar del Entretenimiento / La P) --- */
-            /* Los pilares son expulsados a los costados y el núcleo cian se expande liberando el botón de juego */
+            /* --- ESTADO: PROIECTIO (El Despertar / La P) --- */
+            /* Los pilares expulsados lejos a los costados y el núcleo cian expandido */
             .state-proiectio #tm-core {
                 transform: scale(2.4);
                 fill: #00d8ff;
@@ -77,28 +74,28 @@
                 opacity: 1;
             }
             .state-proiectio #tm-pillar-l {
-                transform: translateX(-120px);
+                transform: translateX(-160px);
                 opacity: 0;
             }
             .state-proiectio #tm-pillar-r {
-                transform: translateX(120px);
+                transform: translateX(160px);
                 opacity: 0;
             }
         `;
         document.head.appendChild(style);
 
-        // 2. Inyectar HTML del Escenario Vectorial
+        // 2. Inyectar HTML del Escenario Vectorial con el estado nativo pre-configurado
         const overlay = document.createElement('div');
         overlay.id = 'transmedia-overlay';
         overlay.innerHTML = `
-            <svg viewBox="0 0 100 100" id="transmedia-svg">
-                <!-- Núcleo Cyan (El punto atrapado / La esfera Proiectio) -->
+            <svg viewBox="0 0 100 100" id="transmedia-svg" class="${isHumania ? 'state-humania' : 'state-proiectio'}">
+                <!-- Núcleo Cyan -->
                 <circle id="tm-core" cx="50" cy="50" r="12" fill="#00d8ff" />
                 
-                <!-- Símbolo Play Blanco (Forma la P de entretenimiento en Proiectio) -->
+                <!-- Símbolo Play Blanco (Forma la P de entretenimiento) -->
                 <polygon id="tm-play" points="46,42 46,58 58,50" fill="#ffffff" />
                 
-                <!-- Barrotes / Pilares Negros de Contención de Humania -->
+                <!-- Barrotes / Pilares Negros de Contención -->
                 <rect id="tm-pillar-l" x="24" y="18" width="12" height="64" fill="#000000" />
                 <rect id="tm-pillar-r" x="64" y="18" width="12" height="64" fill="#000000" />
             </svg>
@@ -106,13 +103,8 @@
         document.body.appendChild(overlay);
 
         const svg = document.getElementById('transmedia-svg');
-
-        // Identificar el origen actual (Humania vs Proiectio)
-        const isHumania = window.location.hostname.includes('humania') || 
-                          window.location.pathname.includes('humania') || 
-                          document.title.toLowerCase().includes('humania');
         
-        // Ejecución de la coreografía transmedia
+        // Ejecución precisa de la coreografía transmedia
         function handleTransmediaTransition(e, targetHref) {
             if (!targetHref || targetHref.startsWith('#') || targetHref.startsWith('javascript:')) return;
 
@@ -126,35 +118,27 @@
                 e.preventDefault();
                 e.stopPropagation();
 
-                // 1. Congelar estado inicial de origen sin animación
-                if (isHumania) {
-                    svg.setAttribute('class', 'no-transition state-humania');
-                } else {
-                    svg.setAttribute('class', 'no-transition state-proiectio');
-                }
+                // 1. Asegurar que el estado inicial de partida esté fijado con precisión
+                svg.setAttribute('class', isHumania ? 'state-humania' : 'state-proiectio');
                 
-                // Forzar reflujo en el DOM
-                void svg.offsetWidth;
-
-                // 2. Encender overlay blanco y reactivar transiciones
-                svg.classList.remove('no-transition');
+                // 2. Encender overlay blanco
                 overlay.classList.add('active');
 
-                // 3. Disparar metamorfosis simbólica tras 300ms
+                // 3. Tras 300ms de mostrar el logo de origen, disparar la transformación al destino
                 setTimeout(() => {
                     if (goesToProiectio) {
-                        // De H a P: Los barrotes se abren y el círculo se expande
+                        // De H a P: Los barrotes se expulsan a los costados (-160px / +160px) y el núcleo cian se expande
                         svg.setAttribute('class', 'state-proiectio');
                     } else if (goesToHumania) {
-                        // De P a H: El círculo se reduce y los barrotes caen encerrándolo
+                        // De P a H: El núcleo cian se contrae a punto y los barrotes entran desde lejos (-160px / +160px) para encerrarlo
                         svg.setAttribute('class', 'state-humania');
                     }
                 }, 300);
 
-                // 4. Salto de navegación al completarse el clímax visual
+                // 4. Salto de navegación al culminar el movimiento
                 setTimeout(() => {
                     window.location.href = targetHref;
-                }, 1800);
+                }, 1750);
             }
         }
 
