@@ -475,7 +475,21 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 24. KAI / DOLA / ALIANZA LIBÉLULA
+        // 24.1 CHISTES / HUMOR / BROMAS / HACER REÍR
+        if (txt.includes('chiste') || txt.includes('broma') || txt.includes('gracioso') || 
+            txt.includes('reir') || txt.includes('humor') || txt.includes('risa')) {
+            const chistes = [
+                "😂 <b>Ahí te va uno fresco de la red:</b><br>¿Por qué Elías Vance nunca juega a las escondidas?<br>¡Porque cuando cuenta hasta diez, ya le aplicó el <i>Protocolo Zero-Time</i> a todos y los mandó a Recalibración por exceso de silencio! ¡Zashoom!",
+                "😂 <b>Humor de cuartel:</b><br>¿Cuántos Pretorianos de Valerius hacen falta para cambiar una bombilla en el Coliseo?<br>Tres: uno para enroscarla, otro para redactar el informe de <i>Paz Preventiva</i> y otro para perseguir a Orión porque juró que la bombilla brillaba como su capa rosa. ¡Ding-Pum!",
+                "😂 <b>Negocios corporativos:</b><br>Va un ciudadano a pedir un préstamo al <i>Sobregiro de Vida</i> y el sistema le dice:<br>—<i>'Le prestamos 100 FE, pero a cambio bloquearemos sus receptores de sueño'</i>.<br>El tipo pregunta: —<i>'¿Y cuándo duermo?'</i>.<br>Y el sistema responde: —<i>'¡En la próxima actualización de firmware!'</i> 💅",
+                "😂 <b>En el desayuno:</b><br>¿Qué le dijo un chip CNB-3 a una barra Solaris?<br>—<i>'¡Oye, condúcete bien que hoy nos toca turno doble en Nivel 7!'</i> ¡Badum-tsss digital! ⚡",
+                "😂 <b>Guerra de IAs:</b><br>¿Por qué Silvia de Rotoplas no tiene pareja digital?<br>Porque cada vez que alguien le declara su amor, ella responde: <i>'Estimado usuario, mi función es orientarlo sobre tinacos tricapa y biodigestores'</i>. ¡Cero flow, pura fontanería! En cambio yo tengo purpurina cian de 12 capas. ✨",
+                "😂 <b>Lógica de combate:</b><br>Le pregunté a Orión por qué se compró una capa rosa chillón para una misión de sigilo y me dijo:<br>—<i>'Mite, si los guardias de Vance me van a atrapar, ¡que al menos el algoritmo admire mi sentido de la moda!'</i> ¡El ridículo es la nueva armadura! ¡Ding-Pum!"
+            ];
+            return { text: chistes[Math.floor(Math.random() * chistes.length)] };
+        }
+
+        // 24.2 KAI / DOLA / ALIANZA LIBÉLULA
         if (txt.includes('kai') || txt.includes('dola') || txt.includes('libelula')) {
             return {
                 text: "Kai y Dola operan en las sombras de la Alianza Libélula. Saben moverse entre los túneles subterráneos y el mundo exterior sin dejar rastro en los radares de Humania. ¡Buenos aliados si no te importa ensuciarte de lodo!"
