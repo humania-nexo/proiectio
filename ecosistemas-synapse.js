@@ -44,7 +44,7 @@
             this.vx = (Math.random() - 0.5) * 0.45;
             this.vy = (Math.random() - 0.5) * 0.45;
             this.radius = Math.random() * 2.2 + 1.2;
-            this.baseAlpha = Math.random() * 0.4 + 0.25;
+            this.baseAlpha = Math.random() * 0.45 + 0.35;
             this.hue = Math.random() > 0.7 ? 210 : 190; // Cian tecnológico / Zafiro Vance
             this.pulse = Math.random() * Math.PI * 2;
             this.pulseSpeed = 0.02 + Math.random() * 0.02;
@@ -74,18 +74,18 @@
         }
 
         draw() {
-            const currentAlpha = this.baseAlpha + Math.sin(this.pulse) * 0.15;
+            const currentAlpha = this.baseAlpha + Math.sin(this.pulse) * 0.18;
             
             // Halo sutil
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius * 2.5, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 100%, 65%, ${currentAlpha * 0.25})`;
+            ctx.arc(this.x, this.y, this.radius * 2.8, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${this.hue}, 100%, 65%, ${currentAlpha * 0.35})`;
             ctx.fill();
 
             // Núcleo brillante
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 100%, 75%, ${currentAlpha})`;
+            ctx.fillStyle = `hsla(${this.hue}, 100%, 80%, ${currentAlpha})`;
             ctx.fill();
         }
     }
@@ -156,12 +156,12 @@
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
                 if (dist < MAX_CONNECTION_DIST) {
-                    const alpha = (1 - dist / MAX_CONNECTION_DIST) * 0.22;
+                    const alpha = (1 - dist / MAX_CONNECTION_DIST) * 0.35;
                     ctx.beginPath();
                     ctx.moveTo(a.x, a.y);
                     ctx.lineTo(b.x, b.y);
                     ctx.strokeStyle = `rgba(0, 195, 255, ${alpha})`;
-                    ctx.lineWidth = 0.85;
+                    ctx.lineWidth = 1.0;
                     ctx.stroke();
                 }
             }
