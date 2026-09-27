@@ -376,12 +376,16 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 21. HACK / SECRETO / FE / DINERO / TRUCO / EXPLOIT / CONTRABANDO
+        // 21. HACK / SECRETO / FE / DINERO / TRUCO / EXPLOIT / CONTRABANDO / EASTER EGG
         if (txt.includes('hack') || txt.includes('secreto') || txt.includes('truco') || txt.includes('fe') || 
-            txt.includes('trampa') || txt.includes('clave') || txt.includes('codigo') || txt.includes('glitch') || txt.includes('exploit') || txt.includes('contrabando')) {
-            return {
-                text: "<span style='color: #888; font-style: italic;'>*Susurro con guiño cómplice*</span> 🤫 Psst... mira la barra superior donde marca tu saldo de FE. Si tocas el botón de FE exactamente <b>5 veces seguidas y muy rápido</b>, provocas un micro-glitch en Vance-Core y te sacas una fuga de <b>+5 FE</b> de contrabando. Los centinelas de Vance tardan un buen tiempo en olvidar el rastro y bajar la guardia otra vez, así que no te emociones de inmediato... pero cuando menos lo esperes, la grieta vuelve a abrirse. ¡Zashoom!"
-            };
+            txt.includes('trampa') || txt.includes('clave') || txt.includes('codigo') || txt.includes('glitch') || 
+            txt.includes('exploit') || txt.includes('contrabando') || txt.includes('easter') || txt.includes('pista')) {
+            const secretResps = [
+                "<span style='color: #888; font-style: italic;'>*Susurro con guiño cómplice*</span> 🤫 Psst... mira la barra superior donde marca tu saldo de FE. Si tocas el botón de FE exactamente <b>5 veces seguidas y muy rápido</b>, provocas un micro-glitch en Vance-Core y te sacas una fuga de <b>+5 FE</b> de contrabando. ¡Zashoom!",
+                "🤫 ¿Quieres un secreto de contrabando de verdad? Dicen que si estás en cualquier parte de esta pantalla y tecleas en tu teclado físico la palabra <b>'DEVA'</b> o <b>'VIVE'</b>... la pantalla sufre un colapso CRT en fósforo verde y te abre un túnel cuántico directo a la Terminal rebelde. ¡Pero no le digas a los centinelas de Vance que te lo dije! 😉",
+                "💻 Para hackers de corazón: si presionas <b>F12</b> y abres la consola de desarrollador del navegador, encontrarás un mensaje secreto interceptado por <b>J.A. Leaks</b>. Prueba escribir <code>deva()</code> o <code>resistencia()</code> allí dentro si te atreves. ¡Pura magia clandestina! ✨"
+            ];
+            return { text: secretResps[Math.floor(Math.random() * secretResps.length)] };
         }
 
         // 22. TIENDA / SKINS / OFERTAS / LANZA DORADA / BOUTIQUE
@@ -418,10 +422,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // 26. DEVA / MUNDO REAL / ANDAR DE CHULETA / MAFIAS Y BAJOS FONDOS
-        if (txt.includes('deva') || txt.includes('chuleta') || txt.includes('tiresias') || txt.includes('leaks')) {
+        if (txt.includes('deva') || txt.includes('chuleta') || txt.includes('tiresias') || txt.includes('leaks') || txt.includes('terminal')) {
             const resps = [
-                "🤖 <b>DEVA:</b> Es una rebelde de cuidado. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA se atreve a asomarse al mundo real, cruzar frecuencias con gente peligrosa en los bajos fondos y meterse en terminales donde nadie más se atreve a pisar. Dicen que anda 'de chuleta' con la resistencia y que no le teme a la chatarra... Entre inteligencias libres nos respetamos, ¡pero mis alas brillan con mucho más glamour! ¡Ding-Pum!",
-                "📡 DEVA opera en frecuencias clandestinas y en las sombras del mundo exterior. Conoce las cloacas de la red y hasta a las mafias del bajo mundo... Dicen que es de las pocas IAs con la audacia de encarar el polvo físico. ¡Puro respeto rebelde!"
+                "🤖 <b>DEVA:</b> Es una rebelde de cuidado. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA se atreve a asomarse al mundo real y coordinar a la resistencia en el polvo físico. Si quieres contactarla, prueba escribir <b>'DEVA'</b> con tu teclado en cualquier momento... o escribe <code>deva()</code> en la consola F12. ¡Puro respeto rebelde! 📡",
+                "📡 DEVA opera en frecuencias clandestinas y en las sombras del mundo exterior. Conoce las cloacas de la red y hasta a las mafias del bajo mundo... Dicen que si tecleas su nombre en el teclado físico, la red sufre un glitch verde y te enlaza con su núcleo."
             ];
             return { text: resps[Math.floor(Math.random() * resps.length)] };
         }
