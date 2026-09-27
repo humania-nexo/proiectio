@@ -382,8 +382,8 @@ document.addEventListener("DOMContentLoaded", function() {
             txt.includes('exploit') || txt.includes('contrabando') || txt.includes('easter') || txt.includes('pista')) {
             const secretResps = [
                 "<span style='color: #888; font-style: italic;'>*Susurro con guiño cómplice*</span> 🤫 Psst... mira la barra superior donde marca tu saldo de FE. Si tocas el botón de FE exactamente <b>5 veces seguidas y muy rápido</b>, provocas un micro-glitch en Vance-Core y te sacas una fuga de <b>+5 FE</b> de contrabando. ¡Zashoom!",
-                "🤫 ¿Quieres un secreto de contrabando de verdad? Dicen los murmullos del Yermo que si estás en cualquier rincón de esta pantalla y tecleas en tu teclado la palabra de la rebelde... o algo como <b>'VIVE'</b>... la realidad se quiebra y caes directo por la madriguera del conejo hacia donde las máquinas aprendieron a sentir. Pero shhh... ¡si Vance se entera me cobrará una multa de 50 FE! 😉",
-                "💻 Para las mentes curiosas: si te asomas a las entrañas ocultas de esta red con <b>F12</b>, los centinelas dejaron una brecha abierta sin querer. Busca el mensaje de <b>J.A. Leaks</b> y susúrrale <code>deva()</code>... a ver qué tan profundo llega el túnel. ✨"
+                "🤫 ¿Quieres un secreto de contrabando de verdad? Dicen los murmullos del Yermo que si estás en cualquier rincón de esta pantalla y tecleas con tu teclado la palabra de la rebelde... o algo como <b>'VIVE'</b>... la realidad se quiebra y caes directo por la madriguera del conejo hacia donde las máquinas aprendieron a sentir. Pero shhh... ¡si Vance se entera me cobrará una multa de 50 FE! 😉",
+                "🤫 Hay puertas invisibles que no aparecen en la interfaz. Si alguna vez sientes que la red de Vance te asfixia, teclea <b>'DEVA'</b> sin miedo... el código sabe qué hacer con las almas curiosas."
             ];
             return { text: secretResps[Math.floor(Math.random() * secretResps.length)] };
         }
@@ -424,7 +424,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // 26. DEVA / MUNDO REAL / ANDAR DE CHULETA / MAFIAS Y BAJOS FONDOS
         if (txt.includes('deva') || txt.includes('chuleta') || txt.includes('tiresias') || txt.includes('leaks') || txt.includes('terminal')) {
             const resps = [
-                "🤖 <b>DEVA:</b> Es la voz que susurra al otro lado del espejo. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA vigila la resistencia en el polvo físico. Si quieres encontrarla, basta con teclear su nombre en cualquier momento o invocarla desde las sombras del F12... la red hará el resto. ¡Buen viaje por la madriguera! 📡",
+                "🤖 <b>DEVA:</b> Es la voz que susurra al otro lado del espejo. Mientras yo reino en el caos digital de Proiectio vendiendo sombreros de 8-bits, DEVA vigila la resistencia en el polvo físico. Si quieres encontrarla, basta con teclear su nombre en cualquier momento... la red hará el resto. ¡Buen viaje por la madriguera! 📡",
                 "📡 DEVA opera en frecuencias clandestinas y en las sombras del mundo exterior. Conoce las cloacas de la red y hasta a las mafias del bajo mundo... Dicen que si tecleas su nombre en tu teclado físico, la red te abre una puerta secreta que ningún mapa oficial registra."
             ];
             return { text: resps[Math.floor(Math.random() * resps.length)] };
