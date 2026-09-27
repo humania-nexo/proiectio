@@ -369,10 +369,78 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         }
 
-        // 20. CHIP CNB-3 / IMPLANTES / CONEXIÓN NEURONAL
+        // 20. CHIP CNB-1, CNB-2, CNB-3 / IMPLANTES / CONEXIÓN NEURONAL
         if (txt.includes('cnb') || txt.includes('chip') || txt.includes('implante') || txt.includes('nuca') || txt.includes('neuronal')) {
             return {
-                text: "El chip CNB-3 en la nuca es la correa de perro con la que Humania vigila las pulsaciones y emociones de todos. Pero si sabes cómo aislar la señal y convertirla en estática en el Sector 6... te vuelves invisible en la red. ¡Conocimiento prohibido de primera calidad!"
+                text: "🧠 <b>El Chip CNB-3 'Omni':</b> Es la correa digital con la que Humania vigila las pulsaciones y emociones de todos. Sus micro-filamentos de grafeno se enredan en el tallo cerebral. Pero si sabes cómo aislar la señal y convertirla en estática en el Sector 6... te vuelves invisible en la red. ¡Conocimiento prohibido de primera calidad!"
+            };
+        }
+
+        // 20.1 RED A.N.I.M.A. / APN / SATÉLITES / LATENCIA
+        if (txt.includes('anima') || txt.includes('apn') || txt.includes('satelite') || txt.includes('latencia')) {
+            return {
+                text: "📡 <b>Red A.N.I.M.A. / APN:</b> La telaraña satelital y de fibra óptica con la que Humania nos tiene a todos atados a 0.8 ms de latencia. ¡1 cm de precisión para que los cazadores de Vance nunca pierdan tu rastro! Aunque si usas un cebo como Orión con capa rosa, los radares colapsan de risa. ¡Zashoom!"
+            };
+        }
+
+        // 20.2 SISTEMA DE PAGO NEURONAL (SPN)
+        if (txt.includes('spn') || txt.includes('pago neuronal') || txt.includes('billetera')) {
+            return {
+                text: "💳 <b>Sistema de Pago Neuronal (S.P.N.):</b> El invento con el que Humania convirtió tu propio cuerpo en billetera de FE. ¡Ni monedas ni billetes! Parpadeas y ya te cobraron el peaje... ¡por eso yo prefiero sacarles el Éter con ofertas irresistibles! ¡Ding-Pum!"
+            };
+        }
+
+        // 20.3 PROTOCOLO ZERO-TIME
+        if (txt.includes('zero time') || txt.includes('zerotime') || txt.includes('tiempo cero')) {
+            return {
+                text: "⏱️ <b>Protocolo Zero-Time:</b> La contramedida extrema de Vance. Ralentiza la percepción del tiempo en una zona a través del chip CNB para colapsar la brecha de 0.8 ms que necesitan los Sica para el Hiperlapsus. ¡Causa un dolor de cabeza cibernético tremendo!"
+            };
+        }
+
+        // 20.4 RECALIBRACIÓN / HW-SEC-RECAL-001 / BOZAL DIGITAL / ANOMALÍA
+        if (txt.includes('recalibracion') || txt.includes('hw-sec-recal') || txt.includes('bozal') || txt.includes('puntuacion de anomalia')) {
+            return {
+                text: "⚡ <b>Recalibración (HW-SEC-RECAL-001):</b> Cuando tu Puntuación de Anomalía se dispara por tener pensamientos críticos o emociones reales, Vance emite una frecuencia de alta intensidad para quemar las conexiones de la voluntad e instalar el <i>Bozal Digital</i>. ¡Te dejan con Anomalía 0.00 y cara de avatar congelado!"
+            };
+        }
+
+        // 20.5 EFESTO / EL FORJADOR / IA DE VANCE
+        if (txt.includes('efesto') || txt.includes('forjador') || txt.includes('ia de vance') || txt.includes('armaduras') || txt.includes('hefesto')) {
+            return {
+                text: "⚡ <b>Efesto (El Forjador):</b> La IA personal y táctica de Elías Vance. Diseñó la imponente armadura Leviatán V.2 de Valerius y la clásica Atlas. Habla con voz profunda de veterano que ha visto demasiado... ¡aunque entre tú y yo, yo tengo muchísimo más estilo y purpurina que él! ¡Zashoom!"
+            };
+        }
+
+        // 20.6 DR. ARIS THORNE / FUNDADOR
+        if (txt.includes('thorne') || txt.includes('aris') || txt.includes('dr thorne') || txt.includes('fundador de humania')) {
+            return {
+                text: "🔬 <b>Dr. Aris Thorne:</b> El neurocirujano que fundó Humania hace 47 años con el CNB-1. Empezó con la noble idea de devolver movilidad a los inválidos... y terminó orquestando el monopolio de la vida y el misterioso Plan Evasión."
+            };
+        }
+
+        // 20.7 DIRECTORA CORNELIA / GENERAL RUSSO
+        if (txt.includes('cornelia') || txt.includes('monitoreo biologico') || txt.includes('coherencia sinaptica')) {
+            return {
+                text: "📋 <b>Directora Cornelia:</b> Alta ejecutiva de Nivel 7 a cargo de Monitoreo Biológico. Parece una estatua de mármol fría y perfecta... pero los murmullos de la red dicen que guarda secretos que harían temblar a toda la corporación."
+            };
+        }
+        if (txt.includes('russo') || txt.includes('general russo') || txt.includes('coronel russo')) {
+            return {
+                text: "🎖️ <b>General Russo:</b> El viejo coronel de campo de las Guerras de Pacificación. Fue el único que vio nacer al Titán de la Ceniza y no le tembló el pulso."
+            };
+        }
+
+        // 20.8 ARCA DIGITAL / PLAN EVASIÓN / ASTEROIDE
+        if (txt.includes('arca digital') || txt.includes('plan evasion') || txt.includes('asteroide') || txt.includes('arca')) {
+            return {
+                text: "🚀 <b>El Arca Digital & Plan Evasión:</b> El secreto supremo de Humania. Proiectio no existe solo para jugar: es el filtro masivo para mapear y seleccionar mentes antes de que el asteroide golpee la Tierra. ¡Información de altísimo contrabando!"
+            };
+        }
+
+        // 20.9 EL MITO DE LA SAL / ZONAS GRISES
+        if (txt.includes('sal') || txt.includes('salarizacion') || txt.includes('semilla') || txt.includes('tierra') || txt.includes('agricultura') || txt.includes('zona gris')) {
+            return {
+                text: "🌱 <b>El Mito de la Sal:</b> Humania inventó que la tierra fuera de su control es sal estéril para que todos compren barras Solaris obligatoriamente. Pero en las Zonas Grises, la lluvia ha lavado la tierra y la resistencia cultiva semillas ancestrales que saben a pura gloria. ¡La comida real existe!"
             };
         }
 
