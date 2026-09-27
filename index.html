@@ -99,13 +99,16 @@
         </div>
     </section>
 
-    <!-- 2. CATÁLOGO DE SUBMUNDOS HIGH-VOLTAGE -->
-    <div class="section-title">
-        <h2>Ecosistemas de Inmersión</h2>
-        <p>Posa el cursor para previsualización cinemática o toca para sincronizar.</p>
-    </div>
+    <!-- 2. CATÁLOGO DE SUBMUNDOS HIGH-VOLTAGE CON MALLA NEURONAL REACTIVA -->
+    <section id="ecosistemas-section" style="position: relative; width: 100%; overflow: hidden; padding: 20px 0 40px; background: radial-gradient(circle at 50% 30%, #ffffff 0%, #f8fafc 100%);">
+        <canvas id="ecosistemas-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.9;"></canvas>
+        <div style="position: relative; z-index: 1;">
+            <div class="section-title">
+                <h2>Ecosistemas de Inmersión</h2>
+                <p>Posa el cursor para previsualización cinemática o toca para sincronizar.</p>
+            </div>
 
-    <div class="cards-showcase-grid">
+            <div class="cards-showcase-grid">
         <!-- OLYMPUS V-GAMES -->
         <a href="olympus.html" class="proiect-3d-card" data-tier="nivel7" style="--card-glow: var(--glow-cyan);">
             <div class="card-media-box">
@@ -274,13 +277,13 @@
                 <div class="card-bottom-row">
                     <span class="card-fe-cost" style="color: #eab308;">0 FE // ACCESO LIBRE</span>
                     <span class="card-cta-btn" style="color: #fde047;">CONECTAR NODO</span>
-                </div>
             </div>
         </a>
     </div>
+    </div>
+    </section>
 
-    
-   <!-- 2.5 EVENTO GLOBAL (REFORJA CINEMÁTICA) -->
+    <!-- 2.5 EVENTO GLOBAL (REFORJA CINEMÁTICA) -->
     <style>
         /* Contenedor adaptativo: Evita el zoom excesivo */
         .event-section { 
@@ -718,5 +721,6 @@
     </script>
     <script src="dopamine-engine.js"></script>
     <script src="transmedia-transition.js"></script>
+    <script src="ecosistemas-synapse.js"></script>
 </body>
 </html>
